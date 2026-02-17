@@ -1,63 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaxBridge — Free Tax & Invoicing Software for Nigerian Businesses</title>
 
-  <!-- Primary Meta Tags -->
-  <title>TaxBridge — Free Invoicing & Tax Tracking for Nigerian Businesses</title>
-  <meta name="title" content="TaxBridge — Free Invoicing & Tax Tracking for Nigerian Businesses" />
-  <meta name="description" content="Create invoices, track expenses, and prepare FIRS-ready tax reports — even without internet. TaxBridge is free, offline-first, and built for Nigerian SMEs." />
-  <meta name="keywords" content="Nigerian tax software, free invoicing app, SME accounting, VAT calculator, offline invoice, FIRS tax reports, Nigerian business tools" />
-  <meta name="author" content="TaxBridge Nigeria" />
-  <meta name="robots" content="index, follow" />
-  
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://taxbridge.ng" />
+  <meta name="description" content="Free invoicing and tax software built for Nigerian SMEs. Create NRS-compliant invoices, track expenses with AI, file FIRS returns automatically—even offline. No subscription ever.">
+  <meta property="og:title" content="TaxBridge — Free Tax & Invoicing Software for Nigerian Businesses">
+  <meta property="og:description" content="Free invoicing and tax software built for Nigerian SMEs. Create NRS-compliant invoices, track expenses with AI, file FIRS returns automatically—even offline.">
+  <meta property="og:image" content="assets/og-image.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://taxbridge.ng">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TaxBridge — Free Tax & Invoicing Software for Nigerian Businesses">
+  <meta name="twitter:description" content="Free invoicing and tax software built for Nigerian SMEs. Create NRS-compliant invoices, track expenses with AI, file FIRS returns automatically—even offline.">
+  <meta name="twitter:image" content="assets/og-image.png">
+  <meta name="theme-color" content="#00843D">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="assets/logo-main.png">
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://taxbridge.ng" />
-  <meta property="og:title" content="TaxBridge — Free Invoicing & Tax Tracking for Nigerian Businesses" />
-  <meta property="og:description" content="Handle invoices, expenses, and taxes in one simple app. Works offline. Free forever." />
-  <meta property="og:image" content="https://taxbridge.ng/assets/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="en_NG" />
-  <meta property="og:site_name" content="TaxBridge" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://taxbridge.ng" />
-  <meta name="twitter:title" content="TaxBridge — Free Invoicing & Tax Tracking" />
-  <meta name="twitter:description" content="Invoices, expenses, and taxes — without spreadsheets or monthly fees." />
-  <meta name="twitter:image" content="https://taxbridge.ng/assets/og-image.png" />
-  <meta name="twitter:creator" content="@TaxBridgeNG" />
-
-  <!-- Theme & Appearance -->
-  <meta name="theme-color" content="#00843D" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#002A14" media="(prefers-color-scheme: dark)" />
-  <meta name="color-scheme" content="light" />
-
-  <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" sizes="any" />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
-  <link rel="manifest" href="manifest.json" />
-
-  <!-- Preconnect for Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
-  
-  <!-- Fonts with display=swap for better performance -->
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tailwind Configuration -->
   <script>
     tailwind.config = {
       theme: {
@@ -76,963 +43,682 @@
             body: ['DM Sans', 'sans-serif'],
           },
           animation: {
-            'fade-in': 'fadeIn 0.6s ease-out',
-            'slide-up': 'slideUp 0.5s ease-out',
-            'bounce-subtle': 'bounceSubtle 2s infinite',
-          },
-          keyframes: {
-            fadeIn: {
-              '0%': { opacity: '0' },
-              '100%': { opacity: '1' },
-            },
-            slideUp: {
-              '0%': { transform: 'translateY(20px)', opacity: '0' },
-              '100%': { transform: 'translateY(0)', opacity: '1' },
-            },
-            bounceSubtle: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-5px)' },
-            }
+            'fade-up': 'fadeUp 0.7s ease-out forwards',
+            'fade-up-delay': 'fadeUp 0.7s 0.15s ease-out forwards',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'count-up': 'countUp 0.6s ease-out forwards',
           }
         }
       }
     }
   </script>
 
-  <!-- Structured Data (Schema.org) for SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "TaxBridge",
-    "operatingSystem": "Android",
-    "applicationCategory": "BusinessApplication",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "1200"
-    },
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "NGN"
-    },
-    "description": "Create invoices, track expenses, and prepare FIRS-ready tax reports — even without internet. Built for Nigerian SMEs.",
-    "featureList": [
-      "Offline-first invoicing",
-      "Expense tracking",
-      "VAT calculation",
-      "FIRS-ready tax reports",
-      "Receipt scanning"
-    ],
-    "screenshot": "https://taxbridge.ng/assets/app-screenshot.png",
-    "author": {
-      "@type": "Organization",
-      "name": "TaxBridge Nigeria"
-    }
-  }
-  </script>
-
   <style>
-    /* Custom animations and utilities */
-    .animate-on-scroll {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    .hero-gradient {
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0,132,61,0.10) 0%, transparent 70%);
     }
-    
-    .animate-on-scroll.visible {
-      opacity: 1;
-      transform: translateY(0);
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-
-    /* Smooth gradient background */
-    .gradient-mesh {
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(0, 132, 61, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(0, 200, 83, 0.05) 0%, transparent 50%);
-    }
-
-    /* Mobile menu animation */
-    .mobile-menu {
-      transform: translateX(100%);
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .mobile-menu.open {
-      transform: translateX(0);
-    }
-
-    /* Focus styles for accessibility */
-    a:focus-visible, button:focus-visible {
-      outline: 2px solid #00843D;
-      outline-offset: 2px;
-    }
-
-    /* Loading state for buttons */
-    .btn-loading {
-      position: relative;
-      color: transparent;
-    }
-
-    .btn-loading::after {
-      content: "";
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      top: 50%;
-      left: 50%;
-      margin-left: -8px;
-      margin-top: -8px;
-      border: 2px solid #ffffff;
-      border-radius: 50%;
-      border-top-color: transparent;
-      animation: spinner 0.6s linear infinite;
-    }
-
-    @keyframes spinner {
-      to { transform: rotate(360deg); }
-    }
+    .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(.16,1,.3,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .mobile-menu-enter { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.35s cubic-bezier(.16,1,.3,1); }
+    .mobile-menu-enter.active { max-height: 400px; opacity: 1; }
+    .stagger-1 { transition-delay: 0.08s; }
+    .stagger-2 { transition-delay: 0.16s; }
+    .stagger-3 { transition-delay: 0.24s; }
+    .stagger-4 { transition-delay: 0.32s; }
+    .stagger-5 { transition-delay: 0.40s; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #00843D; outline-offset: 2px; border-radius: 4px; }
   </style>
 </head>
+<body class="bg-brand-surface text-slate-900 font-body antialiased selection:bg-brand-primary selection:text-white">
 
-<body class="bg-brand-surface text-slate-900 font-body antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-lg">Skip to content</a>
 
-  <!-- Skip to main content (accessibility) -->
-  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-brand-primary text-white px-4 py-2 rounded-lg z-50">
-    Skip to main content
-  </a>
-
-  <!-- Header -->
-  <header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur border-b border-gray-100 transition-all duration-300" id="header">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2 group" aria-label="TaxBridge home">
-        <img src="assets/logo-main.png" alt="" class="h-9 transition-transform group-hover:scale-105" />
-        <span class="font-display font-bold text-lg">TaxBridge</span>
-      </a>
-
-      <!-- Desktop Navigation -->
-      <nav class="hidden lg:flex items-center gap-8 text-sm" aria-label="Main navigation">
-        <a href="#how-it-works" class="text-slate-600 hover:text-brand-primary transition-colors">How it works</a>
-        <a href="#features" class="text-slate-600 hover:text-brand-primary transition-colors">What you can do</a>
-        <a href="#dashboard" class="text-slate-600 hover:text-brand-primary transition-colors">Web dashboard</a>
-        <a href="#download" class="px-5 py-2 bg-brand-primary text-white font-bold rounded-full hover:bg-brand-dark transition-all hover:shadow-lg">
-          Start free
+  <header class="fixed top-0 w-full z-50 transition-all duration-300" id="navbar">
+    <div class="absolute inset-0 bg-white/80 backdrop-blur-md border-b border-gray-100/80"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="flex justify-between items-center h-16 lg:h-18">
+        <a href="#" class="flex items-center gap-2 group" aria-label="TaxBridge home">
+          <img src="assets/logo-main.png" alt="TaxBridge icon" class="h-9 w-auto group-hover:scale-[1.03] transition-transform duration-300">
+          <span class="text-lg font-display font-bold text-brand-dark">TaxBridge</span>
         </a>
-      </nav>
 
-      <!-- Mobile Menu Button -->
-      <button 
-        class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" 
-        id="mobile-menu-btn"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
+        <nav class="hidden lg:flex items-center gap-8" aria-label="Main navigation">
+          <a href="#how-it-works" class="text-sm font-medium text-slate-600 hover:text-brand-primary transition">How It Works</a>
+          <a href="#features" class="text-sm font-medium text-slate-600 hover:text-brand-primary transition">Features</a>
+          <a href="#dashboard" class="text-sm font-medium text-slate-600 hover:text-brand-primary transition">Dashboard</a>
+          <a href="#pricing" class="text-sm font-medium text-slate-600 hover:text-brand-primary transition">Pricing</a>
 
-    <!-- Mobile Menu -->
-    <div 
-      class="mobile-menu fixed top-0 right-0 w-64 h-full bg-white shadow-2xl lg:hidden" 
-      id="mobile-menu"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Mobile menu"
-    >
-      <div class="p-4">
-        <button 
-          class="ml-auto block p-2 hover:bg-gray-100 rounded-lg transition-colors" 
-          id="mobile-menu-close"
-          aria-label="Close menu"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-        <nav class="flex flex-col gap-4 mt-6" aria-label="Mobile navigation">
-          <a href="#how-it-works" class="text-slate-700 hover:text-brand-primary py-2 transition-colors mobile-nav-link">How it works</a>
-          <a href="#features" class="text-slate-700 hover:text-brand-primary py-2 transition-colors mobile-nav-link">What you can do</a>
-          <a href="#dashboard" class="text-slate-700 hover:text-brand-primary py-2 transition-colors mobile-nav-link">Web dashboard</a>
-          <a href="#download" class="mt-4 px-5 py-3 bg-brand-primary text-white font-bold rounded-full text-center hover:bg-brand-dark transition-all mobile-nav-link">
-            Start free
+          <div class="h-5 w-px bg-gray-200"></div>
+
+          <a href="https://taxbridge.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-slate-700 hover:text-brand-primary transition">
+            Log In
+          </a>
+          <a href="#download" class="inline-flex items-center justify-center px-5 py-2.5 bg-brand-primary hover:bg-brand-dark text-white text-sm font-bold rounded-full transition-all duration-300 shadow-md hover:shadow-green-500/25 hover:-translate-y-px">
+            Get Started Free
           </a>
         </nav>
+
+        <button id="mobile-btn" class="lg:hidden p-2 -mr-2 text-slate-600 hover:text-brand-primary transition" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="mobile-menu-enter lg:hidden border-t border-gray-100" role="navigation" aria-label="Mobile navigation">
+        <div class="py-3 space-y-1">
+          <a href="#how-it-works" class="block px-4 py-3 text-slate-600 hover:bg-gray-50 rounded-lg font-medium transition">How It Works</a>
+          <a href="#features" class="block px-4 py-3 text-slate-600 hover:bg-gray-50 rounded-lg font-medium transition">Features</a>
+          <a href="#dashboard" class="block px-4 py-3 text-slate-600 hover:bg-gray-50 rounded-lg font-medium transition">Dashboard</a>
+          <a href="#pricing" class="block px-4 py-3 text-slate-600 hover:bg-gray-50 rounded-lg font-medium transition">Pricing</a>
+          <a href="https://taxbridge.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="block px-4 py-3 text-brand-primary font-semibold hover:bg-green-50 rounded-lg transition">Log In to Dashboard</a>
+          <div class="px-4 pt-2 pb-1">
+            <a href="#download" class="block w-full text-center py-3 bg-brand-primary text-white font-bold rounded-xl shadow-md hover:bg-brand-dark transition">Get Started Free</a>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
-  <main class="pt-28" id="main-content">
+  <main id="main">
 
-    <!-- HERO Section -->
-    <section class="px-4 py-20 max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 items-center gradient-mesh">
-      <div class="animate-on-scroll">
-        <p class="inline-block mb-4 px-4 py-1.5 bg-green-50 border border-green-200 rounded-full text-xs font-bold animate-fade-in">
-          <span aria-label="Trusted by 1,200 plus Nigerian businesses">Trusted by 1,200+ Nigerian businesses</span>
-        </p>
+  <!-- HERO SECTION - Enhanced headline clarity and benefit focus -->
+  <section class="pt-28 pb-16 lg:pt-36 lg:pb-24 px-4 hero-gradient relative overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-        <h1 class="text-4xl lg:text-6xl font-display font-extrabold leading-tight mb-6">
-          Run your business, send invoices, and track taxes —
-          <span class="text-brand-primary">without stress or monthly fees</span>
-        </h1>
-
-        <p class="text-lg text-slate-600 mb-8 max-w-xl">
-          TaxBridge helps you create official invoices, record expenses, and prepare tax reports — all in one simple app.
-          It works even when there's no internet.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 mb-4">
-          <a 
-            href="#download" 
-            class="px-7 py-4 bg-brand-primary text-white font-bold rounded-xl text-lg text-center hover:bg-brand-dark transition-all hover:shadow-xl transform hover:scale-105"
-            role="button"
-          >
-            Download the app — free
-          </a>
-          <a 
-            href="https://taxbridge.vercel.app/dashboard" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="px-7 py-4 border border-gray-300 rounded-xl font-bold text-lg text-center hover:border-brand-primary hover:bg-brand-surface transition-all"
-          >
-            View sample business dashboard
-          </a>
-        </div>
-
-        <p class="text-sm text-slate-500 flex items-center gap-2 flex-wrap">
-          <span class="inline-flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            No credit card
-          </span>
-          <span class="text-gray-300">•</span>
-          <span class="inline-flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            No accounting knowledge
-          </span>
-          <span class="text-gray-300">•</span>
-          <span class="inline-flex items-center gap-1">
-            <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            Setup takes about 2 minutes
-          </span>
-        </p>
-      </div>
-
-      <!-- Hero Image/Mockup -->
-      <div class="hidden lg:block animate-on-scroll">
-        <div class="relative">
-          <!-- Placeholder for app mockup - replace with actual image -->
-          <div class="aspect-square bg-gradient-to-br from-brand-primary/10 to-brand-accent/10 rounded-3xl flex items-center justify-center border-2 border-brand-primary/20 shadow-2xl">
-            <div class="text-center p-8">
-              <svg class="w-32 h-32 mx-auto mb-4 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-              <p class="text-slate-600 font-medium">TaxBridge Mobile App Screenshot</p>
-            </div>
+        <div class="relative z-10 animate-fade-up">
+          <!-- Trust badge with urgency -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 bg-green-50 border border-green-200/60 rounded-full mb-6">
+            <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+            <span class="text-xs font-bold text-brand-dark tracking-wide">2026 NRS Compliant • Trusted by 1,200+ Nigerian SMEs</span>
           </div>
-          <!-- Floating badges -->
-          <div class="absolute -top-4 -right-4 bg-white px-4 py-2 rounded-lg shadow-lg animate-bounce-subtle">
-            <div class="flex items-center gap-2">
-              <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
-              </svg>
-              <span class="font-bold text-sm">100% Offline</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- SOCIAL PROOF Section -->
-    <section class="bg-white border-y border-gray-100 py-10 animate-on-scroll" aria-label="Statistics">
-      <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 sm:grid-cols-4 gap-8 text-center">
-        <div class="transform hover:scale-105 transition-transform">
-          <div class="text-3xl font-display font-bold text-brand-primary" aria-label="1,200 plus active businesses">1,200+</div>
-          <p class="text-sm text-slate-500">Active businesses</p>
-        </div>
-        <div class="transform hover:scale-105 transition-transform">
-          <div class="text-3xl font-display font-bold text-brand-primary" aria-label="82 million naira in invoices created">₦82M</div>
-          <p class="text-sm text-slate-500">Invoices created</p>
-        </div>
-        <div class="transform hover:scale-105 transition-transform">
-          <div class="text-3xl font-display font-bold text-brand-primary">100%</div>
-          <p class="text-sm text-slate-500">Works offline</p>
-        </div>
-        <div class="transform hover:scale-105 transition-transform">
-          <div class="text-3xl font-display font-bold text-brand-accent" aria-label="Free forever">₦0</div>
-          <p class="text-sm text-slate-500">Forever free</p>
-        </div>
-      </div>
-    </section>
+          <!-- Clearer, benefit-driven headline -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-display font-extrabold text-slate-900 leading-[1.08] mb-6 tracking-tight">
+            Stop Paying Accountants. <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent">Start Saving ₦400K/Year</span>
+          </h1>
 
-    <!-- HOW IT WORKS Section -->
-    <section id="how-it-works" class="py-24 px-4 bg-white">
-      <div class="max-w-5xl mx-auto text-center">
-        <div class="animate-on-scroll">
-          <h2 class="text-3xl lg:text-5xl font-display font-bold mb-6">
-            Start using TaxBridge in minutes
-          </h2>
-          <p class="text-lg text-slate-500 mb-16">
-            No accountant needed. No complex setup.
+          <!-- Outcome-focused subheadline -->
+          <p class="text-lg lg:text-xl text-slate-600 mb-8 leading-relaxed max-w-lg">
+            Create professional invoices, track every expense with AI, and file tax returns automatically—all from your phone. <strong class="text-slate-800">No subscription. Works offline. 100% free forever.</strong>
           </p>
+
+          <!-- Stronger CTAs with clearer value -->
+          <div class="flex flex-col sm:flex-row gap-3 mb-8">
+            <a href="#download" class="inline-flex items-center justify-center gap-3 px-7 py-4 bg-brand-primary hover:bg-brand-dark text-white rounded-xl font-display font-bold text-lg transition-all shadow-xl hover:shadow-2xl hover:-translate-y-0.5">
+              <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35z"/><path d="M16.81 15.12l-3.12-3.12 3.12-3.12 3.69 2.13c.51.29.51 1.11 0 1.4l-3.69 2.71z"/></svg>
+              <span>Start Free on Android</span>
+            </a>
+            <a href="https://taxbridge.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-7 py-4 bg-white text-brand-dark border-2 border-gray-200 hover:border-brand-primary/50 hover:bg-green-50 rounded-xl font-display font-bold text-lg transition-all">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>Try Web Dashboard</span>
+            </a>
+          </div>
+
+          <!-- Risk reversal and friction reduction -->
+          <p class="text-sm text-slate-500 mb-8 -mt-4">Ready in 2 minutes • No credit card • No hidden fees ever</p>
+
+          <!-- Feature badges with stronger benefits -->
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-slate-500">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              Always Free
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              Works Without Internet
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              Bank-Level Security
+            </span>
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              FIRS-Ready Reports
+            </span>
+          </div>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-10">
-          <div class="animate-on-scroll p-6 rounded-2xl hover:bg-brand-surface transition-all">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-brand-primary">1</span>
-            </div>
-            <h3 class="font-bold text-lg mb-2">Set up your business</h3>
-            <p class="text-slate-500">
-              Enter your business name and basic details. We guide you step by step.
-            </p>
-          </div>
-          <div class="animate-on-scroll p-6 rounded-2xl hover:bg-brand-surface transition-all">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-brand-primary">2</span>
-            </div>
-            <h3 class="font-bold text-lg mb-2">Send invoices & track expenses</h3>
-            <p class="text-slate-500">
-              Create invoices in seconds and snap photos of receipts instead of keeping paper.
-            </p>
-          </div>
-          <div class="animate-on-scroll p-6 rounded-2xl hover:bg-brand-surface transition-all">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-brand-primary">3</span>
-            </div>
-            <h3 class="font-bold text-lg mb-2">Know your taxes automatically</h3>
-            <p class="text-slate-500">
-              See VAT and other taxes as you earn. When it's time, your reports are ready.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+        <div class="relative hidden lg:block" aria-hidden="true">
+          <div class="absolute top-0 right-0 w-3/4 h-full bg-gradient-to-bl from-green-100/50 to-transparent rounded-[3rem] -z-10 blur-3xl"></div>
 
-    <!-- FEATURES Section (NEW) -->
-    <section id="features" class="py-24 px-4 bg-brand-surface">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 animate-on-scroll">
-          <h2 class="text-3xl lg:text-5xl font-display font-bold mb-6">
-            Everything you need to run your business
-          </h2>
-          <p class="text-lg text-slate-500 max-w-2xl mx-auto">
-            Professional tools that work together — without the complexity or cost of traditional accounting software.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <!-- Feature 1 -->
-          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all animate-on-scroll">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
+          <div class="relative mx-auto w-[280px] animate-fade-up-delay opacity-0">
+            <div class="bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-800">
+              <div class="bg-white rounded-[2.5rem] overflow-hidden aspect-[9/19] relative">
+                <div class="bg-brand-dark h-32 p-6 flex flex-col justify-end">
+                  <div class="text-white/60 text-xs mb-1">Total Revenue</div>
+                  <div class="text-white text-3xl font-display font-bold tracking-tight">₦2.4M</div>
+                </div>
+                <div class="p-4 space-y-3">
+                  <div class="flex items-center gap-3 p-3 bg-green-50 rounded-xl border border-green-100">
+                    <div class="w-9 h-9 bg-green-100 rounded-lg flex items-center justify-center">
+                      <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="text-[10px] text-gray-400 font-bold uppercase">Smart Scan</div>
+                      <div class="text-sm font-bold text-gray-900 truncate">Receipt Captured</div>
+                    </div>
+                    <div class="ml-auto flex-shrink-0">
+                      <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+                    <div class="w-9 h-9 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <div class="min-w-0">
+                      <div class="text-[10px] text-gray-400 font-bold uppercase">Invoice</div>
+                      <div class="text-sm font-bold text-gray-900 truncate">INV/2026/00042</div>
+                    </div>
+                    <div class="ml-auto flex-shrink-0 text-[10px] font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">NRS</div>
+                  </div>
+                  <div class="space-y-2 pt-1">
+                    <div class="h-2 bg-gray-100 rounded-full w-[85%]"></div>
+                    <div class="h-2 bg-gray-100 rounded-full w-[60%]"></div>
+                  </div>
+                </div>
+                <div class="absolute bottom-5 right-5 w-12 h-12 bg-brand-primary rounded-full shadow-lg flex items-center justify-center text-white shadow-green-500/30">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                </div>
+              </div>
             </div>
-            <h3 class="font-bold text-xl mb-2">Professional invoices</h3>
-            <p class="text-slate-600">Create and send invoices in seconds. Add your logo, customize colors, and get paid faster.</p>
-          </div>
 
-          <!-- Feature 2 -->
-          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all animate-on-scroll">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-              </svg>
+            <div class="absolute top-16 -left-20 bg-white p-3.5 rounded-xl shadow-xl border border-gray-100 animate-pulse-slow">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-green-100 rounded-lg flex items-center justify-center text-green-600">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] text-gray-400 font-bold">Tax Status</div>
+                  <div class="text-sm font-bold text-green-700">FIRS Compliant</div>
+                </div>
+              </div>
             </div>
-            <h3 class="font-bold text-xl mb-2">Receipt scanning</h3>
-            <p class="text-slate-600">Snap a photo of receipts with your phone. No more lost papers or manual data entry.</p>
-          </div>
 
-          <!-- Feature 3 -->
-          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all animate-on-scroll">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
+            <div class="absolute bottom-28 -right-16 bg-white p-3.5 rounded-xl shadow-xl border border-gray-100 animate-pulse-slow" style="animation-delay: 2s;">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-amber-50 rounded-lg flex items-center justify-center text-brand-gold">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div>
+                  <div class="text-[10px] text-gray-400 font-bold">You Save</div>
+                  <div class="text-sm font-bold text-slate-900">₦405K/yr</div>
+                </div>
+              </div>
             </div>
-            <h3 class="font-bold text-xl mb-2">Automatic VAT calculation</h3>
-            <p class="text-slate-600">VAT is calculated automatically on every invoice. See exactly what you owe before filing.</p>
-          </div>
-
-          <!-- Feature 4 -->
-          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all animate-on-scroll">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="font-bold text-xl mb-2">Expense tracking</h3>
-            <p class="text-slate-600">Record every business expense. Know exactly where your money goes and reduce your tax bill.</p>
-          </div>
-
-          <!-- Feature 5 -->
-          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all animate-on-scroll">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
-            </div>
-            <h3 class="font-bold text-xl mb-2">FIRS-ready reports</h3>
-            <p class="text-slate-600">Generate tax reports in minutes. Everything formatted for FIRS submission.</p>
-          </div>
-
-          <!-- Feature 6 -->
-          <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all animate-on-scroll">
-            <div class="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"></path>
-              </svg>
-            </div>
-            <h3 class="font-bold text-xl mb-2">Works offline</h3>
-            <p class="text-slate-600">Create invoices, record expenses, and view reports — even without internet connection.</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- DASHBOARD Section -->
-    <section id="dashboard" class="py-24 px-4 bg-slate-900 text-white">
-      <div class="max-w-6xl mx-auto text-center mb-12 animate-on-scroll">
-        <h2 class="text-3xl lg:text-5xl font-display font-bold mb-4">
-          See your business clearly — in one place
+  <!-- SOCIAL PROOF BAR - Enhanced with concrete numbers -->
+  <section class="py-4 bg-white border-y border-gray-100" aria-label="Key metrics">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex flex-wrap justify-center gap-x-12 gap-y-4 py-4 text-center">
+        <div>
+          <div class="text-2xl lg:text-3xl font-display font-extrabold text-slate-900">1,200+</div>
+          <div class="text-xs font-medium text-slate-500 mt-0.5">Active Businesses</div>
+        </div>
+        <div class="hidden sm:block w-px h-12 bg-gray-200 self-center"></div>
+        <div>
+          <div class="text-2xl lg:text-3xl font-display font-extrabold text-slate-900">₦82M</div>
+          <div class="text-xs font-medium text-slate-500 mt-0.5">Invoiced This Month</div>
+        </div>
+        <div class="hidden sm:block w-px h-12 bg-gray-200 self-center"></div>
+        <div>
+          <div class="text-2xl lg:text-3xl font-display font-extrabold text-slate-900">100%</div>
+          <div class="text-xs font-medium text-slate-500 mt-0.5">Works Offline</div>
+        </div>
+        <div class="hidden sm:block w-px h-12 bg-gray-200 self-center"></div>
+        <div>
+          <div class="text-2xl lg:text-3xl font-display font-extrabold text-brand-primary">₦0</div>
+          <div class="text-xs font-medium text-slate-500 mt-0.5">Forever Free</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS - Simplified and more concrete -->
+  <section id="how-it-works" class="py-20 lg:py-28 px-4 bg-white scroll-mt-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 reveal">
+        <p class="text-sm font-bold text-brand-primary uppercase tracking-wider mb-3">How It Works</p>
+        <h2 class="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-4">Get FIRS-Ready in Under 3 Minutes</h2>
+        <p class="text-lg text-slate-500 max-w-xl mx-auto">No complicated setup. No training videos. Just download, register, and start managing your business finances like a pro.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8 lg:gap-12 max-w-4xl mx-auto">
+        <div class="text-center reveal stagger-1">
+          <div class="w-16 h-16 bg-green-50 border-2 border-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </div>
+          <div class="text-xs font-bold text-brand-primary uppercase tracking-wider mb-2">Step 1 • 1 Minute</div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Download &amp; Create Account</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Install the app, enter your business name and TIN. That's it—you're verified and ready to invoice.</p>
+        </div>
+        <div class="text-center reveal stagger-2">
+          <div class="w-16 h-16 bg-blue-50 border-2 border-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">Step 2 • 30 Seconds</div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Create Your First Invoice</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Add your client details, line items, and VAT. TaxBridge generates a professional NRS-compliant invoice with QR code instantly.</p>
+        </div>
+        <div class="text-center reveal stagger-3">
+          <div class="w-16 h-16 bg-amber-50 border-2 border-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-5">
+            <svg class="w-7 h-7 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <div class="text-xs font-bold text-brand-gold uppercase tracking-wider mb-2">Step 3 • Automatic</div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Watch Your Taxes Calculate Themselves</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Every transaction updates your VAT, CIT, and PAYE automatically. When tax season arrives, your returns are already done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD SECTION - Stronger value prop -->
+  <section id="dashboard" class="py-20 lg:py-28 bg-slate-900 relative overflow-hidden scroll-mt-20">
+    <div class="absolute inset-0 opacity-[0.07]" style="background-image: radial-gradient(#22c55e 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+      <div class="text-center mb-14 reveal">
+        <p class="text-sm font-bold text-brand-accent uppercase tracking-wider mb-3">Web Dashboard</p>
+        <h2 class="text-3xl lg:text-5xl font-display font-bold text-white mb-5">
+          See Your Entire Business <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-gold">in Real-Time</span>
         </h2>
-        <p class="text-slate-400 text-lg max-w-2xl mx-auto">
-          The web dashboard shows your income, expenses, and taxes at a glance.
-          You can also let your accountant view it without changing anything.
+        <p class="text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          The mobile app handles daily tasks. The web dashboard shows you cash flow, upcoming taxes, and generates FIRS reports in one click. Give your accountant read-only access and stop sending spreadsheets.
         </p>
       </div>
 
-      <!-- Dashboard Preview -->
-      <div class="max-w-5xl mx-auto mb-12 animate-on-scroll">
-        <div class="bg-slate-800 rounded-xl p-6 shadow-2xl border border-slate-700">
-          <div class="grid md:grid-cols-3 gap-6 mb-6">
-            <div class="bg-slate-900 p-6 rounded-lg">
-              <p class="text-slate-400 text-sm mb-2">Total Revenue</p>
-              <p class="text-3xl font-bold text-brand-accent">₦2.4M</p>
-              <p class="text-green-400 text-sm mt-2">↑ 23% this month</p>
+      <div class="bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden reveal">
+        <div class="bg-slate-900 px-4 py-2.5 border-b border-slate-700 flex items-center gap-4">
+          <div class="flex gap-1.5">
+            <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-amber-500/80"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+          </div>
+          <div class="flex-1 bg-slate-800 rounded-lg px-4 py-1.5 text-xs text-slate-500 font-body text-center flex items-center justify-center gap-2">
+            <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"/></svg>
+            app.taxbridge.ng/dashboard
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-0">
+          <div class="hidden lg:block lg:col-span-2 bg-slate-900/50 border-r border-slate-700 p-4 space-y-1.5">
+            <div class="text-brand-accent font-bold bg-brand-primary/10 px-3 py-2 rounded-lg border border-brand-primary/20 text-sm">Overview</div>
+            <div class="text-slate-400 px-3 py-2 hover:bg-white/5 rounded-lg text-sm">Invoices</div>
+            <div class="text-slate-400 px-3 py-2 hover:bg-white/5 rounded-lg text-sm flex justify-between">
+              Tax Reports
+              <span class="bg-amber-500/20 text-amber-400 text-[10px] px-1.5 py-0.5 rounded">Due</span>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg">
-              <p class="text-slate-400 text-sm mb-2">Pending Invoices</p>
-              <p class="text-3xl font-bold">₦450K</p>
-              <p class="text-slate-400 text-sm mt-2">12 outstanding</p>
+            <div class="text-slate-400 px-3 py-2 hover:bg-white/5 rounded-lg text-sm">Expenses</div>
+            <div class="text-slate-400 px-3 py-2 hover:bg-white/5 rounded-lg text-sm">Payroll</div>
+          </div>
+
+          <div class="col-span-12 lg:col-span-7 p-6 lg:p-8 bg-slate-800">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+              <div class="bg-slate-700/30 p-4 rounded-xl border border-slate-600/50">
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Revenue (Mar)</p>
+                <p class="text-2xl font-display font-bold text-white mt-1">₦2.45M</p>
+                <p class="text-brand-accent text-xs mt-1.5 flex items-center gap-1">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                  +12% vs Feb
+                </p>
+              </div>
+              <div class="bg-slate-700/30 p-4 rounded-xl border border-slate-600/50">
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">VAT Due</p>
+                <p class="text-2xl font-display font-bold text-white mt-1">₦183K</p>
+                <p class="text-amber-400 text-xs mt-1.5">14 days left</p>
+              </div>
+              <div class="hidden lg:block bg-slate-700/30 p-4 rounded-xl border border-slate-600/50">
+                <p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Outstanding</p>
+                <p class="text-2xl font-display font-bold text-white mt-1">₦1.2M</p>
+                <p class="text-slate-500 text-xs mt-1.5">12 unpaid invoices</p>
+              </div>
             </div>
-            <div class="bg-slate-900 p-6 rounded-lg">
-              <p class="text-slate-400 text-sm mb-2">VAT to Pay</p>
-              <p class="text-3xl font-bold text-brand-gold">₦180K</p>
-              <p class="text-slate-400 text-sm mt-2">Due Mar 15</p>
+
+            <div class="h-52 lg:h-60 bg-slate-900/30 rounded-xl border border-slate-600/50 relative overflow-hidden mb-5">
+               <div class="absolute top-4 left-4 text-[10px] font-bold text-slate-500 uppercase tracking-wider">Monthly Cash Flow</div>
+               <div class="absolute inset-x-0 bottom-0 h-full w-full flex items-end justify-around px-6 pb-0">
+                   <div class="w-10 bg-brand-primary/20 h-[30%] rounded-t transition-all hover:bg-brand-primary/40"></div>
+                   <div class="w-10 bg-brand-primary/25 h-[45%] rounded-t transition-all hover:bg-brand-primary/50"></div>
+                   <div class="w-10 bg-brand-primary/35 h-[35%] rounded-t transition-all hover:bg-brand-primary/55"></div>
+                   <div class="w-10 bg-brand-primary/50 h-[75%] rounded-t transition-all hover:bg-brand-primary/70 relative group">
+                      <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-brand-dark text-[10px] font-bold px-2 py-1 rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">₦980K</div>
+                   </div>
+                   <div class="w-10 bg-brand-primary h-[90%] rounded-t shadow-[0_0_20px_rgba(0,132,61,0.3)] relative">
+                      <div class="absolute -top-7 left-1/2 -translate-x-1/2 bg-white text-brand-dark text-[10px] font-bold px-2 py-1 rounded shadow-sm whitespace-nowrap">Current</div>
+                   </div>
+               </div>
+               <div class="absolute inset-x-0 border-t border-slate-700/20 top-1/4"></div>
+               <div class="absolute inset-x-0 border-t border-slate-700/20 top-2/4"></div>
+               <div class="absolute inset-x-0 border-t border-slate-700/20 top-3/4"></div>
+            </div>
+
+            <div class="flex items-center gap-3">
+               <div class="h-2 w-full bg-slate-700 rounded-full overflow-hidden">
+                 <div class="h-full bg-gradient-to-r from-brand-primary to-brand-accent w-[70%] rounded-full"></div>
+               </div>
+               <div class="text-xs text-slate-500 whitespace-nowrap font-medium">70% to Q1 goal</div>
             </div>
           </div>
-          <div class="text-center text-slate-500 text-sm py-4 border-t border-slate-700">
-            Interactive dashboard preview • Live data updates
+
+          <div class="col-span-12 lg:col-span-3 bg-gradient-to-b from-slate-800 to-slate-900 border-t lg:border-t-0 lg:border-l border-slate-700 p-6 lg:p-8 flex flex-col justify-center text-center lg:text-left">
+            <h4 class="text-white font-bold text-lg mb-2">Stop Emailing Spreadsheets</h4>
+            <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+              Give your accountant or tax consultant secure, read-only access to your dashboard. They'll have everything they need to file your returns in minutes.
+            </p>
+
+            <div class="space-y-3">
+              <a href="https://taxbridge.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="block w-full py-3 px-4 bg-white hover:bg-gray-100 text-brand-dark font-bold rounded-lg transition text-sm text-center">
+                Try Dashboard Now
+              </a>
+              <div class="flex items-center justify-center lg:justify-start gap-2 text-xs text-slate-500">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                Works instantly • No login required
+              </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="text-center animate-on-scroll">
-        <a 
-          href="https://taxbridge.vercel.app/dashboard" 
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-block px-8 py-4 bg-white text-slate-900 font-bold rounded-xl hover:bg-brand-surface transition-all hover:shadow-xl transform hover:scale-105"
-        >
-          Open dashboard preview
+  <!-- FEATURES - Outcome-focused descriptions -->
+  <section id="features" class="py-20 lg:py-28 px-4 bg-brand-surface scroll-mt-20">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16 max-w-3xl mx-auto reveal">
+        <p class="text-sm font-bold text-brand-primary uppercase tracking-wider mb-3">Features</p>
+        <h2 class="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-5">
+          Everything You Need to Run<br class="hidden sm:inline"> a Compliant Nigerian Business
+        </h2>
+        <p class="text-lg text-slate-500 max-w-2xl mx-auto">Built for unreliable internet, limited data, and complex regulations. Every feature works offline and syncs when you're back online—no exceptions.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-7 rounded-2xl bg-white border border-gray-100 hover:border-brand-primary/30 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group reveal stagger-1">
+          <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-brand-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Snap Any Receipt, Track Every Expense</h3>
+          <p class="text-slate-500 leading-relaxed text-sm">AI reads merchant name, amount, date, and VAT from crumpled receipts. Automatically categorizes into 13 expense types. Never lose a deduction again.</p>
+        </div>
+
+        <div class="p-7 rounded-2xl bg-white border border-gray-100 hover:border-blue-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group reveal stagger-2">
+          <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Create FIRS-Ready Invoices in 30 Seconds</h3>
+          <p class="text-slate-500 leading-relaxed text-sm">Professional invoices with QR codes and mandatory NRS stamps. Share via WhatsApp, email, or PDF. Accept payments directly through Paystack or Flutterwave.</p>
+        </div>
+
+        <div class="p-7 rounded-2xl bg-white border border-gray-100 hover:border-purple-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group reveal stagger-3">
+          <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+          </div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Never Miss a Tax Deadline Again</h3>
+          <p class="text-slate-500 leading-relaxed text-sm">PIT, VAT, CIT, CGT, WHT, and PAYE calculated automatically as you transact. Dashboard shows exactly what you owe and when it's due. File in one click.</p>
+        </div>
+
+        <div class="p-7 rounded-2xl bg-white border border-gray-100 hover:border-orange-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group reveal stagger-1">
+          <div class="w-12 h-12 bg-orange-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          </div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Works Perfectly Without Internet</h3>
+          <p class="text-slate-500 leading-relaxed text-sm">Create invoices, scan receipts, track expenses—all stored locally on your phone. Auto-syncs to the cloud when you connect. Zero data loss, ever.</p>
+        </div>
+
+        <div class="p-7 rounded-2xl bg-white border border-gray-100 hover:border-amber-200 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group reveal stagger-2">
+          <div class="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+          </div>
+          <h3 class="text-lg font-display font-bold text-slate-900 mb-2">Get Paid Faster with One-Click Payments</h3>
+          <p class="text-slate-500 leading-relaxed text-sm">Paystack, Flutterwave, and Remita integrated. Customers pay directly from your invoice link by card or bank transfer. Money hits your account in minutes.</p>
+        </div>
+
+        <div class="p-7 rounded-2xl bg-brand-dark text-white hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 group reveal stagger-3">
+          <div class="w-12 h-12 bg-white/10 rounded-xl border border-white/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </div>
+          <h3 class="text-lg font-display font-bold mb-2">Free Forever. Open Source. Your Data, Your Control.</h3>
+          <p class="text-gray-300 leading-relaxed text-sm">No subscription trap. No hidden premium features. Audit the entire codebase on GitHub. Your financial data stays on your device with bank-grade encryption.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING - Stronger objection handling -->
+  <section class="py-20 lg:py-28 bg-white border-t border-gray-100" id="pricing">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="reveal">
+          <p class="text-sm font-bold text-brand-primary uppercase tracking-wider mb-3">Pricing</p>
+          <h2 class="text-3xl lg:text-5xl font-display font-bold text-slate-900 mb-4">
+            Free Today.<br>Free Tomorrow.<br>Free Forever.
+          </h2>
+          <p class="text-lg text-slate-500 mb-8 leading-relaxed">
+            Tax compliance shouldn't cost a fortune. Every feature—invoicing, expense tracking, AI scanning, FIRS filing, payroll—is completely free. No trials. No upsells. Ever.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-bold text-slate-900 text-sm">No credit card required. Ever.</p>
+                <p class="text-slate-500 text-sm">Download and use every feature without entering payment details. Zero risk.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-bold text-slate-900 text-sm">Your data never gets sold</p>
+                <p class="text-slate-500 text-sm">Open-source code you can inspect. Bank-grade AES-256 encryption. NDPC compliant.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3.5 h-3.5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+              </div>
+              <div>
+                <p class="font-bold text-slate-900 text-sm">Built by Nigerian developers for Nigerian businesses</p>
+                <p class="text-slate-500 text-sm">We understand low bandwidth, unreliable power, and FIRS deadlines. Every feature reflects that reality.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="bg-brand-surface rounded-2xl border-2 border-brand-primary/20 p-8 lg:p-10 shadow-xl">
+            <div class="text-center mb-8">
+              <div class="text-6xl font-display font-extrabold text-brand-primary mb-1">₦0</div>
+              <p class="text-slate-500 font-medium">per month, forever</p>
+            </div>
+            <ul class="space-y-3 mb-8 text-sm">
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Unlimited invoices, receipts & clients</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>AI receipt scanning with expense categorization</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Automatic tax calculations (PIT, VAT, CIT, CGT, WHT, PAYE)</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>NRS-compliant invoicing with QR codes</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Payroll management & PAYE for employees</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Web dashboard with real-time analytics</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Full offline mode + automatic cloud sync</li>
+              <li class="flex items-center gap-2.5 text-slate-700"><svg class="w-4 h-4 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>Accountant collaboration & FIRS export</li>
+            </ul>
+            <a href="#download" class="block w-full text-center py-3.5 bg-brand-primary hover:bg-brand-dark text-white font-bold rounded-xl transition shadow-md">
+              Start Using TaxBridge Free
+            </a>
+            <p class="text-center text-xs text-slate-500 mt-4">Join 1,200+ Nigerian businesses already saving time and money</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA - Urgency and strong benefit reminder -->
+  <section id="download" class="py-20 lg:py-28 px-4 bg-brand-dark text-white relative overflow-hidden scroll-mt-20">
+    <div class="absolute inset-0 opacity-[0.15]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+    <div class="max-w-3xl mx-auto text-center relative z-10 reveal">
+      <h2 class="text-3xl lg:text-5xl font-display font-bold mb-5 leading-tight">
+        Ready to Save <span class="text-brand-gold">₦400,000</span> This Year?
+      </h2>
+      <p class="text-lg text-green-100/80 mb-10 max-w-xl mx-auto leading-relaxed">
+        Join 1,200+ Nigerian SMEs that never miss a tax deadline, track every expense, and stay FIRS-compliant—without paying an accountant monthly retainers.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+        <a href="https://play.google.com/store" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-7 py-4 bg-white text-slate-900 rounded-xl font-bold text-lg hover:scale-[1.03] transition-all shadow-2xl">
+          <svg class="w-7 h-7 text-brand-primary flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.24-.84-.76-.84-1.35z"/>
+            <path d="M16.81 15.12l-3.12-3.12 3.12-3.12 3.69 2.13c.51.29.51 1.11 0 1.4l-3.69 2.71z"/>
+          </svg>
+          <div class="text-left leading-tight">
+            <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Download Free</div>
+            <div class="text-lg font-display font-extrabold">Android App</div>
+          </div>
         </a>
-        <p class="text-sm text-slate-400 mt-3">
-          Demo data • No signup required
-        </p>
-      </div>
-    </section>
 
-    <!-- TESTIMONIALS Section (NEW) -->
-    <section class="py-24 px-4 bg-white">
-      <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 animate-on-scroll">
-          <h2 class="text-3xl lg:text-5xl font-display font-bold mb-6">
-            Trusted by Nigerian business owners
-          </h2>
-          <p class="text-lg text-slate-500">
-            See what our users have to say
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          <!-- Testimonial 1 -->
-          <div class="bg-brand-surface p-8 rounded-2xl animate-on-scroll">
-            <div class="flex mb-4">
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-            </div>
-            <p class="text-slate-700 mb-4 italic">"TaxBridge saved me hours every week. I used to spend half a day on invoices and expenses. Now it takes minutes."</p>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-brand-primary/20 rounded-full flex items-center justify-center">
-                <span class="font-bold text-brand-primary">AM</span>
-              </div>
-              <div>
-                <p class="font-bold text-sm">Adebayo M.</p>
-                <p class="text-slate-500 text-xs">Fashion Designer, Lagos</p>
-              </div>
-            </div>
+        <a href="https://taxbridge.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-7 py-4 bg-white/10 border border-white/20 hover:bg-white/20 text-white rounded-xl font-bold text-lg transition-all">
+          <svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <div class="text-left leading-tight">
+            <div class="text-[10px] uppercase font-bold text-gray-300 tracking-wider">Or Try</div>
+            <div class="text-lg font-display font-extrabold">Web Dashboard</div>
           </div>
-
-          <!-- Testimonial 2 -->
-          <div class="bg-brand-surface p-8 rounded-2xl animate-on-scroll">
-            <div class="flex mb-4">
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-            </div>
-            <p class="text-slate-700 mb-4 italic">"The offline feature is a lifesaver. I can work anywhere, even when network is bad. My invoices sync automatically when I'm online."</p>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-brand-primary/20 rounded-full flex items-center justify-center">
-                <span class="font-bold text-brand-primary">CO</span>
-              </div>
-              <div>
-                <p class="font-bold text-sm">Chioma O.</p>
-                <p class="text-slate-500 text-xs">Catering Service, Abuja</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Testimonial 3 -->
-          <div class="bg-brand-surface p-8 rounded-2xl animate-on-scroll">
-            <div class="flex mb-4">
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-              <svg class="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-              </svg>
-            </div>
-            <p class="text-slate-700 mb-4 italic">"I was scared of taxes before. Now I know exactly what I owe every month. No more surprises. No more penalties."</p>
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 bg-brand-primary/20 rounded-full flex items-center justify-center">
-                <span class="font-bold text-brand-primary">EI</span>
-              </div>
-              <div>
-                <p class="font-bold text-sm">Emmanuel I.</p>
-                <p class="text-slate-500 text-xs">Tech Consultant, Port Harcourt</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        </a>
       </div>
-    </section>
 
-    <!-- FAQ Section (NEW) -->
-    <section class="py-24 px-4 bg-brand-surface">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-16 animate-on-scroll">
-          <h2 class="text-3xl lg:text-5xl font-display font-bold mb-6">
-            Common questions
-          </h2>
-          <p class="text-lg text-slate-500">
-            Everything you need to know about TaxBridge
-          </p>
-        </div>
-
-        <div class="space-y-4">
-          <!-- FAQ Item 1 -->
-          <details class="bg-white p-6 rounded-xl shadow-sm group animate-on-scroll">
-            <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
-              <span>Is TaxBridge really free?</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-slate-600">
-              Yes, TaxBridge is completely free to use. You can create unlimited invoices, track all your expenses, and generate tax reports without paying anything. We believe every Nigerian business deserves access to professional tools.
-            </p>
-          </details>
-
-          <!-- FAQ Item 2 -->
-          <details class="bg-white p-6 rounded-xl shadow-sm group animate-on-scroll">
-            <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
-              <span>Do I need accounting knowledge to use it?</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-slate-600">
-              Not at all. TaxBridge is designed for business owners, not accountants. We guide you through everything step-by-step in simple language. VAT and other calculations happen automatically.
-            </p>
-          </details>
-
-          <!-- FAQ Item 3 -->
-          <details class="bg-white p-6 rounded-xl shadow-sm group animate-on-scroll">
-            <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
-              <span>Does it work without internet?</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-slate-600">
-              Yes! You can create invoices, record expenses, and view reports completely offline. Everything syncs automatically when you connect to the internet.
-            </p>
-          </details>
-
-          <!-- FAQ Item 4 -->
-          <details class="bg-white p-6 rounded-xl shadow-sm group animate-on-scroll">
-            <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
-              <span>Is my data safe and private?</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-slate-600">
-              Absolutely. We use bank-level encryption to protect your data. Your information is stored securely and we never share it with anyone. You own your data and can export or delete it anytime.
-            </p>
-          </details>
-
-          <!-- FAQ Item 5 -->
-          <details class="bg-white p-6 rounded-xl shadow-sm group animate-on-scroll">
-            <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
-              <span>Can my accountant access my records?</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-slate-600">
-              Yes. You can give your accountant view-only access to your dashboard. They can see all your records and generate reports, but they can't change anything without your permission.
-            </p>
-          </details>
-
-          <!-- FAQ Item 6 -->
-          <details class="bg-white p-6 rounded-xl shadow-sm group animate-on-scroll">
-            <summary class="font-bold text-lg cursor-pointer list-none flex items-center justify-between">
-              <span>What if I need help?</span>
-              <svg class="w-5 h-5 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-            </summary>
-            <p class="mt-4 text-slate-600">
-              We're here to help! You can reach us through in-app support, email at support@taxbridge.ng, or WhatsApp. We respond within 24 hours, usually much faster.
-            </p>
-          </details>
-        </div>
+      <!-- Trust signals -->
+      <div class="flex flex-wrap justify-center items-center gap-6 text-sm text-green-200/60 mb-6">
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          Setup in 2 minutes
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          No credit card needed
+        </span>
+        <span class="flex items-center gap-2">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>
+          Free forever
+        </span>
       </div>
-    </section>
 
-    <!-- FINAL CTA -->
-    <section id="download" class="py-28 px-4 bg-brand-dark text-white text-center">
-      <div class="max-w-3xl mx-auto animate-on-scroll">
-        <h2 class="text-3xl lg:text-5xl font-display font-bold mb-6">
-          Stop worrying about invoices and taxes
-        </h2>
-        <p class="text-lg text-green-100/80 max-w-xl mx-auto mb-10">
-          Join Nigerian business owners using TaxBridge to stay organised, avoid penalties,
-          and save hundreds of thousands of naira every year.
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <a 
-            href="https://play.google.com/store" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-slate-900 font-bold rounded-xl text-lg hover:bg-brand-surface transition-all hover:shadow-xl transform hover:scale-105"
-          >
-            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"></path>
-            </svg>
-            Download on Google Play — free
-          </a>
-          
-          <a 
-            href="https://taxbridge.vercel.app/dashboard" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-white text-white font-bold rounded-xl text-lg hover:bg-white hover:text-brand-dark transition-all"
-          >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
-            Try web dashboard
-          </a>
-        </div>
-
-        <div class="flex items-center justify-center gap-6 text-sm text-green-100/60">
-          <span class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            No credit card
-          </span>
-          <span class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            Works offline
-          </span>
-          <span class="flex items-center gap-2">
-            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-            </svg>
-            Free forever
-          </span>
-        </div>
-      </div>
-    </section>
+      <p class="text-sm text-green-200/40">Android 8.0+ • iOS coming Q3 2026 • Version 1.0.4 • Made in Nigeria</p>
+    </div>
+  </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-900 text-slate-400 py-16">
+  <footer class="bg-slate-900 border-t border-slate-800 pt-14 pb-8 text-slate-400 text-sm">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="grid md:grid-cols-4 gap-12 mb-12">
-        <!-- Brand Column -->
-        <div class="md:col-span-1">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+        <div class="col-span-2 md:col-span-1">
           <div class="flex items-center gap-2 mb-4">
-            <img src="assets/logo-main.png" alt="" class="h-8 brightness-0 invert" />
-            <span class="font-display font-bold text-white text-lg">TaxBridge</span>
+            <img src="assets/logo-main.png" alt="TaxBridge icon" class="h-8 w-auto brightness-0 invert opacity-90">
+            <span class="text-white font-display font-bold text-lg">TaxBridge</span>
           </div>
-          <p class="text-sm mb-4">
-            Professional invoicing and tax tracking for Nigerian businesses.
-          </p>
-          <div class="flex gap-4">
-            <a href="#" class="hover:text-white transition-colors" aria-label="Twitter">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-              </svg>
-            </a>
-            <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>
-              </svg>
-            </a>
-            <a href="#" class="hover:text-white transition-colors" aria-label="Instagram">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"></path>
-              </svg>
-            </a>
-          </div>
+          <p class="leading-relaxed">Free tax compliance and invoicing software for Nigerian SMEs. Always free, works offline, FIRS-ready.</p>
         </div>
 
-        <!-- Product Column -->
         <div>
-          <h4 class="font-bold text-white mb-4">Product</h4>
-          <ul class="space-y-3 text-sm">
-            <li><a href="#features" class="hover:text-white transition-colors">Features</a></li>
-            <li><a href="#how-it-works" class="hover:text-white transition-colors">How it works</a></li>
-            <li><a href="#dashboard" class="hover:text-white transition-colors">Web dashboard</a></li>
-            <li><a href="#download" class="hover:text-white transition-colors">Download app</a></li>
+          <h4 class="text-white font-bold mb-4 text-sm">Product</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#features" class="hover:text-brand-accent transition">Features</a></li>
+            <li><a href="#how-it-works" class="hover:text-brand-accent transition">How It Works</a></li>
+            <li><a href="https://taxbridge.vercel.app/dashboard" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition">Dashboard</a></li>
+            <li><a href="#download" class="hover:text-brand-accent transition">Download App</a></li>
           </ul>
         </div>
 
-        <!-- Company Column -->
         <div>
-          <h4 class="font-bold text-white mb-4">Company</h4>
-          <ul class="space-y-3 text-sm">
-            <li><a href="/about" class="hover:text-white transition-colors">About us</a></li>
-            <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
-            <li><a href="/careers" class="hover:text-white transition-colors">Careers</a></li>
-            <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+          <h4 class="text-white font-bold mb-4 text-sm">Developers</h4>
+          <ul class="space-y-2.5">
+            <li><a href="https://github.com/Scardubu/Taxbridge" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition">GitHub</a></li>
+            <li><a href="https://taxbridge-api-ker8.onrender.com/docs" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition">API Docs</a></li>
+            <li><a href="https://github.com/Scardubu/Taxbridge/blob/main/docs/DEVELOPER_GUIDE.md" target="_blank" rel="noopener noreferrer" class="hover:text-brand-accent transition">Contributing</a></li>
           </ul>
         </div>
 
-        <!-- Legal Column -->
         <div>
-          <h4 class="font-bold text-white mb-4">Legal</h4>
-          <ul class="space-y-3 text-sm">
-            <li><a href="/privacy" class="hover:text-white transition-colors">Privacy policy</a></li>
-            <li><a href="/terms" class="hover:text-white transition-colors">Terms of service</a></li>
-            <li><a href="/security" class="hover:text-white transition-colors">Security</a></li>
+          <h4 class="text-white font-bold mb-4 text-sm">Legal</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="hover:text-brand-accent transition">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-brand-accent transition">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-brand-accent transition">NDPC Compliance</a></li>
           </ul>
         </div>
       </div>
 
-      <div class="border-t border-slate-800 pt-8 text-center text-sm">
-        <p>© 2026 TaxBridge Nigeria. Built for small businesses with ❤️ in Nigeria.</p>
+      <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-slate-500">&copy; 2026 TaxBridge Nigeria. All rights reserved.</p>
+        <div class="flex items-center gap-5">
+          <a href="https://github.com/Scardubu/Taxbridge" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition" aria-label="GitHub">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          </a>
+          <a href="https://twitter.com/taxbridgeng" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-white transition" aria-label="X (Twitter)">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- JavaScript for Interactivity -->
   <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenuClose = document.getElementById('mobile-menu-close');
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Mobile menu
+    const mobileBtn = document.getElementById('mobile-btn');
     const mobileMenu = document.getElementById('mobile-menu');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-    function openMobileMenu() {
-      mobileMenu.classList.add('open');
-      mobileMenuBtn.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden'; // Prevent background scroll
-    }
-
-    function closeMobileMenu() {
-      mobileMenu.classList.remove('open');
-      mobileMenuBtn.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = ''; // Restore scroll
-    }
-
-    mobileMenuBtn.addEventListener('click', openMobileMenu);
-    mobileMenuClose.addEventListener('click', closeMobileMenu);
-
-    // Close menu when clicking nav links
-    mobileNavLinks.forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
+    mobileBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('active');
+      mobileBtn.setAttribute('aria-expanded', isOpen);
+    });
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        mobileBtn.setAttribute('aria-expanded', 'false');
+      });
     });
 
-    // Close menu when clicking outside
-    mobileMenu.addEventListener('click', (e) => {
-      if (e.target === mobileMenu) {
-        closeMobileMenu();
-      }
-    });
-
-    // Scroll-based header shadow
-    const header = document.getElementById('header');
-    let lastScroll = 0;
-
+    // Navbar scroll
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      
-      if (currentScroll > 100) {
-        header.classList.add('shadow-lg');
-      } else {
-        header.classList.remove('shadow-lg');
-      }
-
-      lastScroll = currentScroll;
-    });
-
-    // Intersection Observer for scroll animations
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const nav = document.getElementById('navbar');
+          nav.classList.toggle('shadow-md', window.scrollY > 10);
+          ticking = false;
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      });
-
-      elements.forEach(element => {
-        observer.observe(element);
-      });
-    };
-
-    // Initialize animations when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', animateOnScroll);
-    } else {
-      animateOnScroll();
-    }
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        
-        // Skip if it's just "#" or empty
-        if (href === '#' || href === '') {
-          e.preventDefault();
-          return;
-        }
-
-        const targetElement = document.querySelector(href);
-        
-        if (targetElement) {
-          e.preventDefault();
-          const headerOffset = 80; // Account for fixed header
-          const elementPosition = targetElement.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-
-    // Track button clicks (analytics placeholder)
-    document.querySelectorAll('a[href*="play.google.com"], a[href*="vercel.app"]').forEach(button => {
-      button.addEventListener('click', function(e) {
-        const destination = this.href;
-        
-        // Analytics tracking would go here
-        console.log('Button clicked:', destination);
-        
-        // Add visual feedback
-        this.classList.add('btn-loading');
-        
-        setTimeout(() => {
-          this.classList.remove('btn-loading');
-        }, 1000);
-      });
-    });
-
-    // Keyboard navigation improvements
-    document.addEventListener('keydown', (e) => {
-      // Close mobile menu with Escape key
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        closeMobileMenu();
+        ticking = true;
       }
     });
 
-    // Service Worker registration (for PWA capabilities - optional)
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        // Uncomment when service-worker.js is created
-        // navigator.serviceWorker.register('/service-worker.js')
-        //   .then(reg => console.log('Service Worker registered'))
-        //   .catch(err => console.log('Service Worker registration failed'));
+    // Smooth scroll offset for fixed header
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
       });
-    }
+    });
   </script>
-
-  <!-- Accessibility: Announce page changes to screen readers -->
-  <div role="status" aria-live="polite" aria-atomic="true" class="sr-only"></div>
-
 </body>
 </html>
