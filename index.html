@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>TaxBridge — Connect Your Business to Nigeria's Tax System (Beta)</title>
 <meta name="description" content="TaxBridge helps Nigerian businesses connect their invoicing software to the NRS e-invoicing system before the July 2026 compliance deadline. No government paperwork required."/>
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Scardubu/taxbridge-landing/main/assets/logo-main.png"/>
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Scardubu/taxbridge-landing/main/assets/logo-main.png"/>
+<!-- Open Graph -->
+<meta property="og:title" content="TaxBridge — Nigeria's NRS e-Invoicing Platform"/>
+<meta property="og:description" content="Connect your business to Nigeria's official NRS tax system before July 2026. No paperwork, no queues."/>
+<meta property="og:image" content="https://raw.githubusercontent.com/Scardubu/taxbridge-landing/main/assets/logo-main.png"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://taxbridge.vercel.app"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -119,6 +129,41 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 /* Tooltip anchor */
 [x-data*="tooltip"]{position:relative;display:inline-flex;align-items:center}
 .tooltip-term{border-bottom:1px dashed rgba(16,185,129,0.5);cursor:help;display:inline-flex;align-items:center;gap:2px}
+
+/* ── App Download Section ── */
+.store-btn{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:12px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:#fff;transition:all .25s;text-decoration:none;backdrop-filter:blur(8px)}
+.store-btn:hover{background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.4);transform:translateY(-2px);box-shadow:0 8px 32px rgba(16,185,129,0.2)}
+.store-btn-label{font-size:0.6rem;color:#94A3B8;font-family:'Syne',sans-serif;letter-spacing:0.08em;text-transform:uppercase;line-height:1}
+.store-btn-name{font-size:0.95rem;font-weight:700;font-family:'Syne',sans-serif;line-height:1.2;margin-top:2px}
+
+/* Phone mockup */
+.phone-mockup{width:220px;height:420px;border-radius:36px;border:2px solid rgba(255,255,255,0.1);background:linear-gradient(145deg,#0D1425,#111827);position:relative;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.6),0 0 0 1px rgba(16,185,129,0.1),inset 0 1px 0 rgba(255,255,255,0.05)}
+.phone-notch{width:80px;height:20px;background:#080D1A;border-radius:0 0 14px 14px;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:10}
+.phone-screen{position:absolute;inset:0;padding:28px 12px 16px;overflow:hidden}
+@keyframes phoneSlide{0%{transform:translateY(0)}40%{transform:translateY(-33%)}80%{transform:translateY(-66%)}100%{transform:translateY(0)}}
+.phone-slides{animation:phoneSlide 9s ease-in-out infinite;will-change:transform}
+.phone-slide{height:376px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;padding-top:8px}
+
+/* Dashboard preview */
+.dashboard-frame{border-radius:16px;border:1px solid rgba(30,45,71,0.9);background:#0A1020;overflow:hidden;box-shadow:0 32px 64px rgba(0,0,0,0.5),0 0 0 1px rgba(16,185,129,0.08)}
+.db-sidebar{width:52px;background:#060C18;border-right:1px solid #1E2D47;flex-shrink:0;display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:12px}
+.db-sidebar-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(30,45,71,0.5);cursor:pointer;transition:background .2s}
+.db-sidebar-icon.active{background:rgba(16,185,129,0.2);box-shadow:0 0 12px rgba(16,185,129,0.2)}
+.db-stat{background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.12);border-radius:10px;padding:10px 12px}
+.db-stat-val{font-family:'Syne',sans-serif;font-weight:700;font-size:1.1rem;color:#34D399;line-height:1}
+.db-stat-label{font-size:0.6rem;color:#4B5563;font-family:'DM Mono',monospace;letter-spacing:0.06em;margin-top:3px;text-transform:uppercase}
+.db-row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;font-size:0.65rem}
+.db-row:nth-child(odd){background:rgba(255,255,255,0.02)}
+.db-badge{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:0.6rem;font-weight:700;font-family:'Syne',sans-serif}
+
+@keyframes dash-pulse{0%,100%{opacity:1}50%{opacity:0.6}}
+.db-live{animation:dash-pulse 2s ease-in-out infinite}
+
+/* QR Download badge */
+.qr-card{background:rgba(13,20,37,0.8);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:16px;display:flex;gap:14px;align-items:center;backdrop-filter:blur(12px)}
+
+/* Floating app badge on hero */
+.app-float-badge{position:absolute;bottom:-16px;left:50%;transform:translateX(-50%);white-space:nowrap;background:rgba(8,13,26,0.9);border:1px solid rgba(16,185,129,0.3);border-radius:999px;padding:6px 14px;font-size:0.7rem;font-family:'Syne',sans-serif;font-weight:600;color:#34D399;backdrop-filter:blur(12px);box-shadow:0 8px 24px rgba(0,0,0,0.4)}
 </style>
 </head>
 
@@ -131,8 +176,13 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
   <div class="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4">
 
     <!-- Logo -->
-    <a href="#" class="flex items-center gap-2 flex-shrink-0" aria-label="TaxBridge home">
-      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#10B981,#059669)" aria-hidden="true">
+    <a href="https://taxbridge.vercel.app" class="flex items-center gap-2 flex-shrink-0" aria-label="TaxBridge home">
+      <img src="https://raw.githubusercontent.com/Scardubu/taxbridge-landing/main/assets/logo-main.png"
+           id="nav-logo-img"
+           alt="TaxBridge"
+           class="h-8 w-auto"
+           onerror="document.getElementById('nav-logo-img').style.display='none';document.getElementById('nav-logo-fb').style.display='flex'"/>
+      <div id="nav-logo-fb" class="w-8 h-8 rounded-lg items-center justify-center" style="background:linear-gradient(135deg,#10B981,#059669);display:none" aria-hidden="true">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
       </div>
       <span class="font-display font-extrabold text-white text-lg tracking-tight">TaxBridge</span>
@@ -142,9 +192,14 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
     <nav class="hidden lg:flex items-center gap-6 text-sm text-slate-400" aria-label="Main navigation">
       <a href="#demo"       class="hover:text-emerald-400 transition-colors font-medium">Live Demo</a>
       <a href="#how"        class="hover:text-emerald-400 transition-colors font-medium">How It Works</a>
-      <a href="#usecases"   class="hover:text-emerald-400 transition-colors font-medium">Who It's For</a>
+      <a href="#app"        class="hover:text-emerald-400 transition-colors font-medium">Mobile App</a>
       <a href="#pricing"    class="hover:text-emerald-400 transition-colors font-medium">Pricing</a>
       <a href="#faq"        class="hover:text-emerald-400 transition-colors font-medium">FAQs</a>
+      <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+         class="flex items-center gap-1.5 text-emerald-400 font-semibold border border-emerald-500/30 px-3 py-1 rounded-lg hover:bg-emerald-500/10 transition-all">
+        <svg width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M4 4h4M4 6h4M4 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Dashboard
+      </a>
     </nav>
 
     <!-- Audience Toggle — appears after hero on scroll -->
@@ -164,7 +219,11 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 
     <!-- CTAs -->
     <div class="flex items-center gap-2">
-      <a href="#demo" class="btn-secondary hidden sm:inline-flex px-4 py-2 rounded-lg text-sm">See Demo</a>
+      <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+         class="btn-secondary hidden sm:flex px-4 py-2 rounded-lg text-sm items-center gap-1.5">
+        <svg width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M4 4h4M4 6h4M4 8h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        Dashboard
+      </a>
       <a href="#demo" class="btn-primary inline-flex px-4 py-2 rounded-lg text-sm"><span>Try Demo Free</span></a>
     </div>
   </div>
@@ -184,10 +243,10 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 </div>
 
 
-<!-- Beta notice banner -->
-<div class="fixed top-0 left-0 right-0 z-[60] flex justify-center pointer-events-none" style="margin-top:56px" aria-label="Beta notice">
-  <div class="pointer-events-auto flex items-center gap-2 px-4 py-1.5 text-xs font-semibold rounded-b-lg" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2);border-top:none;color:#6EE7B7;font-family:'Syne',sans-serif;letter-spacing:0.04em">
-    <span aria-hidden="true">🔬</span> Early Access — Features and pricing are subject to change before general release
+<!-- Beta notice banner — sits just below the fixed nav in page flow -->
+<div class="w-full flex justify-center" style="padding-top:56px" aria-label="Beta notice">
+  <div class="flex items-center gap-2 px-4 py-1.5 text-xs font-semibold rounded-b-xl" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-top:none;color:#6EE7B7;font-family:'Syne',sans-serif;letter-spacing:0.04em">
+    <span aria-hidden="true">🔬</span> Early Access — Features and pricing may change before general release
   </div>
 </div>
 
@@ -195,7 +254,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 <!-- ═══════════════════════════════════════════════
      HERO
 ═══════════════════════════════════════════════ -->
-<section class="relative min-h-screen flex flex-col justify-center pt-24 pb-20 overflow-hidden" id="hero" aria-labelledby="hero-heading">
+<section class="relative min-h-screen flex flex-col justify-center pt-20 pb-20 overflow-hidden" id="hero" aria-labelledby="hero-heading">
   <!-- Background glow -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10" style="background:radial-gradient(circle,#10B981 0%,transparent 70%)"></div>
@@ -230,11 +289,16 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
       </p>
 
       <div class="flex flex-wrap gap-3 mb-10">
-        <a href="#demo" class="btn-primary px-6 py-3 rounded-xl text-base flex items-center gap-2">
-          <span>Try the Demo — No Account Needed</span>
-          <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+           class="btn-primary px-6 py-3 rounded-xl text-base flex items-center gap-2">
+          <span>Open Dashboard</span>
+          <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M5 5h6M5 8h6M5 11h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </a>
-        <a href="#how" class="btn-secondary px-6 py-3 rounded-xl text-base flex items-center gap-2">
+        <a href="#app" class="btn-secondary px-6 py-3 rounded-xl text-base flex items-center gap-2">
+          <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="1" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="10.5" r="0.8" fill="currentColor"/></svg>
+          Get the App
+        </a>
+        <a href="#demo" class="text-slate-400 px-4 py-3 rounded-xl text-sm flex items-center gap-2 hover:text-emerald-400 transition-colors">
           <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 5.5l3 1.5-3 1.5V5.5z" fill="currentColor"/></svg>
           See How It Works
         </a>
@@ -244,6 +308,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
       <div class="flex flex-wrap gap-5 text-sm text-slate-400">
         <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>Free sandbox — test before you pay</div>
         <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>Typically live in 1–5 working days</div>
+        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>Android app available</div>
         <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>NRS-certified Access Point Provider</div>
       </div>
     </div>
@@ -977,7 +1042,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
   <div class="max-w-3xl mx-auto px-4">
     <div class="text-center mb-12">
       <h2 id="faq-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Common Questions</h2>
-      <p class="text-slate-400 mt-3">Can't find your answer here? <a href="/cdn-cgi/l/email-protection#88fbfdf8f8e7fafcc8fce9f0eafae1ecefeda6e6ef" class="text-emerald-400 hover:underline">Email our team</a> — we reply within one business day.</p>
+      <p class="text-slate-400 mt-3">Can't find your answer here? <a href="mailto:hello@taxbridge.ng" class="text-emerald-400 hover:underline">Email our team</a> — we reply within one business day.</p>
     </div>
 
     <!-- Business Owner Questions -->
@@ -1064,6 +1129,336 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 
 
 <!-- ═══════════════════════════════════════════════
+     APP DOWNLOAD + DASHBOARD PREVIEW
+═══════════════════════════════════════════════ -->
+<section class="py-24 relative overflow-hidden" id="app" aria-labelledby="app-heading">
+  <!-- Background -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/2 left-0 w-[500px] h-[500px] -translate-y-1/2 -translate-x-1/3 rounded-full opacity-10" style="background:radial-gradient(circle,#10B981,transparent 70%)"></div>
+    <div class="absolute top-1/2 right-0 w-[400px] h-[400px] -translate-y-1/2 translate-x-1/3 rounded-full opacity-5" style="background:radial-gradient(circle,#008751,transparent 70%)"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 relative">
+
+    <!-- Section header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border text-emerald-400" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2)">
+        <svg width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1" width="8" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><circle cx="6" cy="8.5" r="0.7" fill="currentColor"/></svg>
+        Android App + Web Dashboard
+      </div>
+      <h2 id="app-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Manage Compliance from Anywhere</h2>
+      <p class="text-slate-400 mt-3 max-w-xl mx-auto">Monitor invoice status, download audit records, and manage your account — from your phone or your browser.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- ── LEFT: Phone mockup + store badges ── -->
+      <div class="flex flex-col items-center gap-10">
+
+        <!-- Phone + floating label -->
+        <div class="relative">
+          <div class="phone-mockup" role="img" aria-label="TaxBridge Android app preview">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone-screen">
+              <!-- Scrolling slides -->
+              <div class="phone-slides flex flex-col">
+
+                <!-- Slide 1: Dashboard overview -->
+                <div class="phone-slide">
+                  <div class="flex items-center justify-between mb-1">
+                    <div class="text-xs font-display font-bold text-white">TaxBridge</div>
+                    <div class="flex items-center gap-1">
+                      <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 db-live" aria-hidden="true"></div>
+                      <span class="text-emerald-400 font-mono" style="font-size:0.55rem">LIVE</span>
+                    </div>
+                  </div>
+                  <div class="text-slate-500 font-mono mb-3" style="font-size:0.55rem">Today — <span id="app-date">15 Mar 2026</span></div>
+                  <div class="grid grid-cols-2 gap-2 mb-3">
+                    <div class="db-stat">
+                      <div class="db-stat-val">24</div>
+                      <div class="db-stat-label">Invoices Today</div>
+                    </div>
+                    <div class="db-stat">
+                      <div class="db-stat-val" style="color:#FBBF24">2</div>
+                      <div class="db-stat-label">Pending</div>
+                    </div>
+                  </div>
+                  <!-- Mini invoice list -->
+                  <div class="space-y-1">
+                    <div class="db-row">
+                      <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></div>
+                      <div class="flex-1 text-slate-300" style="font-size:0.6rem">INV-0284</div>
+                      <span class="db-badge" style="background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.25)">Cleared</span>
+                    </div>
+                    <div class="db-row">
+                      <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></div>
+                      <div class="flex-1 text-slate-300" style="font-size:0.6rem">INV-0283</div>
+                      <span class="db-badge" style="background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.25)">Cleared</span>
+                    </div>
+                    <div class="db-row">
+                      <div class="w-1.5 h-1.5 rounded-full bg-amber-400 flex-shrink-0" aria-hidden="true"></div>
+                      <div class="flex-1 text-slate-300" style="font-size:0.6rem">INV-0282</div>
+                      <span class="db-badge" style="background:rgba(251,191,36,0.15);color:#FBBF24;border:1px solid rgba(251,191,36,0.25)">Pending</span>
+                    </div>
+                    <div class="db-row">
+                      <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 flex-shrink-0" aria-hidden="true"></div>
+                      <div class="flex-1 text-slate-300" style="font-size:0.6rem">INV-0281</div>
+                      <span class="db-badge" style="background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.25)">Cleared</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Slide 2: Invoice detail -->
+                <div class="phone-slide">
+                  <div class="flex items-center gap-2 mb-3">
+                    <svg width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true"><path d="M8 2L4 6l4 4" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    <span class="text-emerald-400 font-display font-bold" style="font-size:0.65rem">Invoice Detail</span>
+                  </div>
+                  <div class="glass rounded-xl p-3 mb-2">
+                    <div class="text-slate-500 font-mono mb-1" style="font-size:0.55rem">REFERENCE NUMBER</div>
+                    <div class="text-emerald-400 font-mono font-bold" style="font-size:0.62rem">TB-1748291020-K7MX2N</div>
+                    <div class="flex items-center gap-2 mt-2">
+                      <span class="db-badge" style="background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.25)">✓ Cleared by NRS</span>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-1.5">
+                    <div class="glass rounded-lg p-2">
+                      <div class="text-slate-500 font-mono" style="font-size:0.5rem">AMOUNT</div>
+                      <div class="text-white font-display font-bold" style="font-size:0.75rem">₦268,750</div>
+                    </div>
+                    <div class="glass rounded-lg p-2">
+                      <div class="text-slate-500 font-mono" style="font-size:0.5rem">VAT 7.5%</div>
+                      <div class="text-emerald-400 font-display font-bold" style="font-size:0.75rem">₦18,750</div>
+                    </div>
+                  </div>
+                  <div class="mt-2 glass rounded-lg p-2">
+                    <div class="text-slate-500 font-mono mb-1" style="font-size:0.5rem">DESCRIPTION</div>
+                    <div class="text-slate-300" style="font-size:0.6rem">Supply of office stationery</div>
+                  </div>
+                </div>
+
+                <!-- Slide 3: Compliance score -->
+                <div class="phone-slide">
+                  <div class="text-center mb-3">
+                    <div class="text-slate-500 font-mono mb-1" style="font-size:0.55rem">COMPLIANCE SCORE</div>
+                    <div class="font-display font-extrabold text-4xl grad-text">98%</div>
+                    <div class="text-slate-400 mt-1" style="font-size:0.6rem">Based on last 30 days</div>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex items-center justify-between glass rounded-lg px-3 py-2">
+                      <span class="text-slate-400" style="font-size:0.6rem">Invoices Cleared</span>
+                      <span class="text-emerald-400 font-display font-bold" style="font-size:0.65rem">312</span>
+                    </div>
+                    <div class="flex items-center justify-between glass rounded-lg px-3 py-2">
+                      <span class="text-slate-400" style="font-size:0.6rem">Failed Submissions</span>
+                      <span class="text-red-400 font-display font-bold" style="font-size:0.65rem">6</span>
+                    </div>
+                    <div class="flex items-center justify-between glass rounded-lg px-3 py-2">
+                      <span class="text-slate-400" style="font-size:0.6rem">Auto-Retried</span>
+                      <span class="text-amber-400 font-display font-bold" style="font-size:0.65rem">4</span>
+                    </div>
+                    <div class="flex items-center justify-between glass rounded-lg px-3 py-2">
+                      <span class="text-slate-400" style="font-size:0.6rem">Audit Records</span>
+                      <span class="text-emerald-400 font-display font-bold" style="font-size:0.65rem">Ready</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div><!-- /phone-slides -->
+            </div><!-- /phone-screen -->
+
+            <!-- Home indicator -->
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 w-16 h-1 rounded-full bg-slate-600" aria-hidden="true"></div>
+          </div><!-- /phone-mockup -->
+
+          <!-- Floating badge below phone -->
+          <div class="app-float-badge">
+            <span aria-hidden="true">🤖</span> Android · Early Access
+          </div>
+        </div><!-- /relative phone wrapper -->
+
+        <!-- Store badges -->
+        <div class="flex flex-col items-center gap-4 w-full max-w-xs">
+          <div class="text-xs text-slate-500 font-mono uppercase tracking-widest text-center">Download the App</div>
+          <div class="flex flex-col sm:flex-row gap-3 w-full justify-center">
+
+            <!-- Google Play -->
+            <a href="#" aria-label="Download TaxBridge on Google Play"
+               class="store-btn flex-1 justify-center">
+              <svg width="22" height="24" viewBox="0 0 22 24" fill="none" aria-hidden="true">
+                <path d="M1.22 0.43C0.89 0.78 0.7 1.3 0.7 1.97V22.04C0.7 22.71 0.89 23.23 1.22 23.58L1.3 23.66L12.79 12.17V11.84L1.3 0.35L1.22 0.43Z" fill="url(#gp1)"/>
+                <path d="M16.69 16.07L12.79 12.17V11.84L16.69 7.94L16.79 8.0L21.42 10.67C22.73 11.41 22.73 12.6 21.42 13.34L16.79 16.01L16.69 16.07Z" fill="url(#gp2)"/>
+                <path d="M16.79 16.01L12.79 12.01L1.22 23.58C1.66 24.05 2.38 24.11 3.19 23.66L16.79 16.01Z" fill="url(#gp3)"/>
+                <path d="M16.79 8.0L3.19 0.35C2.38 -0.1 1.66 -0.04 1.22 0.43L12.79 12.01L16.79 8.0Z" fill="url(#gp4)"/>
+                <defs>
+                  <linearGradient id="gp1" x1="11.84" y1="1.0" x2="-4.74" y2="12.01" gradientUnits="userSpaceOnUse"><stop stop-color="#00A0FF"/><stop offset="1" stop-color="#00A0FF" stop-opacity="0"/></linearGradient>
+                  <linearGradient id="gp2" x1="23.33" y1="12.0" x2="0.34" y2="12.0" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD900"/><stop offset="1" stop-color="#FF8A00"/></linearGradient>
+                  <linearGradient id="gp3" x1="14.33" y1="14.07" x2="-4.0" y2="31.54" gradientUnits="userSpaceOnUse"><stop stop-color="#FF3A44"/><stop offset="1" stop-color="#C31162"/></linearGradient>
+                  <linearGradient id="gp4" x1="-1.87" y1="-5.62" x2="7.81" y2="3.94" gradientUnits="userSpaceOnUse"><stop stop-color="#32A071"/><stop offset="1" stop-color="#2DA771"/></linearGradient>
+                </defs>
+              </svg>
+              <div>
+                <div class="store-btn-label">Get it on</div>
+                <div class="store-btn-name">Google Play</div>
+              </div>
+            </a>
+
+            <!-- APK Direct Download -->
+            <a href="#" aria-label="Download TaxBridge APK directly"
+               class="store-btn flex-1 justify-center">
+              <svg width="20" height="22" viewBox="0 0 20 22" fill="none" aria-hidden="true">
+                <path d="M10 1v14M10 15l-4-4M10 15l4-4" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="#10B981" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+              <div>
+                <div class="store-btn-label">Direct download</div>
+                <div class="store-btn-name">APK File</div>
+              </div>
+            </a>
+
+          </div>
+          <p class="text-xs text-slate-600 text-center leading-relaxed">Android 8.0+ · Free · No in-app purchases</p>
+        </div>
+
+      </div><!-- /left column -->
+
+      <!-- ── RIGHT: Web Dashboard preview ── -->
+      <div class="flex flex-col gap-6">
+
+        <div>
+          <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-2">Web Admin Dashboard</div>
+          <h3 class="font-display font-bold text-2xl text-white mb-3">Full Control at <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener" class="grad-text hover:opacity-80 transition-opacity">taxbridge.vercel.app</a></h3>
+          <p class="text-slate-400 text-sm leading-relaxed">Your compliance command centre. Monitor every invoice, manage your team's access, and export audit records — all from one clean web interface.</p>
+        </div>
+
+        <!-- Dashboard frame -->
+        <div class="dashboard-frame" style="height:320px">
+          <div class="flex h-full">
+
+            <!-- Sidebar -->
+            <div class="db-sidebar">
+              <!-- Logo mark -->
+              <div class="w-7 h-7 rounded-lg flex items-center justify-center mb-2" style="background:linear-gradient(135deg,#10B981,#059669)">
+                <img src="https://raw.githubusercontent.com/Scardubu/taxbridge-landing/main/assets/logo-main.png"
+                     alt="" class="w-5 h-5 object-contain"
+                     onerror="this.outerHTML='<svg width=&quot;12&quot; height=&quot;12&quot; viewBox=&quot;0 0 16 16&quot; fill=&quot;none&quot;><path d=&quot;M2 4h12M2 8h8M2 12h10&quot; stroke=&quot;white&quot; stroke-width=&quot;2&quot; stroke-linecap=&quot;round&quot;/></svg>'"/>
+              </div>
+              <div class="db-sidebar-icon active" aria-label="Dashboard">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" rx="1" stroke="#10B981" stroke-width="1.2"/><rect x="8" y="1" width="5" height="5" rx="1" stroke="#10B981" stroke-width="1.2"/><rect x="1" y="8" width="5" height="5" rx="1" stroke="#10B981" stroke-width="1.2"/><rect x="8" y="8" width="5" height="5" rx="1" stroke="#10B981" stroke-width="1.2"/></svg>
+              </div>
+              <div class="db-sidebar-icon" aria-label="Invoices">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><rect x="2" y="1" width="10" height="12" rx="1.5" stroke="#4B5563" stroke-width="1.2"/><path d="M5 4h4M5 7h4M5 10h2" stroke="#4B5563" stroke-width="1.2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="db-sidebar-icon" aria-label="Reports">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><path d="M2 11V8M5.5 11V5M9 11V2M12.5 11V7" stroke="#4B5563" stroke-width="1.2" stroke-linecap="round"/></svg>
+              </div>
+              <div class="db-sidebar-icon" aria-label="Settings">
+                <svg width="14" height="14" fill="none" viewBox="0 0 14 14"><circle cx="7" cy="7" r="2" stroke="#4B5563" stroke-width="1.2"/><path d="M7 1v1.5M7 11.5V13M1 7h1.5M11.5 7H13M3.05 3.05l1.06 1.06M9.89 9.89l1.06 1.06M3.05 10.95l1.06-1.06M9.89 4.11l1.06-1.06" stroke="#4B5563" stroke-width="1.2" stroke-linecap="round"/></svg>
+              </div>
+            </div>
+
+            <!-- Main dashboard content -->
+            <div class="flex-1 p-4 overflow-hidden flex flex-col gap-3">
+
+              <!-- Top bar -->
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-white font-display font-bold text-sm">Overview</div>
+                  <div class="text-slate-600 font-mono" style="font-size:0.6rem">March 2026</div>
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="db-live flex items-center gap-1.5 text-emerald-400 font-mono" style="font-size:0.6rem">
+                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>Live
+                  </div>
+                  <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+                     class="text-emerald-400 hover:text-emerald-300 transition-colors font-mono flex items-center gap-1"
+                     style="font-size:0.6rem">
+                    Open ↗
+                  </a>
+                </div>
+              </div>
+
+              <!-- Stats row -->
+              <div class="grid grid-cols-3 gap-2">
+                <div class="db-stat">
+                  <div class="db-stat-val">312</div>
+                  <div class="db-stat-label">Cleared</div>
+                </div>
+                <div class="db-stat" style="background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.12)">
+                  <div class="db-stat-val" style="color:#FBBF24">8</div>
+                  <div class="db-stat-label">Pending</div>
+                </div>
+                <div class="db-stat" style="background:rgba(99,102,241,0.06);border-color:rgba(99,102,241,0.12)">
+                  <div class="db-stat-val" style="color:#A5B4FC">₦74M</div>
+                  <div class="db-stat-label">Vol. MTD</div>
+                </div>
+              </div>
+
+              <!-- Invoice table -->
+              <div class="flex-1 overflow-hidden">
+                <div class="text-slate-600 font-mono uppercase tracking-widest mb-1.5" style="font-size:0.55rem">Recent Invoices</div>
+                <div class="space-y-0.5">
+                  <div class="db-row">
+                    <div class="text-slate-500 font-mono flex-shrink-0" style="font-size:0.58rem;width:64px">INV-0284</div>
+                    <div class="flex-1 text-slate-400 truncate" style="font-size:0.58rem">Adeyemi Stores Ltd</div>
+                    <div class="text-white font-mono flex-shrink-0" style="font-size:0.58rem">₦268,750</div>
+                    <span class="db-badge ml-2 flex-shrink-0" style="background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)">✓</span>
+                  </div>
+                  <div class="db-row">
+                    <div class="text-slate-500 font-mono flex-shrink-0" style="font-size:0.58rem;width:64px">INV-0283</div>
+                    <div class="flex-1 text-slate-400 truncate" style="font-size:0.58rem">Okafor Supplies Co.</div>
+                    <div class="text-white font-mono flex-shrink-0" style="font-size:0.58rem">₦115,000</div>
+                    <span class="db-badge ml-2 flex-shrink-0" style="background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)">✓</span>
+                  </div>
+                  <div class="db-row">
+                    <div class="text-slate-500 font-mono flex-shrink-0" style="font-size:0.58rem;width:64px">INV-0282</div>
+                    <div class="flex-1 text-slate-400 truncate" style="font-size:0.58rem">Bello Trading Ltd</div>
+                    <div class="text-white font-mono flex-shrink-0" style="font-size:0.58rem">₦490,000</div>
+                    <span class="db-badge ml-2 flex-shrink-0" style="background:rgba(251,191,36,0.12);color:#FBBF24;border:1px solid rgba(251,191,36,0.2)">…</span>
+                  </div>
+                  <div class="db-row">
+                    <div class="text-slate-500 font-mono flex-shrink-0" style="font-size:0.58rem;width:64px">INV-0281</div>
+                    <div class="flex-1 text-slate-400 truncate" style="font-size:0.58rem">Ekene Pharma Dist.</div>
+                    <div class="text-white font-mono flex-shrink-0" style="font-size:0.58rem">₦87,500</div>
+                    <span class="db-badge ml-2 flex-shrink-0" style="background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)">✓</span>
+                  </div>
+                  <div class="db-row">
+                    <div class="text-slate-500 font-mono flex-shrink-0" style="font-size:0.58rem;width:64px">INV-0280</div>
+                    <div class="flex-1 text-slate-400 truncate" style="font-size:0.58rem">Uche Import Ventures</div>
+                    <div class="text-white font-mono flex-shrink-0" style="font-size:0.58rem">₦1,250,000</div>
+                    <span class="db-badge ml-2 flex-shrink-0" style="background:rgba(16,185,129,0.12);color:#34D399;border:1px solid rgba(16,185,129,0.2)">✓</span>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /main content -->
+          </div><!-- /flex -->
+        </div><!-- /dashboard-frame -->
+
+        <!-- Dashboard feature pills -->
+        <div class="flex flex-wrap gap-2">
+          <span class="text-xs font-mono text-emerald-400 rounded-lg px-3 py-1.5" style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.15)">Real-time invoice feed</span>
+          <span class="text-xs font-mono text-slate-400 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5">Audit export (CSV / PDF)</span>
+          <span class="text-xs font-mono text-slate-400 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5">Team access controls</span>
+          <span class="text-xs font-mono text-slate-400 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5">NRS error log &amp; retries</span>
+          <span class="text-xs font-mono text-slate-400 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-1.5">Monthly compliance report</span>
+        </div>
+
+        <!-- Open dashboard CTA -->
+        <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+           class="btn-primary w-full py-3.5 rounded-xl text-sm flex items-center justify-center gap-2.5">
+          <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M5 5h6M5 8h6M5 11h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <span>Open Admin Dashboard — taxbridge.vercel.app</span>
+          <svg width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 9.5l7-7M4 2.5h5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+      </div><!-- /right column -->
+    </div><!-- /grid -->
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
      PRICING
 ═══════════════════════════════════════════════ -->
 <section class="py-20 relative" id="pricing" aria-labelledby="pricing-heading">
@@ -1143,12 +1538,14 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
     </h2>
     <p class="text-slate-300 text-lg mb-10 max-w-xl mx-auto">Start with the free sandbox — no credit card, no obligation. Test the full workflow before you commit to a live plan.</p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-      <a href="#demo" class="btn-primary px-8 py-4 rounded-xl text-base flex items-center justify-center gap-2">
-        <span>Try the Demo — No Card Needed</span>
-        <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+         class="btn-primary px-8 py-4 rounded-xl text-base flex items-center justify-center gap-2">
+        <span>Open Dashboard</span>
+        <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><path d="M1.5 12.5l11-11M4 1.5h8.5V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <a href="/cdn-cgi/l/email-protection#3546545950467541544d57475c5152501b5b52" class="btn-secondary px-8 py-4 rounded-xl text-base flex items-center justify-center gap-2">
-        📅 Book a 15-Minute Call
+      <a href="#app" class="btn-secondary px-8 py-4 rounded-xl text-base flex items-center justify-center gap-2">
+        <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="1" width="8" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="10.5" r="0.8" fill="currentColor"/></svg>
+        Download Android App
       </a>
     </div>
     <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
@@ -1167,34 +1564,55 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 <footer class="border-t border-slate-800 py-12" role="contentinfo">
   <div class="max-w-6xl mx-auto px-4">
     <div class="grid sm:grid-cols-4 gap-8 mb-10">
+
+      <!-- Brand col -->
       <div>
-        <div class="flex items-center gap-2 mb-3">
-          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#10B981,#059669)" aria-hidden="true">
+        <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener" class="flex items-center gap-2 mb-3 group">
+          <img src="https://raw.githubusercontent.com/Scardubu/taxbridge-landing/main/assets/logo-main.png"
+               id="footer-logo-img"
+               alt="TaxBridge logo" class="h-7 w-auto"
+               onerror="document.getElementById('footer-logo-img').style.display='none';document.getElementById('footer-logo-fb').style.display='flex'"/>
+          <div id="footer-logo-fb" class="w-7 h-7 rounded-lg items-center justify-center" style="background:linear-gradient(135deg,#10B981,#059669);display:none" aria-hidden="true">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
           </div>
-          <span class="font-display font-bold text-white">TaxBridge</span>
-        </div>
+          <span class="font-display font-bold text-white group-hover:text-emerald-400 transition-colors">TaxBridge</span>
+        </a>
         <p class="text-xs text-slate-500 leading-relaxed">Nigeria's NRS-certified Access Point Provider. Reliable compliance infrastructure for Nigerian businesses — currently in early access.</p>
         <p class="text-xs text-slate-600 mt-3">📍 Lagos · Abuja · Kano</p>
+        <a href="#app" class="inline-flex items-center gap-2 mt-4 px-3 py-2 rounded-lg border border-slate-700 hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><rect x="1" y="0.5" width="10" height="13" rx="2" stroke="#10B981" stroke-width="1.2"/><circle cx="6" cy="11" r="0.8" fill="#10B981"/></svg>
+          <div>
+            <div class="text-emerald-400 font-display font-semibold" style="font-size:0.7rem;line-height:1.1">Android App</div>
+            <div class="text-slate-600 font-mono" style="font-size:0.55rem">Early Access</div>
+          </div>
+        </a>
       </div>
+
+      <!-- Product col -->
       <div>
         <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Product</div>
         <ul class="space-y-2 text-sm text-slate-400">
-          <li><a href="#demo"       class="hover:text-emerald-400 transition-colors">Live Demo</a></li>
-          <li><a href="#"           class="hover:text-emerald-400 transition-colors">API Documentation</a></li>
-          <li><a href="#"           class="hover:text-emerald-400 transition-colors">Developer SDK</a></li>
-          <li><a href="#"           class="hover:text-emerald-400 transition-colors">System Status</a></li>
+          <li><a href="https://taxbridge.vercel.app" target="_blank" rel="noopener" class="hover:text-emerald-400 transition-colors flex items-center gap-1">Dashboard <span class="text-slate-600 text-xs">↗</span></a></li>
+          <li><a href="#app"   class="hover:text-emerald-400 transition-colors">Android App</a></li>
+          <li><a href="#demo"  class="hover:text-emerald-400 transition-colors">Live Demo</a></li>
+          <li><a href="#"      class="hover:text-emerald-400 transition-colors">API Documentation</a></li>
+          <li><a href="#"      class="hover:text-emerald-400 transition-colors">Developer SDK</a></li>
+          <li><a href="#"      class="hover:text-emerald-400 transition-colors">System Status</a></li>
         </ul>
       </div>
+
+      <!-- Company col -->
       <div>
         <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Company</div>
         <ul class="space-y-2 text-sm text-slate-400">
           <li><a href="#" class="hover:text-emerald-400 transition-colors">About Us</a></li>
           <li><a href="#" class="hover:text-emerald-400 transition-colors">Blog &amp; Updates</a></li>
           <li><a href="#" class="hover:text-emerald-400 transition-colors">We're Hiring</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#3e4d4b4e4e514c4a7e4a5f465c4c575a595b105059" class="hover:text-emerald-400 transition-colors">Contact Support</a></li>
+          <li><a href="mailto:hello@taxbridge.ng" class="hover:text-emerald-400 transition-colors">Contact Support</a></li>
         </ul>
       </div>
+
+      <!-- Legal col -->
       <div>
         <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Legal</div>
         <ul class="space-y-2 text-sm text-slate-400">
@@ -1203,12 +1621,18 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
           <li><a href="#" class="hover:text-emerald-400 transition-colors">Data Processing Agreement</a></li>
         </ul>
       </div>
+
     </div>
+
     <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="text-xs text-slate-600">© 2026 TaxBridge. All rights reserved. Early Access · NRS Access Point Provider, Federal Republic of Nigeria.</div>
-      <div class="flex items-center gap-2">
-        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-slow" aria-hidden="true"></div>
-        <span class="text-xs text-slate-500">System status: operational</span>
+      <div class="flex items-center gap-4 flex-wrap justify-center sm:justify-end">
+        <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+           class="text-xs text-emerald-500 hover:text-emerald-300 transition-colors font-mono">taxbridge.vercel.app ↗</a>
+        <div class="flex items-center gap-1.5">
+          <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-slow" aria-hidden="true"></div>
+          <span class="text-xs text-slate-500">System status: operational</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1270,7 +1694,13 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
      aria-hidden="true"></div>
 
 <!-- Mobile sticky CTA -->
-<div class="fixed bottom-6 right-6 z-50 md:hidden">
+<div class="fixed bottom-6 right-6 z-50 md:hidden flex flex-col gap-2 items-end">
+  <a href="https://taxbridge.vercel.app" target="_blank" rel="noopener"
+     class="btn-secondary px-4 py-2.5 rounded-xl text-xs shadow-lg shadow-black/40 flex items-center gap-1.5"
+     style="background:rgba(13,20,37,0.95)">
+    <svg width="12" height="12" fill="none" viewBox="0 0 12 12" aria-hidden="true"><rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M3.5 3.5h5M3.5 6h5M3.5 8.5h2.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+    Dashboard
+  </a>
   <a href="#demo" class="btn-primary px-5 py-3 rounded-xl text-sm shadow-xl shadow-emerald-500/20 flex items-center gap-2">
     <span>Try Demo</span><span aria-hidden="true">⚡</span>
   </a>
@@ -1280,7 +1710,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 <!-- ═══════════════════════════════════════════════
      ALPINE.JS APPLICATION LOGIC
 ═══════════════════════════════════════════════ -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 document.addEventListener('alpine:init', () => {
 
   /* ── Tooltip component ── */
@@ -1379,6 +1809,12 @@ document.addEventListener('alpine:init', () => {
     },
 
     init() {
+      /* Live date in phone mockup */
+      const appDateEl = document.getElementById('app-date');
+      if (appDateEl) {
+        appDateEl.textContent = new Date().toLocaleDateString('en-NG', { day:'numeric', month:'short', year:'numeric' });
+      }
+
       /* Days to deadline */
       const deadline = new Date('2026-07-01T00:00:00');
       const now = new Date();
