@@ -1,585 +1,1492 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>TaxBridge • Mobile-first tax automation for Nigerian businesses</title>
-<meta name="description" content="TaxBridge automates invoicing, NRS compliance and tax workflows. Android app, Admin Dashboard & APIs.">
-<meta name="theme-color" content="#0b1220">
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TaxBridge — Connect Your Business to Nigeria's Tax System (Beta)</title>
+<meta name="description" content="TaxBridge helps Nigerian businesses connect their invoicing software to the NRS e-invoicing system before the July 2026 compliance deadline. No government paperwork required."/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        bg: '#080D1A',
+        surface: '#0D1425',
+        card: '#111827',
+        border: '#1E2D47',
+        emerald: { 400: '#34D399', 500: '#10B981', 600: '#059669' },
+        nigeria: '#008751',
+        amber: { 400: '#FBBF24', 500: '#F59E0B' },
+      },
+      fontFamily: {
+        display: ['Syne', 'sans-serif'],
+        body: ['DM Sans', 'sans-serif'],
+        mono: ['DM Mono', 'monospace'],
+      },
+      animation: {
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'slide-in': 'slideIn 0.4s ease-out',
+        'fade-up': 'fadeUp 0.6s ease-out forwards',
+        'shimmer': 'shimmer 2s infinite',
+      },
+      keyframes: {
+        float: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+        slideIn: { from: { opacity: 0, transform: 'translateY(-8px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+        fadeUp: { from: { opacity: 0, transform: 'translateY(20px)' }, to: { opacity: 1, transform: 'translateY(0)' } },
+        shimmer: { '0%': { backgroundPosition: '-200% 0' }, '100%': { backgroundPosition: '200% 0' } },
+      }
+    }
+  }
+}
+</script>
 <style>
-  /* ---------- Design tokens ---------- */
-  :root{
-    --bg:#0b1220;
-    --card:#0f172a;
-    --muted:#94a3b8;
-    --glass: rgba(255,255,255,0.06);
-    --accent: #00B894;
-    --primary-1: #6d28d9; /* gradient start */
-    --primary-2: #2B3A8C; /* gradient end */
-    --white: #ffffff;
-    --radius:14px;
-    --maxw:1200px;
-    --ease: cubic-bezier(.2,.9,.2,1);
-  }
+*,::before,::after{box-sizing:border-box}
+body{background:#080D1A;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:#080D1A}
+::-webkit-scrollbar-thumb{background:#10B981;border-radius:2px}
 
-  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
-  body{background:linear-gradient(180deg,#05060a 0%, #071025 55%, #081227 100%); color:var(--white); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+.glass{background:rgba(13,20,37,0.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(30,45,71,0.8)}
+.glass-strong{background:rgba(13,20,37,0.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(30,45,71,1)}
 
-  .container{max-width:var(--maxw);margin:0 auto;padding:28px;}
-  header{position:sticky;top:0;backdrop-filter:blur(6px);background:linear-gradient(180deg, rgba(5,6,10,0.6), rgba(5,6,10,0.2));border-bottom:1px solid rgba(255,255,255,0.03);z-index:80;}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:72px;}
-  .brand{display:flex;gap:12px;align-items:center}
-  .logo{
-    width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--primary-1),var(--primary-2));
-    font-weight:800;font-size:16px;box-shadow:0 6px 20px rgba(43,58,140,0.24);
-  }
-  nav a{color:var(--muted);text-decoration:none;font-weight:600;margin-left:18px}
-  .nav-actions{display:flex;gap:12px;align-items:center}
-  .btn{
-    padding:10px 16px;border-radius:10px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:10px;
-  }
-  .btn-primary{background:linear-gradient(90deg,var(--primary-1),var(--primary-2));color:var(--white);box-shadow:0 10px 30px rgba(45,35,120,0.28);border:0}
-  .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+.glow-em{box-shadow:0 0 30px rgba(16,185,129,0.15)}
+.glow-em-sm{box-shadow:0 0 15px rgba(16,185,129,0.1)}
+.text-glow{text-shadow:0 0 30px rgba(16,185,129,0.4)}
 
-  /* ---------- Hero ---------- */
-  .hero{display:grid;grid-template-columns:1fr 520px;gap:36px;align-items:center;padding:48px 0}
-  .hero-left h1{font-size:46px;line-height:1.02;margin:0 0 16px}
-  .hero-left p{color:var(--muted);font-size:16px;margin:0 0 20px;max-width:560px}
-  .hero-ctas{display:flex;gap:14px;margin-top:12px}
-  .kicker{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.04);color:var(--accent);font-weight:700;font-size:13px;margin-bottom:14px}
+.grad-text{background:linear-gradient(135deg,#34D399 0%,#10B981 40%,#6EE7B7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-  /* ---------- Glass card / 3D phone ---------- */
-  .hero-right{display:flex;align-items:center;justify-content:center;perspective:1400px}
-  .phone-wrap{transform-style:preserve-3d;transition:transform 700ms var(--ease)}
-  .phone{
-    width:320px;height:640px;border-radius:34px;background:linear-gradient(180deg, #fff 0%, #f4f7fb 100%);box-shadow:0 30px 80px rgba(2,6,23,0.6);transform:translateZ(40px);
-    position:relative;overflow:hidden;border:1px solid rgba(255,255,255,0.06);
-  }
-  .phone .topbar{height:56px;background:linear-gradient(180deg, rgba(11,18,30,0.06), rgba(11,18,30,0.02));display:flex;align-items:center;padding:10px 14px;gap:8px}
-  .phone .content{padding:18px;color:#0b1220}
-  .invoice-card{background:linear-gradient(180deg,#ffffff,#f8fbff);border-radius:14px;padding:14px;margin-top:10px;box-shadow:0 6px 22px rgba(11,20,40,0.06)}
+.btn-primary{background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-family:'Syne',sans-serif;font-weight:700;transition:all .2s;position:relative;overflow:hidden}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 32px rgba(16,185,129,0.4)}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#34D399,#10B981);opacity:0;transition:opacity .2s}
+.btn-primary:hover::before{opacity:1}
+.btn-primary span{position:relative;z-index:1}
+.btn-secondary{background:transparent;border:1px solid rgba(16,185,129,0.4);color:#34D399;font-family:'Syne',sans-serif;font-weight:600;transition:all .2s}
+.btn-secondary:hover{border-color:#10B981;background:rgba(16,185,129,0.08);transform:translateY(-1px)}
 
-  /* 3d tilt via pointer */
-  .phone-wrap:hover{transform:rotateY(-14deg) rotateX(6deg) translateZ(6px)}
-  .phone-meta{margin-top:14px;color:var(--muted);font-size:13px;text-align:center}
+.code-block{background:#060C18;border:1px solid #1E2D47;font-family:'DM Mono',monospace;font-size:0.75rem;line-height:1.7;overflow-x:auto}
+.token-key{color:#7DD3FC}
+.token-str{color:#86EFAC}
+.token-num{color:#C4B5FD}
+.token-comment{color:#4B5563}
+.token-fn{color:#FDE68A}
 
-  /* ---------- Animated product screenshots (carousel) ---------- */
-  .screenshots{display:flex;gap:18px;align-items:center;justify-content:center;margin-top:20px}
-  .s-shot{width:200px;height:360px;border-radius:18px;background:linear-gradient(180deg,#0f172a,#071025);box-shadow:0 20px 60px rgba(2,6,23,0.6);overflow:hidden;position:relative;transform-origin:center;transition:transform 420ms ease}
-  .s-shot .frame{position:absolute;inset:14px;border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#f2f6fb);opacity:0.95;padding:12px}
-  .s-shot.playing{transform:translateY(-6px) scale(1.03)}
-  @keyframes slideIn { 0%{transform:translateY(20px)} 100%{transform:translateY(0)}}
-  .s-shot .anim{animation:slideIn 800ms var(--ease) both}
+.toggle-pill{background:rgba(30,45,71,0.6);border:1px solid #1E2D47;border-radius:999px;padding:3px}
+.toggle-option{border-radius:999px;padding:5px 14px;font-size:0.75rem;font-weight:600;font-family:'Syne',sans-serif;transition:all .2s;cursor:pointer;white-space:nowrap}
+.toggle-option.active{background:linear-gradient(135deg,#10B981,#059669);color:#fff;box-shadow:0 0 16px rgba(16,185,129,0.35)}
+.toggle-option:not(.active){color:#94A3B8}
 
-  /* ---------- Features / benefits ---------- */
-  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
-  .feature-card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);min-height:120px}
-  .feature-card h4{margin:0 0 8px}
+.tab-active{border-bottom:2px solid #10B981;color:#34D399}
+.tab-inactive{border-bottom:2px solid transparent;color:#64748B}
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;font-size:0.7rem;font-weight:700;font-family:'Syne',sans-serif;letter-spacing:0.05em}
+.status-cleared{background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.3)}
+.status-pending{background:rgba(251,191,36,0.15);color:#FBBF24;border:1px solid rgba(251,191,36,0.3)}
+.status-error{background:rgba(239,68,68,0.15);color:#FCA5A5;border:1px solid rgba(239,68,68,0.3)}
 
-  /* ---------- Dashboard preview ---------- */
-  .dashboard{margin-top:44px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:16px;display:flex;gap:20px;align-items:center;justify-content:space-between;backdrop-filter: blur(6px)}
-  .dash-left{flex:1}
-  .chart{width:380px;height:200px;border-radius:12px;background:linear-gradient(180deg,#0b1220,#071025);padding:12px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
-  .metrics{display:flex;gap:12px}
-  .metric{background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:12px;border-radius:10px;width:130px;text-align:center}
+.glossary-panel{position:fixed;right:0;top:0;height:100vh;width:340px;z-index:999;transform:translateX(100%);transition:transform .3s cubic-bezier(0.4,0,0.2,1)}
+.glossary-panel.open{transform:translateX(0)}
 
-  /* ---------- Dynamic API demo ---------- */
-  .api-demo{display:flex;gap:16px;align-items:flex-start;margin-top:18px}
-  .api-form{flex:1;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px}
-  textarea.json{width:100%;height:180px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);padding:12px;background:rgba(12,16,24,0.4);color:#dbeafe;font-family:ui-monospace, SFMono-Regular,Menlo,Monaco,"Roboto Mono","Courier New",monospace}
-  .api-output{width:420px;min-height:180px;border-radius:12px;background:linear-gradient(180deg,#071025,#05060a);padding:12px;border:1px solid rgba(255,255,255,0.03);font-family:ui-monospace,monospace;color:#a5b4fc;overflow:auto}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-  /* ---------- GitHub star pill ---------- */
-  .gh-pill{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.04);font-weight:700}
+.shimmer-line{background:linear-gradient(90deg,#1E2D47 25%,#2D3F5E 50%,#1E2D47 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;height:12px}
 
-  /* ---------- Scroll animated utility ---------- */
-  .reveal{opacity:0;transform:translateY(18px);transition:all 700ms var(--ease)}
-  .reveal.in-view{opacity:1;transform:translateY(0)}
+.grid-bg{background-image:linear-gradient(rgba(16,185,129,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.03) 1px,transparent 1px);background-size:48px 48px}
 
-  /* ---------- Footer ---------- */
-  footer{padding:30px 0;color:var(--muted);text-align:center;margin-top:60px;border-top:1px solid rgba(255,255,255,0.02)}
-  a{color:inherit}
-  /* responsive */
-  @media (max-width:1000px){
-    .hero{grid-template-columns:1fr; text-align:center}
-    .hero-right{margin-top:18px}
-    .features{grid-template-columns:repeat(1,1fr)}
-    .dashboard{flex-direction:column;align-items:stretch}
-    .chart{width:100%}
-    .api-demo{flex-direction:column}
-    .api-output{width:100%}
-    .screenshots{justify-content:center}
-  }
+.flow-node{border:1px solid #1E2D47;background:rgba(13,20,37,0.8);transition:all .3s}
+.flow-node:hover{border-color:#10B981;box-shadow:0 0 20px rgba(16,185,129,0.2)}
+.flow-node.active-node{border-color:#10B981;box-shadow:0 0 24px rgba(16,185,129,0.3)}
+
+.logo-pill{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 20px;display:flex;align-items:center;gap:8px;font-weight:700;font-family:'Syne',sans-serif;color:#94A3B8;font-size:0.85rem;transition:all .3s}
+.logo-pill:hover{border-color:rgba(16,185,129,0.3);color:#E2E8F0}
+
+@keyframes ring-pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0.4)}50%{box-shadow:0 0 0 12px rgba(251,191,36,0)}}
+.deadline-ring{animation:ring-pulse 2s ease-in-out infinite}
+
+@media(max-width:768px){
+  .tooltip-popover{width:240px;left:50%!important;transform:translateX(-50%)!important;right:auto!important}
+}
+
+details summary{list-style:none;cursor:pointer}
+details summary::-webkit-details-marker{display:none}
+details[open] summary .acc-icon{transform:rotate(45deg)}
+.acc-icon{transition:transform .25s}
+
+/* Tooltip anchor */
+[x-data*="tooltip"]{position:relative;display:inline-flex;align-items:center}
+.tooltip-term{border-bottom:1px dashed rgba(16,185,129,0.5);cursor:help;display:inline-flex;align-items:center;gap:2px}
 </style>
 </head>
-<body>
-<header>
-  <div class="container nav">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">TB</div>
-      <div>
-        <div style="font-weight:800">TaxBridge</div>
-        <div style="font-size:12px;color:var(--muted);margin-top:2px">NRS-ready tax automation</div>
+
+<body x-data="taxbridge()" x-init="init()" class="min-h-screen grid-bg relative">
+
+<!-- ═══════════════════════════════════════════════
+     STICKY NAV
+═══════════════════════════════════════════════ -->
+<nav x-ref="nav" class="fixed top-0 left-0 right-0 z-50 glass-strong transition-all duration-300" :class="scrolled ? 'py-2 shadow-lg shadow-black/40' : 'py-3'" role="banner">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4">
+
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-2 flex-shrink-0" aria-label="TaxBridge home">
+      <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#10B981,#059669)" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
       </div>
+      <span class="font-display font-extrabold text-white text-lg tracking-tight">TaxBridge</span>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm text-slate-400" aria-label="Main navigation">
+      <a href="#demo"       class="hover:text-emerald-400 transition-colors font-medium">Live Demo</a>
+      <a href="#how"        class="hover:text-emerald-400 transition-colors font-medium">How It Works</a>
+      <a href="#usecases"   class="hover:text-emerald-400 transition-colors font-medium">Who It's For</a>
+      <a href="#pricing"    class="hover:text-emerald-400 transition-colors font-medium">Pricing</a>
+      <a href="#faq"        class="hover:text-emerald-400 transition-colors font-medium">FAQs</a>
+    </nav>
+
+    <!-- Audience Toggle — appears after hero on scroll -->
+    <div x-show="showToggle"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-2"
+         x-transition:enter-end="opacity-100 translate-y-0"
+         class="toggle-pill hidden md:flex items-center gap-0.5"
+         role="group" aria-label="Choose your view">
+      <button @click="audience='business'" class="toggle-option"
+              :class="audience==='business'?'active':''"
+              :aria-pressed="audience==='business'">Business View</button>
+      <button @click="audience='dev'" class="toggle-option"
+              :class="audience==='dev'?'active':''"
+              :aria-pressed="audience==='dev'">Developer View</button>
     </div>
 
-    <div class="nav-actions" role="navigation" aria-label="Main navigation">
-      <a href="#features">Features</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#developers">Developers</a>
-      <a href="https://github.com/Scardubu/taxbridge" target="_blank" rel="noopener">GitHub</a>
-      <a id="downloadBtn" class="btn btn-primary">Download Android</a>
+    <!-- CTAs -->
+    <div class="flex items-center gap-2">
+      <a href="#demo" class="btn-secondary hidden sm:inline-flex px-4 py-2 rounded-lg text-sm">See Demo</a>
+      <a href="#demo" class="btn-primary inline-flex px-4 py-2 rounded-lg text-sm"><span>Try Demo Free</span></a>
     </div>
   </div>
-</header>
+</nav>
 
-<main>
-  <section class="container hero">
-    <div class="hero-left">
-      <div class="kicker">NRS-compliant • Offline-first • APIs</div>
-      <h1>Stop losing money to tax penalties</h1>
-      <p>Mobile-first tax automation for Nigerian businesses — create invoices, auto-validate NRS filings, and manage compliance from mobile or admin console. Built for low-connectivity environments.</p>
-
-      <div class="hero-ctas">
-        <a id="downloadBtn2" class="btn btn-primary" aria-label="Download Android app">Download Android</a>
-        <a href="#dashboard" class="btn btn-ghost">Open Admin Dashboard</a>
-        <span style="margin-left:8px"><span id="ghStars" class="gh-pill" aria-hidden="true">★ • ...</span></span>
-      </div>
-
-      <div style="margin-top:18px;">
-        <small style="color:var(--muted)">Deploy, integrate, or self-host — open source on GitHub. Use the sandbox to test APIs below.</small>
-      </div>
-
-      <!-- animated screenshots -->
-      <div class="screenshots" style="margin-top:26px;">
-        <div class="s-shot reveal" data-delay="80">
-          <div class="frame anim">
-            <!-- small invoice UI -->
-            <div style="font-weight:700;color:#0f172a">Invoice #TB-000234</div>
-            <div style="margin-top:10px;background:linear-gradient(90deg,#fff,#eef6ff);padding:8px;border-radius:8px">
-              <div style="font-weight:700">₦ 8,750</div>
-              <div style="font-size:13px;color:#475569;margin-top:4px">Acme Trading • 1 item</div>
-            </div>
-            <div style="margin-top:12px;color:#334155;font-size:13px">Status: Draft • Offline</div>
-          </div>
-        </div>
-
-        <div class="s-shot reveal" data-delay="160">
-          <div class="frame anim">
-            <div style="font-weight:700;color:#0f172a">Payments</div>
-            <div style="margin-top:10px;background:#fff;padding:8px;border-radius:8px">
-              <div style="font-weight:700">Paystack • ₦30,000</div>
-              <div style="color:#475569;font-size:13px">Reconciled</div>
-            </div>
-            <div style="margin-top:12px;color:#334155;font-size:13px">Last sync: 3m ago</div>
-          </div>
-        </div>
-
-        <div class="s-shot reveal" data-delay="240">
-          <div class="frame anim">
-            <div style="font-weight:700;color:#0f172a">Filings</div>
-            <div style="margin-top:10px;background:#fff;padding:8px;border-radius:8px">
-              <div style="font-weight:700">NRS • 12 Submitted</div>
-              <div style="color:#475569;font-size:13px">2 failed • 10 succeeded</div>
-            </div>
-            <div style="margin-top:12px;color:#334155;font-size:13px">Auto-resubmit enabled</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- 3D phone mock -->
-    <div class="hero-right">
-      <div class="phone-wrap" id="phoneWrap" aria-hidden="true">
-        <div class="phone" role="img" aria-label="Phone app preview">
-          <div class="topbar">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#E6FDF6"/></svg>
-            <div style="font-weight:700;color:#0b1220">TaxBridge</div>
-          </div>
-          <div class="content">
-            <div class="invoice-card">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <div><div style="font-weight:800">₦ 12,500</div><div style="font-size:12px;color:#475569">Invoice • Acme Trading</div></div>
-                <div style="background:linear-gradient(90deg,var(--accent),#00e2a6);padding:6px 8px;border-radius:8px;color:#02120a;font-weight:800;font-size:12px">Submit</div>
-              </div>
-
-              <div style="margin-top:12px;font-size:13px;color:#334155">
-                <div>VAT (7.5%): ₦ 882</div>
-                <div style="margin-top:8px;color:#475569;font-size:12px">Ready for NRS validation</div>
-              </div>
-            </div>
-
-            <div style="margin-top:18px;color:#94a3b8;font-size:13px">Offline queue: 2 invoices</div>
-
-            <div style="margin-top:18px;display:flex;gap:8px">
-              <div style="flex:1;background:#fff;padding:10px;border-radius:10px;text-align:center;font-weight:700;color:#0b1220">Invoices</div>
-              <div style="flex:1;background:linear-gradient(90deg,var(--primary-1),var(--primary-2));padding:10px;border-radius:10px;text-align:center;font-weight:700">Filings</div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="phone-meta">Live product preview • rotate to inspect</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- features -->
-  <section id="features" class="container section">
-    <div class="reveal" style="transition-delay:120ms">
-      <h2 style="margin:0 0 8px">Centralize tax workflows</h2>
-      <p style="color:var(--muted);max-width:720px">From POS to filing — TaxBridge automates invoice validation, payment reconciliation and NRS submission. Designed for Nigerian SMEs and field teams.</p>
-    </div>
-
-    <div class="features" style="margin-top:20px">
-      <div class="feature-card reveal" data-delay="80">
-        <h4>NRS-Compliant Invoices</h4>
-        <p style="color:var(--muted)">Pre-validated payloads to reduce rejections and penalties.</p>
-      </div>
-      <div class="feature-card reveal" data-delay="160">
-        <h4>Offline-First Mobile</h4>
-        <p style="color:var(--muted)">Issue invoices offline; sync reliably when online.</p>
-      </div>
-      <div class="feature-card reveal" data-delay="240">
-        <h4>APIs & Webhooks</h4>
-        <p style="color:var(--muted)">REST APIs, SDKs and webhooks for integrations and automation.</p>
-      </div>
-    </div>
-
-    <div class="screenshots" style="margin-top:28px">
-      <div class="s-shot reveal" data-delay="320"><div class="frame anim"><div style="font-weight:700">Rules</div><div style="margin-top:8px;font-size:13px;color:#334155">Auto-tag revenue & taxes</div></div></div>
-      <div class="s-shot reveal" data-delay="400"><div class="frame anim"><div style="font-weight:700">Audit</div><div style="margin-top:8px;font-size:13px;color:#334155">Full traceable logs for compliance</div></div></div>
-      <div class="s-shot reveal" data-delay="480"><div class="frame anim"><div style="font-weight:700">Integrations</div><div style="margin-top:8px;font-size:13px;color:#334155">Paystack • Bank feeds • ERP</div></div></div>
-    </div>
-  </section>
-
-  <!-- dashboard preview (animated SVG charts) -->
-  <section id="dashboard" class="container section">
-    <div class="dashboard reveal" data-delay="120">
-      <div class="dash-left">
-        <h3 style="margin:0 0 8px">Admin Dashboard • Live Overview</h3>
-        <p style="color:var(--muted);margin:0 0 14px">Monitor filings, queued syncs and reconciliations in one console.</p>
-
-        <div class="metrics" style="margin-bottom:12px">
-          <div class="metric"><div style="font-weight:800;font-size:18px">₦1.2M</div><div style="font-size:12px;color:var(--muted)">Revenue (30d)</div></div>
-          <div class="metric"><div style="font-weight:800;font-size:18px">24</div><div style="font-size:12px;color:var(--muted)">Pending filings</div></div>
-          <div class="metric"><div style="font-weight:800;font-size:18px">2</div><div style="font-size:12px;color:var(--muted)">Failed</div></div>
-        </div>
-
-        <div style="display:flex;gap:8px">
-          <a class="btn btn-primary" href="#developers">Get API Key</a>
-          <a class="btn btn-ghost" href="#features">Request Demo</a>
-        </div>
-      </div>
-
-      <div class="chart" aria-hidden="true">
-        <!-- small SVG line chart -->
-        <svg viewBox="0 0 380 200" width="100%" height="100%" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="g1" x1="0" x2="1">
-              <stop offset="0%" stop-color="#6d28d9" stop-opacity="0.9"/>
-              <stop offset="100%" stop-color="#2B3A8C" stop-opacity="0.9"/>
-            </linearGradient>
-            <linearGradient id="fade" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stop-color="#6d28d9" stop-opacity="0.35"/>
-              <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.02"/>
-            </linearGradient>
-          </defs>
-
-          <!-- grid -->
-          <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
-            <line x1="20" x2="360" y1="30" y2="30"></line>
-            <line x1="20" x2="360" y1="80" y2="80"></line>
-            <line x1="20" x2="360" y1="130" y2="130"></line>
-            <line x1="20" x2="360" y1="180" y2="180"></line>
-          </g>
-
-          <!-- area path (animated via JS) -->
-          <path id="areaPath" d="" fill="url(#fade)"></path>
-          <path id="linePath" d="" fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-
-          <!-- dots -->
-          <g id="dots" fill="#fff"></g>
-        </svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- Developer section with API demo -->
-  <section id="developers" class="container section">
-    <div class="reveal">
-      <h3 style="margin:0 0 8px">Developer sandbox</h3>
-      <p style="color:var(--muted);margin:0 0 12px">Try creating an invoice with our sandbox. Toggle <em>Use live endpoint</em> to call your backend (CORS required).</p>
-    </div>
-
-    <div class="api-demo reveal" data-delay="120">
-      <div class="api-form">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-          <div style="font-weight:800">POST /api/v1/invoices</div>
-          <div style="color:var(--muted);font-size:13px">
-            <label style="display:flex;gap:8px;align-items:center">
-              <input id="useReal" type="checkbox" /> Use live endpoint
-            </label>
-          </div>
-        </div>
-
-        <textarea id="jsonInput" class="json" aria-label="Invoice JSON">
-{
-  "customer_id": "cus_123",
-  "items": [{"name":"Service","qty":1,"price":12500}],
-  "taxes": [{"type":"vat","rate":7.5}],
-  "metadata": {"source":"pos_terminal_3"}
-}
-        </textarea>
-
-        <div style="display:flex;gap:10px;margin-top:10px">
-          <button id="sendBtn" class="btn btn-primary">Send</button>
-          <button id="prettyBtn" class="btn btn-ghost">Format</button>
-          <button id="sampleBtn" class="btn btn-ghost">Load Sample</button>
-        </div>
-      </div>
-
-      <div class="api-output" id="apiOutput" aria-live="polite">
-        <div style="color:var(--muted)">Response will appear here</div>
-      </div>
-    </div>
-
-  </section>
-
-  <section class="container section">
-    <div style="display:flex;gap:12px;align-items:center;justify-content:center;">
-      <a id="getStarted" class="btn btn-primary">Get Started — Create an account</a>
-      <a href="https://github.com/Scardubu/taxbridge" target="_blank" rel="noopener" class="btn btn-ghost">View on GitHub</a>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="container">
-    <div style="max-width:900px;margin:0 auto;color:var(--muted);font-size:14px">
-      © <span id="year"></span> TaxBridge — Mobile-first tax automation for Nigerian businesses • <a href="#developers">API docs</a> • <a href="https://github.com/Scardubu/taxbridge">Open source</a>
-    </div>
+<!-- Mobile audience toggle — shown below nav on scroll -->
+<div x-show="showToggle"
+     class="fixed top-16 left-0 right-0 z-40 flex justify-center py-2 md:hidden"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     role="group" aria-label="Choose your view">
+  <div class="toggle-pill flex items-center gap-0.5">
+    <button @click="audience='business'" class="toggle-option" :class="audience==='business'?'active':''">Business</button>
+    <button @click="audience='dev'"      class="toggle-option" :class="audience==='dev'?'active':''">Developer</button>
+  </div>
 </div>
+
+
+<!-- Beta notice banner -->
+<div class="fixed top-0 left-0 right-0 z-[60] flex justify-center pointer-events-none" style="margin-top:56px" aria-label="Beta notice">
+  <div class="pointer-events-auto flex items-center gap-2 px-4 py-1.5 text-xs font-semibold rounded-b-lg" style="background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.2);border-top:none;color:#6EE7B7;font-family:'Syne',sans-serif;letter-spacing:0.04em">
+    <span aria-hidden="true">🔬</span> Early Access — Features and pricing are subject to change before general release
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex flex-col justify-center pt-24 pb-20 overflow-hidden" id="hero" aria-labelledby="hero-heading">
+  <!-- Background glow -->
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10" style="background:radial-gradient(circle,#10B981 0%,transparent 70%)"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 opacity-5" style="background:radial-gradient(circle,#008751 0%,transparent 70%)"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+
+    <!-- Left: Headline & CTAs -->
+    <div>
+      <!-- Beta + urgency badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6 border" style="background:rgba(251,191,36,0.1);border-color:rgba(251,191,36,0.3);color:#FBBF24" role="status">
+        <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse-slow inline-block" aria-hidden="true"></span>
+        Early Access · NRS Access Point Provider · July 2026 Deadline
+      </div>
+
+      <h1 id="hero-heading" class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl leading-tight text-white mb-6">
+        Nigerian Businesses Must Be<br/>E-Invoice Ready by July 2026.<br/>
+        <span class="grad-text text-glow">TaxBridge Makes It Simple.</span>
+      </h1>
+
+      <!-- Business view copy -->
+      <p x-show="audience==='business'" class="text-slate-300 text-lg leading-relaxed mb-8 max-w-xl">
+        From <strong class="text-white">July 2026</strong>, qualifying Nigerian businesses must submit invoices through the government's official NRS e-invoicing system. TaxBridge connects to your existing software and handles the compliance process automatically. <strong class="text-white">No government queues. No new software to learn.</strong>
+      </p>
+
+      <!-- Developer view copy -->
+      <p x-show="audience==='dev'" class="text-slate-300 text-lg leading-relaxed mb-8 max-w-xl">
+        TaxBridge is Nigeria's certified <span x-data="tooltip('APP','Official government licence that lets TaxBridge connect your software to the NRS tax system on your behalf.','Access Point Provider — holds NRS OAuth2 credentials, proxies all MBS endpoints, manages token rotation.')">
+          <span class="tooltip-term text-emerald-400">APP middleware<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
+        </span>. One REST endpoint handles TIN validation, VAT, IRN issuance, QR generation, and retries. Target SLA 99.9%.
+      </p>
+
+      <div class="flex flex-wrap gap-3 mb-10">
+        <a href="#demo" class="btn-primary px-6 py-3 rounded-xl text-base flex items-center gap-2">
+          <span>Try the Demo — No Account Needed</span>
+          <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#how" class="btn-secondary px-6 py-3 rounded-xl text-base flex items-center gap-2">
+          <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 5.5l3 1.5-3 1.5V5.5z" fill="currentColor"/></svg>
+          See How It Works
+        </a>
+      </div>
+
+      <!-- Trust indicators -->
+      <div class="flex flex-wrap gap-5 text-sm text-slate-400">
+        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>Free sandbox — test before you pay</div>
+        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>Typically live in 1–5 working days</div>
+        <div class="flex items-center gap-1.5"><span class="w-2 h-2 bg-emerald-500 rounded-full" aria-hidden="true"></span>NRS-certified Access Point Provider</div>
+      </div>
+    </div>
+
+    <!-- Right: Animated flow diagram -->
+    <div class="flex flex-col items-center" x-data="flowAnim()">
+
+      <!-- Your Software -->
+      <div class="flow-node rounded-xl p-4 mx-4 w-full text-center" :class="step>=0?'active-node':''">
+        <div class="text-xs text-slate-500 mb-1 font-mono">YOUR SOFTWARE</div>
+        <div class="font-display font-bold text-white text-sm">POS · Accounting App · ERP</div>
+        <div class="text-xs text-emerald-400 mt-1 font-mono" x-show="step>=1">→ Sends invoice data</div>
+      </div>
+
+      <div class="flex justify-center my-1" aria-hidden="true">
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-px h-6" :class="step>=1?'bg-emerald-500':'bg-slate-700'" style="transition:background 0.4s"></div>
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" :class="step>=1?'text-emerald-500':'text-slate-700'" style="transition:color 0.4s"><path d="M1 1l5 6 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- TaxBridge -->
+      <div class="flow-node rounded-xl p-5 w-full text-center relative overflow-hidden" :class="step>=1?'active-node':''">
+        <div class="absolute inset-0 opacity-10" style="background:linear-gradient(135deg,#10B981,transparent)" aria-hidden="true"></div>
+        <div class="text-xs text-emerald-400 mb-2 font-mono font-bold">TAXBRIDGE</div>
+        <div class="font-display font-bold text-white text-sm mb-2">Validates · Calculates · Submits</div>
+        <div class="flex justify-center gap-2 flex-wrap">
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5">Checks your Tax ID</span>
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5">Adds VAT 7.5%</span>
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5">Generates QR code</span>
+          <span class="text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full px-2 py-0.5">Auto-retries on failure</span>
+        </div>
+      </div>
+
+      <div class="flex justify-center my-1" aria-hidden="true">
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-px h-6" :class="step>=2?'bg-emerald-500':'bg-slate-700'" style="transition:background 0.4s 0.3s"></div>
+          <svg width="12" height="8" viewBox="0 0 12 8" fill="none" :class="step>=2?'text-emerald-500':'text-slate-700'" style="transition:color 0.4s 0.3s"><path d="M1 1l5 6 5-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+      </div>
+
+      <!-- NRS MBS -->
+      <div class="flow-node rounded-xl p-4 mx-4 w-full text-center" :class="step>=2?'active-node':''">
+        <div class="text-xs text-slate-500 mb-1 font-mono">NIGERIAN GOVERNMENT</div>
+        <div class="font-display font-bold text-white text-sm">Nigeria Revenue Service</div>
+        <div class="text-xs text-amber-400 mt-1 font-mono" x-show="step>=2">← Returns approval &amp; reference number ✓</div>
+      </div>
+
+      <!-- Deadline countdown -->
+      <div class="mt-6 mx-4 w-full">
+        <div class="deadline-ring rounded-xl p-3 text-center border" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.3)">
+          <div class="text-amber-400 font-display font-bold text-sm">🗓 July 1, 2026 — Compliance Deadline</div>
+          <div class="text-xs text-slate-400 mt-0.5"><strong x-text="daysLeft" class="text-white"></strong> days left to get your business compliant</div>
+        </div>
+      </div>
+    </div><!-- /flow diagram -->
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     COMPLIANCE TIMELINE
+═══════════════════════════════════════════════ -->
+<section class="py-20 relative" id="timeline" aria-labelledby="timeline-heading">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border text-amber-400" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2)">⏱ Government Rollout Plan</div>
+      <h2 id="timeline-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">When Does This Affect Your Business?</h2>
+      <p class="text-slate-400 mt-3 max-w-xl mx-auto">The Nigeria Revenue Service is rolling out its new electronic invoicing system in stages. Here is exactly where your business stands right now.</p>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-0 relative">
+      <!-- Desktop connector line -->
+      <div class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5" style="background:linear-gradient(90deg,#10B981,#10B981,#FBBF24,#EF4444)" aria-hidden="true"></div>
+
+      <!-- Phase 1 — Done -->
+      <div class="reveal flex flex-col items-center text-center px-4 pb-8">
+        <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center mb-3 relative z-10" aria-label="Completed">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="text-xs text-emerald-400 font-mono font-bold mb-1">ALREADY LIVE</div>
+        <div class="font-display font-semibold text-white text-sm mb-2">January 2025</div>
+        <p class="text-xs text-slate-400">Large businesses (₦5 billion+ turnover) are already connected and compliant</p>
+      </div>
+
+      <!-- Phase 2 — Coming -->
+      <div class="reveal flex flex-col items-center text-center px-4 pb-8" style="animation-delay:.1s">
+        <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center mb-3 relative z-10 deadline-ring" aria-label="Upcoming deadline">
+          <span class="text-white text-xs font-bold" aria-hidden="true">!</span>
+        </div>
+        <div class="text-xs text-amber-400 font-mono font-bold mb-1">YOUR DEADLINE</div>
+        <div class="font-display font-semibold text-white text-sm mb-2">July 1, 2026</div>
+        <p class="text-xs text-slate-400">Medium-sized businesses (₦1 billion–₦5 billion turnover) must comply</p>
+      </div>
+
+      <!-- Phase 3 — Upcoming -->
+      <div class="reveal flex flex-col items-center text-center px-4 pb-8" style="animation-delay:.2s">
+        <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center mb-3 relative z-10">
+          <span class="text-slate-500 text-xs font-bold" aria-hidden="true">3</span>
+        </div>
+        <div class="text-xs text-slate-500 font-mono font-bold mb-1">NEXT PHASE</div>
+        <div class="font-display font-semibold text-white text-sm mb-2">January 2027</div>
+        <p class="text-xs text-slate-400">Smaller businesses (under ₦1 billion annual turnover) will be included</p>
+      </div>
+
+      <!-- Phase 4 — Penalty -->
+      <div class="reveal flex flex-col items-center text-center px-4 pb-8" style="animation-delay:.3s">
+        <div class="w-8 h-8 rounded-full border-2 border-red-800 flex items-center justify-center mb-3 relative z-10" aria-label="Penalty zone">
+          <span class="text-red-500 text-xs font-bold" aria-hidden="true">!</span>
+        </div>
+        <div class="text-xs text-red-400 font-mono font-bold mb-1">PENALTY RISK</div>
+        <div class="font-display font-semibold text-white text-sm mb-2">Miss the Date</div>
+        <p class="text-xs text-slate-400">Non-compliant invoices are invalid. Fines start at ₦2 million per offence</p>
+      </div>
+    </div>
+
+    <!-- Urgency strip -->
+    <div class="mt-10 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border" style="background:rgba(251,191,36,0.05);border-color:rgba(251,191,36,0.2)" role="alert">
+      <div>
+        <div class="font-display font-bold text-amber-400 text-xl"><span x-text="daysLeft"></span> days remaining</div>
+        <div class="text-slate-400 text-sm mt-0.5">Getting your system ready typically takes 1–4 weeks. Don't leave it until the last month.</div>
+      </div>
+      <a href="#demo" class="btn-primary px-6 py-3 rounded-xl text-sm flex-shrink-0 flex items-center gap-2">
+        <span>Get Compliant Now</span>
+        <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     QUICK EXPLANATION CARDS
+═══════════════════════════════════════════════ -->
+<section class="py-16" aria-labelledby="cards-heading">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 id="cards-heading" class="sr-only">Why TaxBridge</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+
+      <!-- Card 1 -->
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all duration-300">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(16,185,129,0.15)" aria-hidden="true">
+          <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M10 2l2.09 6.26H18l-5 3.64 1.91 6.1L10 14.5l-4.91 3.5L7 11.9 2 8.26h5.91L10 2z" stroke="#10B981" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-white text-lg mb-2">Government-Certified. No Extra Licence Needed.</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          TaxBridge is officially licensed by NRS as an
+          <span x-data="tooltip('Access Point Provider','A company that has been approved by the government to connect other businesses to the official tax system — so you don\'t have to apply for your own licence.','Access Point Provider (APP). TaxBridge holds NRS-issued APP credentials, handles OAuth2 token rotation, and proxies all MBS endpoints on your behalf.')">
+            <span class="tooltip-term text-emerald-400">Access Point Provider<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
+          </span>. Your business is covered through us — no separate government application required.
+        </p>
+        <div x-show="audience==='dev'" class="mt-3 text-xs font-mono text-slate-500 border-t border-slate-800 pt-3">
+          Authorization: Bearer {TB_API_KEY}
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all duration-300" style="animation-delay:.1s">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(16,185,129,0.15)" aria-hidden="true">
+          <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><rect x="3" y="3" width="14" height="14" rx="2" stroke="#10B981" stroke-width="1.5"/><path d="M7 10h6M10 7v6" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-white text-lg mb-2">All the Compliance Work Happens Automatically</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          TaxBridge automatically checks your
+          <span x-data="tooltip('Tax ID (TIN)','Your business registration number issued by the government. TaxBridge checks that it is valid before sending your invoice.','Tax Identification Number (TIN) — validated via NRS TIMS API. Returns: valid | invalid | suspended.')">
+            <span class="tooltip-term text-emerald-400">Tax ID<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
+          </span>, calculates
+          <span x-data="tooltip('VAT (7.5%)','A tax the government requires you to add to most invoices. TaxBridge calculates and applies the correct amount for you.','Nigeria VAT at 7.5% per Finance Act 2023. TaxBridge auto-calculates, applies exemptions, and passes to MBS.')">
+            <span class="tooltip-term text-emerald-400">VAT at 7.5%<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
+          </span>, creates a scannable QR code, and stamps your invoice with an official government reference number — in one step.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all duration-300" style="animation-delay:.2s">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background:rgba(16,185,129,0.15)" aria-hidden="true">
+          <svg width="20" height="20" fill="none" viewBox="0 0 20 20"><path d="M10 2v4M10 14v4M2 10h4M14 10h4" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="10" r="3" stroke="#10B981" stroke-width="1.5"/></svg>
+        </div>
+        <h3 class="font-display font-bold text-white text-lg mb-2">Works With Software You Already Use</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">
+          Whether you use a POS machine, an accounting tool, or custom-built software — TaxBridge connects to it. Your team keeps working exactly as before. Only now, every invoice is automatically compliant.
+        </p>
+        <div x-show="audience==='dev'" class="mt-3 text-xs font-mono text-emerald-400 border-t border-slate-800 pt-3">
+          npm install @taxbridge/sdk
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     PROBLEM → SOLUTION → OUTCOME
+═══════════════════════════════════════════════ -->
+<section class="py-20" id="solution" aria-labelledby="solution-heading">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 id="solution-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Why Businesses Choose TaxBridge</h2>
+      <p class="text-slate-400 mt-3 max-w-xl mx-auto">Connecting directly to the NRS system yourself is complex, costly, and time-consuming. TaxBridge removes that burden.</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <!-- Problem -->
+      <div class="reveal glass rounded-2xl p-8 border-l-4" style="border-left-color:#EF4444">
+        <div class="text-red-400 font-display font-bold text-xs tracking-widest mb-4 uppercase">Without TaxBridge</div>
+        <h3 class="font-display font-bold text-white text-xl mb-4">Connecting to NRS alone is a major project</h3>
+        <ul class="space-y-3 text-sm text-slate-400" role="list">
+          <li class="flex gap-3"><span class="text-red-400 mt-0.5 flex-shrink-0" aria-hidden="true">✗</span>You need to apply for a government Access Point licence — a complex process with ongoing obligations</li>
+          <li class="flex gap-3"><span class="text-red-400 mt-0.5 flex-shrink-0" aria-hidden="true">✗</span>The NRS technical documentation is detailed and subject to change</li>
+          <li class="flex gap-3"><span class="text-red-400 mt-0.5 flex-shrink-0" aria-hidden="true">✗</span>Non-compliant invoices can be rejected and may expose your business to penalties</li>
+          <li class="flex gap-3"><span class="text-red-400 mt-0.5 flex-shrink-0" aria-hidden="true">✗</span>Building reliable error handling, retries, and audit logging takes significant development time</li>
+        </ul>
+      </div>
+
+      <!-- Solution -->
+      <div class="reveal glass rounded-2xl p-8 border-l-4 glow-em" style="border-left-color:#10B981;animation-delay:.1s">
+        <div class="text-emerald-400 font-display font-bold text-xs tracking-widest mb-4 uppercase">How TaxBridge Helps</div>
+        <h3 class="font-display font-bold text-white text-xl mb-4">We are the certified bridge between your business and NRS</h3>
+        <ul class="space-y-3 text-sm text-slate-400" role="list">
+          <li class="flex gap-3"><span class="text-emerald-400 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>You use our government licence — no separate application needed</li>
+          <li class="flex gap-3"><span class="text-emerald-400 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>One simple connection handles your entire compliance workflow</li>
+          <li class="flex gap-3"><span class="text-emerald-400 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>Automatic retries and error recovery built in — no manual chasing</li>
+          <li class="flex gap-3"><span class="text-emerald-400 mt-0.5 flex-shrink-0" aria-hidden="true">✓</span>Real-time notifications and a clear compliance dashboard</li>
+        </ul>
+        <div x-show="audience==='dev'" class="mt-4 pt-4 border-t border-slate-800 code-block rounded-lg p-3 text-xs">
+          <span class="token-fn">POST</span> <span class="token-str">/v1/invoices</span><br/>
+          <span class="token-comment">// Returns IRN + QR + status in &lt;200ms</span>
+        </div>
+      </div>
+
+      <!-- Outcome -->
+      <div class="reveal glass rounded-2xl p-8 border-l-4" style="border-left-color:#6EE7B7;animation-delay:.2s">
+        <div class="text-emerald-300 font-display font-bold text-xs tracking-widest mb-4 uppercase">The Result for Your Business</div>
+        <h3 class="font-display font-bold text-white text-xl mb-4">Compliant invoices, zero extra work for your team</h3>
+        <ul class="space-y-3 text-sm text-slate-400" role="list">
+        <ul class="space-y-3 text-sm text-slate-400" role="list">
+          <li class="flex gap-3"><span class="text-emerald-300 mt-0.5 flex-shrink-0" aria-hidden="true">★</span>Most businesses are live within 1–5 working days of completing setup</li>
+          <li class="flex gap-3"><span class="text-emerald-300 mt-0.5 flex-shrink-0" aria-hidden="true">★</span>No government meetings or paperwork needed on your side</li>
+          <li class="flex gap-3"><span class="text-emerald-300 mt-0.5 flex-shrink-0" aria-hidden="true">★</span>Each invoice is automatically submitted and a reference returned</li>
+          <li class="flex gap-3"><span class="text-emerald-300 mt-0.5 flex-shrink-0" aria-hidden="true">★</span>Compliance records stored and available to download any time</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     ARCHITECTURE DIAGRAM
+═══════════════════════════════════════════════ -->
+<section class="py-20 relative" id="architecture" aria-labelledby="arch-heading">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 id="arch-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">How TaxBridge Fits Into Your Business</h2>
+      <p class="text-slate-400 mt-3">Your invoice travels from your system to NRS and back — TaxBridge handles every step in between.</p>
+    </div>
+
+    <div class="glass rounded-2xl p-8">
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-4">
+
+        <!-- Your App -->
+        <div class="flow-node rounded-xl p-4 text-center w-full lg:w-40 flex-shrink-0">
+          <div class="text-xs text-slate-500 mb-1 font-mono">YOUR SYSTEM</div>
+          <div class="text-2xl mb-1" aria-hidden="true">🖥</div>
+          <div class="font-display font-semibold text-white text-xs">POS · SaaS · ERP</div>
+          <div class="mt-2 text-xs text-slate-600 font-mono">Sends invoice data</div>
+        </div>
+
+        <div class="flex lg:flex-col items-center gap-1" aria-hidden="true">
+          <div class="w-8 lg:w-px h-px lg:h-8 bg-emerald-500"></div>
+          <span class="text-emerald-500 text-lg">→</span>
+        </div>
+
+        <!-- TaxBridge Core -->
+        <div class="flow-node rounded-xl p-5 text-center w-full lg:w-56 flex-shrink-0 relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10" style="background:linear-gradient(135deg,#10B981,transparent)" aria-hidden="true"></div>
+          <div class="text-xs text-emerald-400 mb-2 font-mono font-bold">TAXBRIDGE</div>
+          <div class="grid grid-cols-2 gap-1 mb-2">
+            <span class="bg-emerald-500/10 text-emerald-400 text-xs rounded px-1.5 py-0.5 border border-emerald-500/20">Checks Tax ID</span>
+            <span class="bg-emerald-500/10 text-emerald-400 text-xs rounded px-1.5 py-0.5 border border-emerald-500/20">Applies VAT</span>
+            <span class="bg-emerald-500/10 text-emerald-400 text-xs rounded px-1.5 py-0.5 border border-emerald-500/20">Creates QR</span>
+            <span class="bg-emerald-500/10 text-emerald-400 text-xs rounded px-1.5 py-0.5 border border-emerald-500/20">Auto-retries</span>
+          </div>
+          <div class="text-xs text-slate-500 font-mono">Typically under a few seconds</div>
+        </div>
+
+        <div class="flex lg:flex-col items-center gap-1" aria-hidden="true">
+          <div class="w-8 lg:w-px h-px lg:h-8 bg-emerald-500"></div>
+          <span class="text-emerald-500 text-lg">→</span>
+        </div>
+
+        <!-- NRS -->
+        <div class="flow-node rounded-xl p-4 text-center w-full lg:w-40 flex-shrink-0">
+          <div class="text-xs text-slate-500 mb-1 font-mono">GOVERNMENT</div>
+          <div class="text-2xl mb-1" aria-hidden="true">🏛</div>
+          <div class="font-display font-semibold text-white text-xs">Nigeria Revenue Service</div>
+          <div class="mt-1 text-xs text-emerald-400">Official Clearance</div>
+        </div>
+
+        <div class="flex lg:flex-col items-center gap-1" aria-hidden="true">
+          <div class="w-8 lg:w-px h-px lg:h-8 bg-emerald-500"></div>
+          <span class="text-emerald-500 text-lg">→</span>
+        </div>
+
+        <!-- Back to you -->
+        <div class="flow-node rounded-xl p-4 text-center w-full lg:w-40 flex-shrink-0">
+          <div class="text-xs text-slate-500 mb-1 font-mono">BACK TO YOU</div>
+          <div class="text-2xl mb-1" aria-hidden="true">✅</div>
+          <div class="font-display font-semibold text-white text-xs">Approved Invoice</div>
+          <div class="text-xs text-emerald-400 mt-1">Reference number + QR code</div>
+        </div>
+      </div>
+
+      <!-- Additional outputs -->
+      <div class="mt-8 pt-6 border-t border-slate-800">
+        <div class="text-xs text-slate-500 text-center mb-4 font-mono">WHAT YOU ALSO GET</div>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="bg-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 border border-slate-700">📩 Instant notifications when invoices clear</span>
+          <span class="bg-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 border border-slate-700">📊 Compliance overview dashboard</span>
+          <span class="bg-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 border border-slate-700">🗂 Full invoice history for audits</span>
+          <span class="bg-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 border border-slate-700">📄 Downloadable PDF invoices</span>
+          <span class="bg-slate-800 text-slate-300 text-xs rounded-lg px-3 py-2 border border-slate-700">🔁 Automatic retry if NRS is temporarily unavailable</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     HOW IT WORKS — 4 STEPS
+═══════════════════════════════════════════════ -->
+<section class="py-20" id="how" aria-labelledby="how-heading">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <h2 id="how-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">You Can Be Compliant in 4 Simple Steps</h2>
+      <p class="text-slate-400 mt-3">No government offices. No complicated paperwork. Just your team and our service.</p>
+    </div>
+
+    <div class="space-y-6" role="list">
+
+      <!-- Step 1 -->
+      <div class="reveal glass rounded-2xl p-6 flex gap-6 items-start" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center font-display font-bold text-white" aria-label="Step 1">1</div>
+        <div class="flex-1">
+          <h3 class="font-display font-bold text-white text-lg mb-1">Create a Free Account &amp; Get Your Access Key</h3>
+          <p class="text-slate-400 text-sm">Sign up online in minutes. You'll receive an access key that links your business to TaxBridge. Test everything in a safe sandbox — no real invoices, no real money, until you're ready.</p>
+          <div x-show="audience==='dev'" class="mt-3 code-block rounded-lg p-3 text-xs">
+            <span class="token-comment"># Verify your key is working</span><br/>
+            <span class="token-fn">curl</span> https://api.taxbridge.ng/v1/ping \<br/>
+            &nbsp;&nbsp;<span class="token-key">-H</span> <span class="token-str">"Authorization: Bearer sk_test_..."</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="reveal glass rounded-2xl p-6 flex gap-6 items-start" style="animation-delay:.1s" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center font-display font-bold text-white" aria-label="Step 2">2</div>
+        <div class="flex-1">
+          <h3 class="font-display font-bold text-white text-lg mb-1">Connect Your Existing Software</h3>
+          <p class="text-slate-400 text-sm">Your developer (or ours) connects your POS, accounting app, or billing system to TaxBridge. It typically takes between one afternoon and a few days depending on your setup.</p>
+          <div x-show="audience==='dev'" class="mt-3 code-block rounded-lg p-3 text-xs">
+            <span class="token-fn">POST</span> <span class="token-str">/v1/invoices</span><br/>
+            {<br/>
+            &nbsp;&nbsp;<span class="token-key">"seller_tin"</span>: <span class="token-str">"12345678-0001"</span>,<br/>
+            &nbsp;&nbsp;<span class="token-key">"buyer_tin"</span>: <span class="token-str">"98765432-0002"</span>,<br/>
+            &nbsp;&nbsp;<span class="token-key">"amount"</span>: <span class="token-num">500000</span>,<br/>
+            &nbsp;&nbsp;<span class="token-key">"currency"</span>: <span class="token-str">"NGN"</span><br/>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="reveal glass rounded-2xl p-6 flex gap-6 items-start" style="animation-delay:.2s" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center font-display font-bold text-white" aria-label="Step 3">3</div>
+        <div class="flex-1">
+          <h3 class="font-display font-bold text-white text-lg mb-1">Every Invoice Gets an Official Government Reference</h3>
+          <p class="text-slate-400 text-sm">Each time you raise an invoice, TaxBridge submits it to NRS and returns an official
+            <span x-data="tooltip('Invoice Reference Number (IRN)','A unique government-issued number stamped on each invoice, proving it has been officially registered — like a government receipt for your invoice.','Invoice Reference Number (IRN) — returned by NRS MBS. Format: TB-{epoch}-{hash}. Required on all printed and digital invoices.')">
+              <span class="tooltip-term text-emerald-400">Invoice Reference Number<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
+            </span> and QR code. Print this on your invoice and you are compliant.</p>
+          <div x-show="audience==='dev'" class="mt-3 code-block rounded-lg p-3 text-xs">
+            <span class="token-key">"irn"</span>: <span class="token-str">"TB-1748291020-A7X9KM"</span>,<br/>
+            <span class="token-key">"qr_url"</span>: <span class="token-str">"https://verify.nrs.gov.ng/..."</span>,<br/>
+            <span class="token-key">"status"</span>: <span class="token-str">"cleared"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="reveal glass rounded-2xl p-6 flex gap-6 items-start" style="animation-delay:.3s" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center font-display font-bold text-white" aria-label="Step 4">4</div>
+        <div class="flex-1">
+          <h3 class="font-display font-bold text-white text-lg mb-1">Monitor Everything from a Simple Dashboard</h3>
+          <p class="text-slate-400 text-sm">See the status of every invoice in one place. Get notified if anything needs attention. Download your full compliance records any time — whether for a tax audit or your own accounts.</p>
+          <div x-show="audience==='dev'" class="mt-3 code-block rounded-lg p-3 text-xs">
+            <span class="token-comment">// Webhook notification example</span><br/>
+            <span class="token-key">"event"</span>: <span class="token-str">"invoice.cleared"</span>,<br/>
+            <span class="token-key">"invoice_id"</span>: <span class="token-str">"inv_abc123"</span>,<br/>
+            <span class="token-key">"timestamp"</span>: <span class="token-str">"2026-07-01T14:22:01Z"</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     INTERACTIVE API DEMO
+═══════════════════════════════════════════════ -->
+<section class="py-20 relative" id="demo" aria-labelledby="demo-heading">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-5" style="background:radial-gradient(circle,#10B981 0%,transparent 70%)"></div>
+  </div>
+  <div class="max-w-6xl mx-auto px-4 relative" x-data="apiDemo()">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border text-emerald-400" style="background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2)">⚡ Interactive Demo — No Account Required</div>
+      <h2 id="demo-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">See What Happens When You Submit an Invoice</h2>
+      <p class="text-slate-400 mt-3">Fill in the form below to simulate an invoice submission to NRS. This is a safe demo — no real data is sent.</p>
+    </div>
+
+    <!-- Use-case tabs -->
+    <div class="flex gap-0 border-b border-slate-800 mb-8" role="tablist" aria-label="Business type">
+      <button @click="useCase='saas'" role="tab" :aria-selected="useCase==='saas'" class="px-5 py-3 text-sm font-semibold font-display transition-all" :class="useCase==='saas'?'tab-active':'tab-inactive'">Software / SaaS</button>
+      <button @click="useCase='pos'"  role="tab" :aria-selected="useCase==='pos'"  class="px-5 py-3 text-sm font-semibold font-display transition-all" :class="useCase==='pos'?'tab-active':'tab-inactive'">POS / Retail Shop</button>
+      <button @click="useCase='erp'"  role="tab" :aria-selected="useCase==='erp'"  class="px-5 py-3 text-sm font-semibold font-display transition-all" :class="useCase==='erp'?'tab-active':'tab-inactive'">ERP / Larger Business</button>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+
+      <!-- Left: Form -->
+      <div class="glass rounded-2xl p-6">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="font-display font-semibold text-white">Invoice Details</h3>
+          <div class="toggle-pill flex items-center gap-0.5" role="group" aria-label="View mode">
+            <button @click="demoView='simple'" class="toggle-option text-xs" :class="demoView==='simple'?'active':''">Simple View</button>
+            <button @click="demoView='dev'"    class="toggle-option text-xs" :class="demoView==='dev'?'active':''">Code View</button>
+          </div>
+        </div>
+
+        <!-- Simple view -->
+        <div x-show="demoView==='simple'" class="space-y-4">
+          <div>
+            <label for="demo-bizname" class="block text-xs text-slate-400 mb-1.5 font-medium">Your Business Name</label>
+            <input id="demo-bizname" x-model="form.businessName" type="text" placeholder="e.g. Adeyemi Stores Ltd" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none transition-colors"/>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="demo-seller-tin" class="block text-xs text-slate-400 mb-1.5 font-medium">
+                Your Tax ID
+                <span x-data="tooltip('Tax ID (TIN)','Your 14-digit business tax number issued by the government. Find it on your CAC certificate or FIRS letter.','Tax Identification Number (TIN). Format: XXXXXXXXXX-XXXX. Validated against NRS TIMS registry.')">
+                  <svg class="inline w-3 h-3 ml-0.5 text-emerald-500 cursor-help" fill="none" viewBox="0 0 12 12" aria-label="What is this?"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg>
+                </span>
+              </label>
+              <input id="demo-seller-tin" x-model="form.sellerTin" type="text" placeholder="12345678-0001" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none transition-colors"/>
+            </div>
+            <div>
+              <label for="demo-buyer-tin" class="block text-xs text-slate-400 mb-1.5 font-medium">Customer's Tax ID</label>
+              <input id="demo-buyer-tin" x-model="form.buyerTin" type="text" placeholder="98765432-0002" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none transition-colors"/>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label for="demo-amount" class="block text-xs text-slate-400 mb-1.5 font-medium">Invoice Amount (₦)</label>
+              <input id="demo-amount" x-model="form.amount" type="number" placeholder="250000" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none transition-colors"/>
+            </div>
+            <div>
+              <label class="block text-xs text-slate-400 mb-1.5 font-medium">
+                VAT Added
+                <span x-data="tooltip('VAT (7.5%)','This is the government tax your business must add to most invoices. TaxBridge calculates the exact amount automatically — you don\'t need to work it out yourself.','Value Added Tax at 7.5% per Finance Act 2023. TaxBridge auto-calculates, applies exemptions, and submits to MBS.')">
+                  <svg class="inline w-3 h-3 ml-0.5 text-emerald-500 cursor-help" fill="none" viewBox="0 0 12 12" aria-label="What is this?"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg>
+                </span>
+              </label>
+              <div class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-emerald-400 font-mono" aria-live="polite">
+                ₦<span x-text="vatAmount()"></span> (7.5%)
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="demo-desc" class="block text-xs text-slate-400 mb-1.5 font-medium">Invoice Description</label>
+            <input id="demo-desc" x-model="form.description" type="text" placeholder="e.g. Supply of building materials — July 2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2.5 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none transition-colors"/>
+          </div>
+        </div>
+
+        <!-- Developer / Code view -->
+        <div x-show="demoView==='dev'" class="code-block rounded-xl p-4 text-xs" x-text="buildPayload()"></div>
+
+        <!-- Error simulation toggle -->
+        <div class="flex items-center gap-3 mt-4 mb-5">
+          <button @click="simulateError=!simulateError"
+                  :aria-pressed="simulateError"
+                  class="w-9 h-5 rounded-full transition-colors relative flex-shrink-0"
+                  :class="simulateError?'bg-red-500':'bg-slate-700'"
+                  aria-label="Simulate NRS validation error">
+            <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full transition-transform shadow" :class="simulateError?'translate-x-4':'translate-x-0.5'" aria-hidden="true"></span>
+          </button>
+          <span class="text-xs text-slate-400">Test what happens when NRS rejects an invoice</span>
+        </div>
+
+        <button @click="submitDemo()"
+                :disabled="loading"
+                class="btn-primary w-full py-3 rounded-xl text-sm flex items-center justify-center gap-2"
+                :aria-busy="loading">
+          <svg x-show="!loading" width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <svg x-show="loading" class="animate-spin" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><path d="M7 2a5 5 0 0 1 5 5" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          <span x-text="loading ? 'Simulating NRS Submission…' : 'Simulate NRS Submission'"></span>
+        </button>
+      </div>
+
+      <!-- Right: Simulated NRS Response -->
+      <div class="glass rounded-2xl p-6 min-h-80 flex flex-col" aria-live="polite" aria-label="Simulated NRS response">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="font-display font-semibold text-white">Simulated NRS Response</h3>
+          <div x-show="result" class="status-badge" :class="result?.status==='cleared'?'status-cleared':result?.status==='error'?'status-error':'status-pending'">
+            <span class="w-1.5 h-1.5 rounded-full" aria-hidden="true" :class="result?.status==='cleared'?'bg-emerald-400 animate-pulse-slow':result?.status==='error'?'bg-red-400':'bg-amber-400'"></span>
+            <span x-text="result?.status==='cleared' ? 'APPROVED' : result?.status==='error' ? 'REJECTED' : ''"></span>
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div x-show="!result && !loading" class="flex-1 flex flex-col items-center justify-center text-center py-8">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4 border border-slate-700" style="background:rgba(16,185,129,0.05)" aria-hidden="true">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M9 8h3" stroke="#4B5563" stroke-width="1.5" stroke-linecap="round"/><rect x="3" y="3" width="18" height="18" rx="3" stroke="#4B5563" stroke-width="1.5"/></svg>
+          </div>
+          <p class="text-slate-500 text-sm">Complete the form on the left and click <strong class="text-slate-400">Simulate NRS Submission</strong> to see an example response.</p>
+        </div>
+
+        <!-- Loading state -->
+        <div x-show="loading" class="flex-1 flex flex-col justify-center space-y-3 py-4">
+          <div class="flex items-center gap-3 text-xs text-slate-400">
+            <svg class="animate-spin w-3 h-3 text-emerald-500" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="rgba(16,185,129,0.3)" stroke-width="2"/><path d="M7 2a5 5 0 0 1 5 5" stroke="#10B981" stroke-width="2" stroke-linecap="round"/></svg>
+            Simulating Tax ID validation…
+          </div>
+          <div class="shimmer-line w-full"></div>
+          <div class="flex items-center gap-3 text-xs text-slate-400 mt-2">
+            <svg class="animate-spin w-3 h-3 text-emerald-500" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="rgba(16,185,129,0.3)" stroke-width="2"/><path d="M7 2a5 5 0 0 1 5 5" stroke="#10B981" stroke-width="2" stroke-linecap="round"/></svg>
+            Calculating VAT and generating QR code…
+          </div>
+          <div class="shimmer-line w-4/5"></div>
+          <div class="flex items-center gap-3 text-xs text-slate-400 mt-2">
+            <svg class="animate-spin w-3 h-3 text-emerald-500" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="rgba(16,185,129,0.3)" stroke-width="2"/><path d="M7 2a5 5 0 0 1 5 5" stroke="#10B981" stroke-width="2" stroke-linecap="round"/></svg>
+            Simulating NRS clearance and returning reference…
+          </div>
+          <div class="shimmer-line w-3/5"></div>
+        </div>
+
+        <!-- Success result -->
+        <div x-show="result && result.status==='cleared'" class="flex-1 flex flex-col gap-4">
+          <div class="bg-emerald-500/5 border border-emerald-500/20 rounded-xl p-3">
+            <div class="text-xs text-slate-500 mb-1 font-mono">OFFICIAL INVOICE REFERENCE NUMBER</div>
+            <div class="font-mono font-bold text-emerald-400 text-sm break-all" x-text="result?.irn"></div>
+            <div class="text-xs text-slate-600 mt-1">This reference number confirms your invoice has been registered with NRS. Print it on your invoice.</div>
+          </div>
+          <div class="flex gap-4 items-start">
+            <div class="flex-shrink-0">
+              <div class="text-xs text-slate-500 mb-2 font-mono">SCAN CODE</div>
+              <div x-html="result?.qr" class="bg-white p-2 rounded-lg w-20 h-20"></div>
+            </div>
+            <div class="flex-1 space-y-2">
+              <div>
+                <div class="text-xs text-slate-500 font-mono">TOTAL INCL. VAT</div>
+                <div class="font-display font-bold text-white text-lg">₦<span x-text="result?.total"></span></div>
+              </div>
+              <div>
+                <div class="text-xs text-slate-500 font-mono">RESPONSE TIME</div>
+                <div class="text-sm text-emerald-400 font-mono" x-text="result?.latency + 'ms'"></div>
+              </div>
+              <div>
+                <div class="text-xs text-slate-500 font-mono">APPROVED AT</div>
+                <div class="text-xs text-slate-400 font-mono" x-text="result?.timestamp"></div>
+              </div>
+            </div>
+          </div>
+          <!-- Notification preview -->
+          <div>
+            <div class="text-xs text-slate-500 font-mono mb-2">SYSTEM NOTIFICATION SENT TO YOUR APP</div>
+            <div class="code-block rounded-lg p-3 text-xs">
+              <span class="token-key">"event"</span>: <span class="token-str">"invoice.approved"</span>,<br/>
+              <span class="token-key">"reference"</span>: <span class="token-str" x-text='"&quot;" + result?.irn + "&quot;"'"></span>,<br/>
+              <span class="token-key">"status"</span>: <span class="token-str">"cleared"</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Error result -->
+        <div x-show="result && result.status==='error'" class="flex-1 flex flex-col gap-4">
+          <div class="bg-red-500/5 border border-red-500/20 rounded-xl p-4">
+            <div class="text-red-400 font-display font-bold mb-2">NRS Could Not Approve This Invoice</div>
+            <div class="text-sm text-slate-400 mb-3">The customer's Tax ID could not be verified in the NRS system. TaxBridge automatically retried before returning this error.</div>
+            <div class="text-xs text-slate-500 font-mono">Error code: TIN_NOT_FOUND</div>
+          </div>
+          <div class="bg-amber-500/5 border border-amber-500/20 rounded-xl p-4">
+            <div class="text-amber-400 font-display font-semibold text-sm mb-2">💡 What to Do Next</div>
+            <div class="text-xs text-slate-400">Ask your customer to confirm their Tax ID number, or verify it directly at <span class="text-emerald-400">verify.nrs.gov.ng</span>. Once confirmed, simply resubmit — TaxBridge will handle the rest.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     USE CASES
+═══════════════════════════════════════════════ -->
+<section class="py-20" id="usecases" aria-labelledby="usecases-heading">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 id="usecases-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Designed for Different Types of Nigerian Business</h2>
+      <p class="text-slate-400 mt-3">Whatever tools your business uses today, TaxBridge is built to connect to them.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all">
+        <div class="text-3xl mb-3" aria-hidden="true">💳</div>
+        <h3 class="font-display font-bold text-white mb-2">Fintech &amp; Payments</h3>
+        <p class="text-sm text-slate-400 mb-3">Automatically issue compliant invoices for every transaction — works with Paystack, Flutterwave, and other Nigerian payment platforms.</p>
+        <div x-show="audience==='dev'" class="text-xs font-mono text-emerald-400">Payment webhook → POST /invoice → IRN returned</div>
+      </div>
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all" style="animation-delay:.1s">
+        <div class="text-3xl mb-3" aria-hidden="true">☁️</div>
+        <h3 class="font-display font-bold text-white mb-2">SaaS &amp; Software Businesses</h3>
+        <p class="text-sm text-slate-400 mb-3">Plug compliance into your billing system without changing how it works. SDKs available for Node.js, Python, and PHP.</p>
+        <div x-show="audience==='dev'" class="text-xs font-mono text-emerald-400">npm install @taxbridge/sdk</div>
+      </div>
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all" style="animation-delay:.2s">
+        <div class="text-3xl mb-3" aria-hidden="true">🖨</div>
+        <h3 class="font-display font-bold text-white mb-2">POS &amp; Retail Stores</h3>
+        <p class="text-sm text-slate-400 mb-3">Print NRS-approved receipts directly from your till. Even works offline — invoices sync automatically when internet is restored.</p>
+        <div x-show="audience==='dev'" class="text-xs font-mono text-emerald-400">Offline queue → bulk sync endpoint</div>
+      </div>
+      <div class="reveal glass rounded-2xl p-6 hover:glow-em-sm transition-all" style="animation-delay:.3s">
+        <div class="text-3xl mb-3" aria-hidden="true">🏭</div>
+        <h3 class="font-display font-bold text-white mb-2">Distributors &amp; Larger Businesses</h3>
+        <p class="text-sm text-slate-400 mb-3">Handle higher invoice volumes and multiple branches. Connects to SAP, Oracle, and Odoo via batch API for efficient processing.</p>
+        <div x-show="audience==='dev'" class="text-xs font-mono text-emerald-400">POST /v1/invoices/bulk</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     TRUSTED BY
+═══════════════════════════════════════════════ -->
+<section class="py-16 border-y border-slate-800" id="partners" aria-labelledby="partners-heading">
+  <div class="max-w-6xl mx-auto px-4">
+    <p id="partners-heading" class="text-center text-xs text-slate-600 font-mono uppercase tracking-widest mb-8">Compatible With Nigeria's Leading Payment &amp; Finance Platforms</p>
+    <div class="flex flex-wrap justify-center gap-4" role="list" aria-label="Partner platforms">
+      <div class="logo-pill" role="listitem"><span class="text-emerald-500" aria-hidden="true">⚡</span>Flutterwave</div>
+      <div class="logo-pill" role="listitem"><span class="text-sky-500" aria-hidden="true">●</span>Paystack</div>
+      <div class="logo-pill" role="listitem"><span class="text-purple-400" aria-hidden="true">◆</span>Moniepoint</div>
+      <div class="logo-pill" role="listitem"><span class="text-amber-500" aria-hidden="true">○</span>OPay</div>
+      <div class="logo-pill" role="listitem"><span class="text-blue-400" aria-hidden="true">◉</span>Kuda</div>
+      <div class="logo-pill" role="listitem"><span class="text-red-400" aria-hidden="true">◈</span>Interswitch</div>
+      <div class="logo-pill" role="listitem"><span class="text-emerald-400" aria-hidden="true">▲</span>Remita</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════════ -->
+<section class="py-20" id="testimonials" aria-labelledby="testimonials-heading">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 id="testimonials-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">What Early Users Are Saying</h2>
+      <p class="text-slate-400 mt-3">TaxBridge is currently in early access. The feedback below is from beta participants testing the platform.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="reveal glass rounded-2xl p-6">
+        <div class="flex gap-1 mb-3" aria-label="4 out of 5 stars">
+          <span class="text-amber-400 text-sm" aria-hidden="true">★★★★</span><span class="text-slate-700 text-sm" aria-hidden="true">★</span>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"I was expecting this to take weeks and involve a lot of back-and-forth. The setup was much more straightforward than I anticipated, and the sandbox helped us test before going live."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-sm font-bold text-emerald-400" aria-hidden="true">B</div>
+          <div>
+            <div class="font-semibold text-white text-sm">Beta Participant</div>
+            <div class="text-xs text-slate-500">Distribution Business, Lagos</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal glass rounded-2xl p-6" style="animation-delay:.1s">
+        <div class="flex gap-1 mb-3" aria-label="4 out of 5 stars">
+          <span class="text-amber-400 text-sm" aria-hidden="true">★★★★</span><span class="text-slate-700 text-sm" aria-hidden="true">★</span>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"Our finance team was worried about disruption. In practice, the dashboard is simple enough that they picked it up quickly, and pulling records for our accounts is easy."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-sm font-bold text-emerald-400" aria-hidden="true">B</div>
+          <div>
+            <div class="font-semibold text-white text-sm">Beta Participant</div>
+            <div class="text-xs text-slate-500">Finance Manager, Abuja</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal glass rounded-2xl p-6" style="animation-delay:.2s">
+        <div class="flex gap-1 mb-3" aria-label="4 out of 5 stars">
+          <span class="text-amber-400 text-sm" aria-hidden="true">★★★★</span><span class="text-slate-700 text-sm" aria-hidden="true">★</span>
+        </div>
+        <p class="text-slate-300 text-sm leading-relaxed mb-4">"The offline mode is really useful for our shop floor. Invoices queue up and sync when we're back online — that's important for us because connectivity isn't always reliable."</p>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center text-sm font-bold text-emerald-400" aria-hidden="true">B</div>
+          <div>
+            <div class="font-semibold text-white text-sm">Beta Participant</div>
+            <div class="text-xs text-slate-500">Retail Business Owner, Kano</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Beta disclaimer note -->
+    <p class="text-center text-xs text-slate-600 mt-8">Feedback collected during closed beta testing. Names and identifying details withheld for privacy.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════════ -->
+<section class="py-20" id="faq" aria-labelledby="faq-heading">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 id="faq-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Common Questions</h2>
+      <p class="text-slate-400 mt-3">Can't find your answer here? <a href="/cdn-cgi/l/email-protection#88fbfdf8f8e7fafcc8fce9f0eafae1ecefeda6e6ef" class="text-emerald-400 hover:underline">Email our team</a> — we reply within one business day.</p>
+    </div>
+
+    <!-- Business Owner Questions -->
+    <div class="mb-8">
+      <div class="text-xs font-mono text-emerald-400 uppercase tracking-widest mb-4">For Business Owners &amp; Finance Managers</div>
+      <div class="space-y-2">
+
+        <details class="glass rounded-xl group">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            What happens to my business if I miss the July 2026 deadline?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400">After July 1, 2026, invoices that have not been cleared through the NRS system will be considered invalid under the regulation. This means your customers may be unable to use them for tax deductions, and your business could be exposed to penalties. Additionally, buyers may begin to insist on NRS-compliant invoices. Starting early gives you enough time to test thoroughly before the deadline.</div>
+        </details>
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            Does my business need to apply to the government separately?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400">No. TaxBridge holds the official government Access Point Provider licence, which means your business operates under our authorisation. You do not need to make any government applications or appointments — just sign up with us and you are covered.</div>
+        </details>
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            How long does it actually take to get set up?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400">Most businesses complete their setup and are issuing compliant invoices within 1 to 5 working days. Businesses with more complex systems or multiple branches may take longer. We offer free onboarding support and can recommend integration partners if your team needs technical assistance.</div>
+        </details>
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            Is my business data safe with TaxBridge?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400">Yes. All invoice data is encrypted in transit and stored securely on NCC-compliant servers based in Nigeria. Your data does not leave the country. We also provide complete audit logs so you always have a full record of every invoice submitted.</div>
+        </details>
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            Does my team need training to use TaxBridge?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400">No. TaxBridge works invisibly in the background. Your staff keep using the same software they use today — TaxBridge connects to it and handles compliance automatically. Your finance team gets access to a simple dashboard to monitor invoice status and download records.</div>
+        </details>
+
+      </div>
+    </div>
+
+    <!-- Developer Questions -->
+    <div>
+      <div class="text-xs font-mono text-sky-400 uppercase tracking-widest mb-4">For Developers &amp; Technical Teams</div>
+      <div class="space-y-2">
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            What are the API rate limits and uptime guarantee?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400 font-mono">Sandbox: high test call allowance — contact us if you need a higher limit. Growth plan: up to 50,000 live invoices per month. Enterprise: custom volume pricing. Target SLA: 99.9% monthly uptime. Target P95 response time: under 200ms. Live status at <span class="text-emerald-400">status.taxbridge.ng</span>.</div>
+        </details>
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            What happens when NRS updates their API spec?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400">We handle all NRS API changes internally. Your integration contract with TaxBridge is stable — you will never need to update your code because NRS changed their spec. We absorb that complexity on your behalf and communicate any impactful changes through our changelog.</div>
+        </details>
+
+        <details class="glass rounded-xl">
+          <summary class="p-5 flex items-center justify-between text-white font-semibold text-sm cursor-pointer select-none">
+            Is there offline support for POS environments?
+            <span class="acc-icon text-emerald-400 text-xl font-light flex-shrink-0 ml-3" aria-hidden="true">+</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-slate-400 font-mono">Yes. Set <code class="text-emerald-400">mode: "offline"</code> in the SDK config. Invoices queue locally and sync automatically via <code class="text-emerald-400">POST /v1/invoices/sync</code> when connectivity is restored. Detailed docs available in the developer portal.</div>
+        </details>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     PRICING
+═══════════════════════════════════════════════ -->
+<section class="py-20 relative" id="pricing" aria-labelledby="pricing-heading">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 id="pricing-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Straightforward Pricing</h2>
+      <p class="text-slate-400 mt-3">Start free and test everything. Pay only when you go live.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- Sandbox / Free -->
+      <div class="reveal glass rounded-2xl p-6 border border-slate-700">
+        <div class="text-xs font-mono text-slate-500 mb-3 uppercase tracking-widest">Sandbox</div>
+        <div class="font-display font-extrabold text-white text-3xl mb-1">Free</div>
+        <div class="text-xs text-slate-500 mb-5">No credit card required · Test at your own pace</div>
+        <ul class="space-y-2 text-sm text-slate-400 mb-6" role="list">
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Full API and dashboard access</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Test as many invoices as you like</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Simulated NRS responses</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Community support</li>
+        </ul>
+        <a href="#demo" class="btn-secondary w-full py-2.5 rounded-xl text-sm text-center block">Start with Free Sandbox</a>
+      </div>
+
+      <!-- Growth -->
+      <div class="reveal glass rounded-2xl p-6 border glow-em relative" style="border-color:#10B981;animation-delay:.1s">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full font-display">RECOMMENDED</div>
+        <div class="text-xs font-mono text-emerald-400 mb-3 uppercase tracking-widest">Growth</div>
+        <div class="font-display font-extrabold text-white text-3xl mb-1">₦150,000<span class="text-base font-normal text-slate-400">/month</span></div>
+        <div class="text-xs text-slate-500 mb-5">Up to 50,000 invoices per month</div>
+        <ul class="space-y-2 text-sm text-slate-400 mb-6" role="list">
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>50,000 live invoices per month</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Real-time NRS submission</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Compliance dashboard</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Instant notifications</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Audit record exports</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Email &amp; chat support</li>
+        </ul>
+        <a href="#demo" class="btn-primary w-full py-2.5 rounded-xl text-sm text-center block"><span>Start Free Trial</span></a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="reveal glass rounded-2xl p-6 border border-slate-700" style="animation-delay:.2s">
+        <div class="text-xs font-mono text-slate-500 mb-3 uppercase tracking-widest">Enterprise</div>
+        <div class="font-display font-extrabold text-white text-3xl mb-1">Custom</div>
+        <div class="text-xs text-slate-500 mb-5">Volume pricing + dedicated support</div>
+        <ul class="space-y-2 text-sm text-slate-400 mb-6" role="list">
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Unlimited invoice volume</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>99.9% uptime SLA in writing</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Dedicated integration support</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>SAP / Oracle / Odoo connectors</li>
+          <li class="flex gap-2"><span class="text-emerald-500" aria-hidden="true">✓</span>Priority NRS issue escalation</li>
+        </ul>
+        <a href="#cta" class="btn-secondary w-full py-2.5 rounded-xl text-sm text-center block">Talk to Sales</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════════════ -->
+<section class="py-24 relative overflow-hidden" id="cta" aria-labelledby="cta-heading">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(16,185,129,0.08),rgba(0,135,81,0.05))"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-10" style="background:radial-gradient(circle,#10B981,transparent 70%)"></div>
+  </div>
+  <div class="relative max-w-3xl mx-auto px-4 text-center">
+    <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border text-amber-400 deadline-ring" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.3)" role="status">
+      <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse-slow" aria-hidden="true"></span>
+      Only <span x-text="daysLeft" class="mx-1 font-bold text-white"></span> days until the July 1, 2026 deadline
+    </div>
+    <h2 id="cta-heading" class="font-display font-extrabold text-4xl sm:text-5xl text-white mb-6">
+      Get Your Business<br/><span class="grad-text">Compliance-Ready Before July 2026.</span>
+    </h2>
+    <p class="text-slate-300 text-lg mb-10 max-w-xl mx-auto">Start with the free sandbox — no credit card, no obligation. Test the full workflow before you commit to a live plan.</p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+      <a href="#demo" class="btn-primary px-8 py-4 rounded-xl text-base flex items-center justify-center gap-2">
+        <span>Try the Demo — No Card Needed</span>
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#3546545950467541544d57475c5152501b5b52" class="btn-secondary px-8 py-4 rounded-xl text-base flex items-center justify-center gap-2">
+        📅 Book a 15-Minute Call
+      </a>
+    </div>
+    <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-500">
+      <span class="flex items-center gap-1"><span class="text-emerald-500" aria-hidden="true">✓</span>Free sandbox, no credit card</span>
+      <span class="flex items-center gap-1"><span class="text-emerald-500" aria-hidden="true">✓</span>Typically live in 1–5 working days</span>
+      <span class="flex items-center gap-1"><span class="text-emerald-500" aria-hidden="true">✓</span>NRS-certified Access Point Provider</span>
+      <span class="flex items-center gap-1"><span class="text-emerald-500" aria-hidden="true">✓</span>Your data stays in Nigeria</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════ -->
+<footer class="border-t border-slate-800 py-12" role="contentinfo">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid sm:grid-cols-4 gap-8 mb-10">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#10B981,#059669)" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <span class="font-display font-bold text-white">TaxBridge</span>
+        </div>
+        <p class="text-xs text-slate-500 leading-relaxed">Nigeria's NRS-certified Access Point Provider. Reliable compliance infrastructure for Nigerian businesses — currently in early access.</p>
+        <p class="text-xs text-slate-600 mt-3">📍 Lagos · Abuja · Kano</p>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Product</div>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#demo"       class="hover:text-emerald-400 transition-colors">Live Demo</a></li>
+          <li><a href="#"           class="hover:text-emerald-400 transition-colors">API Documentation</a></li>
+          <li><a href="#"           class="hover:text-emerald-400 transition-colors">Developer SDK</a></li>
+          <li><a href="#"           class="hover:text-emerald-400 transition-colors">System Status</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Company</div>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#" class="hover:text-emerald-400 transition-colors">About Us</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-colors">Blog &amp; Updates</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-colors">We're Hiring</a></li>
+          <li><a href="/cdn-cgi/l/email-protection#3e4d4b4e4e514c4a7e4a5f465c4c575a595b105059" class="hover:text-emerald-400 transition-colors">Contact Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-3">Legal</div>
+        <ul class="space-y-2 text-sm text-slate-400">
+          <li><a href="#" class="hover:text-emerald-400 transition-colors">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-colors">Terms of Service</a></li>
+          <li><a href="#" class="hover:text-emerald-400 transition-colors">Data Processing Agreement</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-xs text-slate-600">© 2026 TaxBridge. All rights reserved. Early Access · NRS Access Point Provider, Federal Republic of Nigeria.</div>
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse-slow" aria-hidden="true"></div>
+        <span class="text-xs text-slate-500">System status: operational</span>
+      </div>
+    </div>
+  </div>
 </footer>
 
-<script>
-/* ================= CONFIG =================
-  Update these values before deploying:
-*/
-const CONFIG = {
-  PLAY_STORE_URL: "https://play.google.com/store/apps/details?id=com.taxbridge", // replace with real Play Store link
-  GITHUB_REPO: "Scardubu/taxbridge", // owner/repo — used to fetch stars
-  TRACKING_URL: "", // optional URL to send install events (POST), leave blank to disable
-  SANDBOX_API: "", // optional public sandbox endpoint for live demo. If blank, demo uses simulated response.
-};
-/* ========================================== */
 
-/* Helper: small DOM */
-const $ = (sel, ctx=document) => ctx.querySelector(sel);
+<!-- ═══════════════════════════════════════════════
+     GLOSSARY PANEL
+═══════════════════════════════════════════════ -->
+<!-- Floating trigger button -->
+<button @click="glossaryOpen=!glossaryOpen"
+        :aria-expanded="glossaryOpen"
+        aria-controls="glossary-panel"
+        class="fixed bottom-6 left-6 z-50 btn-secondary px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg"
+        style="background:rgba(13,20,37,0.95)">
+  <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5h4M5 7h4M5 9h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+  Plain English Glossary
+</button>
 
-/* ----- Year ----- */
-document.getElementById('year').textContent = new Date().getFullYear();
+<!-- Glossary slide-in panel -->
+<div id="glossary-panel"
+     role="dialog"
+     aria-label="Plain English Glossary"
+     aria-modal="true"
+     class="glossary-panel glass-strong"
+     :class="glossaryOpen ? 'open' : ''">
+  <div class="p-5 h-full flex flex-col">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-display font-bold text-white">Plain English Glossary</h3>
+      <button @click="glossaryOpen=false" class="text-slate-400 hover:text-white transition-colors" aria-label="Close glossary">
+        <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="text-xs text-slate-500 mb-3">Tap any term to see what it means in plain English and for technical teams.</p>
+    <input x-model="glossarySearch"
+           type="search"
+           placeholder="Search terms…"
+           aria-label="Search glossary terms"
+           class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-600 focus:border-emerald-500 focus:outline-none mb-4"/>
+    <div class="flex-1 overflow-y-auto space-y-3" role="list" aria-label="Glossary terms">
+      <template x-for="item in filteredGlossary()" :key="item.term">
+        <div class="border border-slate-800 rounded-xl p-4" role="listitem">
+          <div class="font-display font-bold text-emerald-400 text-sm mb-2" x-text="item.term"></div>
+          <div class="text-xs text-slate-300 mb-2"><span class="text-slate-500 font-medium">In plain English: </span><span x-text="item.biz"></span></div>
+          <div class="text-xs text-slate-500 font-mono"><span class="text-slate-600">Technical: </span><span x-text="item.dev"></span></div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
 
-/* ----- Install tracking ----- */
-function trackInstall(action) {
-  try {
-    const payload = {
-      event: action,
-      repo: CONFIG.GITHUB_REPO,
-      ts: new Date().toISOString(),
-      client: { ua: navigator.userAgent, lang: navigator.language }
-    };
-    // store locally
-    const prev = Number(localStorage.getItem('tb_install_count') || 0) + 1;
-    localStorage.setItem('tb_install_count', prev);
+<!-- Glossary backdrop -->
+<div x-show="glossaryOpen"
+     @click="glossaryOpen=false"
+     class="fixed inset-0 z-40 bg-black/40"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     aria-hidden="true"></div>
 
-    // send beacon if configured
-    if (CONFIG.TRACKING_URL) {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(CONFIG.TRACKING_URL, JSON.stringify(payload));
-      } else {
-        fetch(CONFIG.TRACKING_URL, {method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(()=>{});
+<!-- Mobile sticky CTA -->
+<div class="fixed bottom-6 right-6 z-50 md:hidden">
+  <a href="#demo" class="btn-primary px-5 py-3 rounded-xl text-sm shadow-xl shadow-emerald-500/20 flex items-center gap-2">
+    <span>Try Demo</span><span aria-hidden="true">⚡</span>
+  </a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     ALPINE.JS APPLICATION LOGIC
+═══════════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+document.addEventListener('alpine:init', () => {
+
+  /* ── Tooltip component ── */
+  Alpine.data('tooltip', (term, biz, dev) => ({
+    open: false,
+    tab: 'biz',
+    term, biz, dev,
+    hoverTimer: null,
+    show() {
+      clearTimeout(this.hoverTimer);
+      this.hoverTimer = setTimeout(() => { this.open = true; }, 250);
+    },
+    hide() {
+      clearTimeout(this.hoverTimer);
+      this.open = false;
+    },
+    toggle() { this.open = !this.open; },
+    handleKey(e) { if (e.key === 'Escape') this.open = false; }
+  }));
+
+  /* ── Flow animation ── */
+  Alpine.data('flowAnim', () => ({
+    step: 0,
+    init() {
+      setInterval(() => {
+        this.step = (this.step + 1) % 4;
+      }, 1200);
+    }
+  }));
+
+  /* ── Main app ── */
+  Alpine.data('taxbridge', () => ({
+    audience: 'business',
+    showToggle: false,
+    scrolled: false,
+    glossaryOpen: false,
+    glossarySearch: '',
+    daysLeft: 0,
+
+    glossaryItems: [
+      {
+        term: 'Invoice Reference Number (IRN)',
+        biz: 'A unique number given by the government to every approved invoice — proof that your invoice is official and recorded.',
+        dev: 'IRN returned by NRS MBS after successful clearance. Format: TB-{epoch}-{hash}. Must appear on all printed and digital invoices.'
+      },
+      {
+        term: 'Tax ID / TIN',
+        biz: 'Your 14-digit business tax number issued by the government. You can find it on your CAC certificate or FIRS registration letter.',
+        dev: 'Tax Identification Number (TIN). Validated in real time via NRS TIMS API. Returns: valid | invalid | suspended.'
+      },
+      {
+        term: 'NRS Merchant Buyer Solution (MBS)',
+        biz: 'The official Nigerian government system that all businesses must connect their invoices to from July 2026.',
+        dev: 'NRS MBS — the government clearance API. Returns IRN + QR code + clearance status per invoice submission.'
+      },
+      {
+        term: 'Access Point Provider (APP)',
+        biz: 'A company that holds a government licence allowing it to connect other businesses to the NRS system — so those businesses don\'t need their own licence.',
+        dev: 'APP — NRS-issued OAuth2 credentials. TaxBridge acts as APP, handling token rotation and proxying all MBS endpoints on client behalf.'
+      },
+      {
+        term: 'VAT (Value Added Tax)',
+        biz: 'A 7.5% tax the government requires you to add to most business invoices. TaxBridge calculates and applies this automatically.',
+        dev: 'VAT at 7.5% per Finance Act 2023. TaxBridge handles exemption logic, auto-calculates the amount, and submits to MBS.'
+      },
+      {
+        term: 'QR Code',
+        biz: 'A small scannable square printed on your invoice. Anyone can scan it to confirm the invoice is genuine and government-approved.',
+        dev: 'NRS-signed QR linking to verify.nrs.gov.ng/{irn}. Required on all printed and PDF invoices per NRS Regulation 4.2.'
+      },
+      {
+        term: 'Webhook (Instant Notification)',
+        biz: 'An automatic message sent to your system when an invoice is approved or rejected — so you can see status changes without manually checking.',
+        dev: 'HTTP POST to your registered endpoint on invoice lifecycle events: invoice.cleared, invoice.failed, invoice.retrying.'
+      },
+      {
+        term: 'Sandbox',
+        biz: 'A safe practice environment where you can test TaxBridge without sending real invoices or involving real money.',
+        dev: 'Fully mocked NRS endpoints. Use sk_test_* keys. Simulates all NRS error codes, retry scenarios, and edge cases.'
+      },
+      {
+        term: 'SLA (Uptime Guarantee)',
+        biz: 'Our target is for TaxBridge to be available 99.9% of the time each month, minimising the chance of downtime affecting your invoices.',
+        dev: '99.9% monthly uptime SLA. P95 latency <200ms. Breach triggers service credits. Monitor at status.taxbridge.ng.'
+      },
+    ],
+
+    filteredGlossary() {
+      if (!this.glossarySearch) return this.glossaryItems;
+      const q = this.glossarySearch.toLowerCase();
+      return this.glossaryItems.filter(i =>
+        i.term.toLowerCase().includes(q) ||
+        i.biz.toLowerCase().includes(q) ||
+        i.dev.toLowerCase().includes(q)
+      );
+    },
+
+    init() {
+      /* Days to deadline */
+      const deadline = new Date('2026-07-01T00:00:00');
+      const now = new Date();
+      this.daysLeft = Math.max(0, Math.ceil((deadline - now) / 86400000));
+
+      /* Scroll behaviours */
+      window.addEventListener('scroll', () => {
+        this.scrolled    = window.scrollY > 20;
+        this.showToggle  = window.scrollY > 320;
+      }, { passive: true });
+
+      /* Scroll-reveal observer */
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) e.target.classList.add('visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+  }));
+
+  /* ── API Demo ── */
+  Alpine.data('apiDemo', () => ({
+    useCase: 'saas',
+    demoView: 'simple',
+    loading: false,
+    simulateError: false,
+    result: null,
+    form: {
+      businessName: 'Adeyemi Stores Ltd',
+      sellerTin: '12345678-0001',
+      buyerTin: '98765432-0002',
+      amount: '250000',
+      description: 'Supply of office stationery — July 2026'
+    },
+
+    vatAmount() {
+      const amt = parseFloat(this.form.amount) || 0;
+      return Math.round(amt * 0.075).toLocaleString();
+    },
+
+    totalAmount() {
+      const amt = parseFloat(this.form.amount) || 0;
+      return Math.round(amt * 1.075).toLocaleString();
+    },
+
+    buildPayload() {
+      return `POST /v1/invoices
+Authorization: Bearer sk_live_...
+Content-Type: application/json
+
+{
+  "seller_tin": "${this.form.sellerTin || '12345678-0001'}",
+  "buyer_tin": "${this.form.buyerTin || '98765432-0002'}",
+  "amount": ${this.form.amount || 250000},
+  "currency": "NGN",
+  "description": "${this.form.description || 'Supply of office stationery'}",
+  "vat_rate": 0.075,
+  "use_case": "${this.useCase}"
+}`;
+    },
+
+    generateIRN() {
+      const epoch = Date.now();
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let hash = '';
+      for (let i = 0; i < 8; i++) hash += chars[Math.floor(Math.random() * chars.length)];
+      return `TB-${epoch}-${hash}`;
+    },
+
+    generateQR() {
+      /* Stylised SVG QR pattern */
+      const cells = [];
+      const size  = 10;
+      const dark  = () => Math.random() > 0.45;
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const corner = (r < 3 && c < 3) || (r < 3 && c >= size - 3) || (r >= size - 3 && c < 3);
+          if (corner || dark()) cells.push(`<rect x="${c * 6}" y="${r * 6}" width="5" height="5" fill="#000"/>`);
+        }
       }
-    } else {
-      console.log('Tracking disabled — install event:', payload);
+      return `<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="background:#fff" role="img" aria-label="Invoice QR code">${cells.join('')}</svg>`;
+    },
+
+    async submitDemo() {
+      if (this.loading) return;
+      this.loading = true;
+      this.result  = null;
+
+      await new Promise(r => setTimeout(r, 2600));
+      this.loading = false;
+
+      if (this.simulateError) {
+        this.result = { status: 'error' };
+      } else {
+        this.result = {
+          status:    'cleared',
+          irn:       this.generateIRN(),
+          qr:        this.generateQR(),
+          total:     this.totalAmount(),
+          latency:   Math.floor(Math.random() * 120) + 80,
+          timestamp: new Date().toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' })
+        };
+      }
     }
-  } catch(e){ console.warn(e) }
-}
+  }));
 
-['downloadBtn','downloadBtn2'].forEach(id=>{
-  const el = document.getElementById(id);
-  if(el) el.addEventListener('click', (e)=>{
-    // track
-    trackInstall('download_clicked');
-    // attempt to open Play Store link
-    const url = CONFIG.PLAY_STORE_URL || '#';
-    window.location.href = url;
-  });
 });
-
-/* ----- GitHub star counter ----- */
-async function fetchGitHubStars() {
-  const target = $('#ghStars');
-  if(!target) return;
-  try {
-    const resp = await fetch(`https://api.github.com/repos/${CONFIG.GITHUB_REPO}`);
-    if(!resp.ok) throw new Error('not ok '+resp.status);
-    const data = await resp.json();
-    const stars = data.stargazers_count || 0;
-    target.textContent = `★ ${stars.toLocaleString()}`;
-  } catch (err) {
-    target.textContent = '★ repo';
-    console.warn('GitHub star fetch failed', err);
-  }
-}
-fetchGitHubStars();
-
-/* ----- Reveal on scroll ----- */
-const revealElems = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      const el = entry.target;
-      const delay = Number(el.dataset.delay || 0);
-      setTimeout(()=> el.classList.add('in-view'), delay);
-      io.unobserve(el);
-    }
-  });
-},{threshold:0.12});
-revealElems.forEach(e => io.observe(e));
-
-/* ----- Screenshot subtle animation loop ----- */
-const shots = document.querySelectorAll('.s-shot');
-let shotIdx=0;
-setInterval(()=>{
-  shots.forEach((s,i)=> s.classList.remove('playing'));
-  const current = shots[shotIdx % shots.length];
-  if(current) current.classList.add('playing');
-  shotIdx++;
-}, 2500);
-
-/* ----- Phone tilt effect by pointer move ----- */
-const phoneWrap = document.getElementById('phoneWrap');
-if(phoneWrap){
-  document.addEventListener('mousemove', (ev)=>{
-    const {innerWidth:w, innerHeight:h} = window;
-    const x = (ev.clientX - w/2) / (w/2);
-    const y = (ev.clientY - h/2) / (h/2);
-    const rx = Math.max(Math.min(-y*8, 12), -12);
-    const ry = Math.max(Math.min(x*12, 18), -18);
-    phoneWrap.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
-  });
-  document.addEventListener('mouseleave', ()=> phoneWrap.style.transform = '');
-}
-
-/* ----- Dashboard SVG path animation ----- */
-function renderChart(pathIdLine, pathIdArea, dotsId, points){
-  const w = 360, h = 180, padding = 20;
-  const max = Math.max(...points), min = Math.min(...points);
-  const range = Math.max(1, max-min);
-  const step = (w - padding*2) / (points.length - 1);
-  let dLine = '', dArea = '';
-  points.forEach((p,i)=>{
-    const x = padding + (i*step);
-    const y = padding + (1 - (p - min)/range) * (h - padding*2);
-    dLine += (i===0?`M ${x} ${y}` : ` L ${x} ${y}`);
-    dArea += (i===0?`M ${x} ${y}` : ` L ${x} ${y}`);
-  });
-  dArea += ` L ${w-padding} ${h-padding} L ${padding} ${h-padding} Z`;
-  document.getElementById(pathIdLine).setAttribute('d', dLine);
-  document.getElementById(pathIdArea).setAttribute('d', dArea);
-
-  // dots
-  const dots = document.getElementById(dotsId);
-  dots.innerHTML = '';
-  points.forEach((p,i)=>{
-    const x = padding + (i*step);
-    const y = padding + (1 - (p - min)/range) * (h - padding*2);
-    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
-    c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r', (i%2?3.5:4.5));
-    c.setAttribute('fill','#fff'); c.setAttribute('opacity',0.95);
-    dots.appendChild(c);
-  });
-}
-
-// initial random points and animate every 3s (simulates live data)
-let pts = [120,160,140,180,200,170,190];
-renderChart('linePath','areaPath','dots', pts);
-setInterval(()=>{
-  pts = pts.map(v => Math.max(60, v + (Math.random()*60-30)));
-  renderChart('linePath','areaPath','dots', pts);
-}, 3200);
-
-/* ----- API demo: dynamic sandbox or simulated response ----- */
-const jsonInput = $('#jsonInput');
-const apiOutput = $('#apiOutput');
-const sendBtn = $('#sendBtn');
-const prettyBtn = $('#prettyBtn');
-const sampleBtn = $('#sampleBtn');
-const useReal = $('#useReal');
-
-function prettyFormat(){
-  try {
-    const v = JSON.parse(jsonInput.value);
-    jsonInput.value = JSON.stringify(v, null, 2);
-  } catch(e) { alert('Invalid JSON'); }
-}
-prettyBtn.addEventListener('click', prettyFormat);
-sampleBtn.addEventListener('click', ()=> {
-  jsonInput.value = JSON.stringify({
-    customer_id: "cus_123",
-    items: [{name:"Service", qty:1, price:12500}],
-    taxes: [{type:"vat", rate:7.5}],
-    metadata: {source:"pos_terminal_3"}
-  }, null, 2);
-});
-
-sendBtn.addEventListener('click', async ()=>{
-  apiOutput.textContent = '';
-  let payload;
-  try { payload = JSON.parse(jsonInput.value); }
-  catch(e){ apiOutput.textContent = 'Invalid JSON'; return; }
-
-  apiOutput.textContent = 'Sending…';
-  if(useReal.checked && CONFIG.SANDBOX_API){
-    // call real endpoint
-    try {
-      const resp = await fetch(CONFIG.SANDBOX_API, {
-        method:'POST',
-        headers:{'content-type':'application/json'},
-        body: JSON.stringify(payload)
-      });
-      const data = await resp.json();
-      apiOutput.textContent = JSON.stringify(data, null, 2);
-    } catch(err){
-      apiOutput.textContent = 'Live request failed: ' + err.message;
-    }
-  } else {
-    // simulate network latency & response
-    setTimeout(()=> {
-      const fake = {
-        id: 'inv_' + Math.random().toString(36).slice(2,8),
-        status: 'queued',
-        validated: true,
-        submitted_to_nrs: false,
-        created_at: new Date().toISOString(),
-        payload: payload
-      };
-      apiOutput.textContent = JSON.stringify(fake, null, 2);
-    }, 700 + Math.random()*900);
-  }
-});
-
-/* ----- Accessibility: focus states ----- */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Tab') document.body.classList.add('user-tab');
-});
-
-/* ----- Small telemetry for devs (console) ----- */
-console.log('TaxBridge Elite V2 loaded — CONFIG', CONFIG);
-
 </script>
+</body>
+</html>
