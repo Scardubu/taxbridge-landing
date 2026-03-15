@@ -133,14 +133,42 @@ details summary::-webkit-details-marker{display:none}
 details[open] summary .acc-icon{transform:rotate(45deg)}
 .acc-icon{transition:transform .25s}
 
-/* Tooltip anchor */
+/* Tooltip anchor — desktop only */
 [x-data*="tooltip"]{position:relative;display:inline-flex;align-items:center}
-.tooltip-term{border-bottom:1px dashed rgba(16,185,129,0.5);cursor:help;display:inline-flex;align-items:center;gap:2px}
+.tooltip-term{cursor:pointer;display:inline-flex;align-items:center;gap:2px}
+@media(min-width:768px){
+  .tooltip-term{border-bottom:1px dashed rgba(16,185,129,0.5);cursor:help}
+}
 
-/* Tooltip popover */
-.tooltip-popover{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);width:260px;background:rgba(8,13,26,0.97);border:1px solid rgba(30,45,71,0.9);border-radius:12px;padding:12px 14px;z-index:200;backdrop-filter:blur(16px);box-shadow:0 16px 48px rgba(0,0,0,0.5)}
-.tooltip-popover::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:rgba(30,45,71,0.9)}
-@media(max-width:768px){.tooltip-popover{width:220px;left:50%!important;transform:translateX(-50%)!important;right:auto!important;bottom:auto!important;top:calc(100% + 8px)!important}.tooltip-popover::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:rgba(30,45,71,0.9)}}
+/* Tooltip popover — desktop only, hidden on mobile */
+.tooltip-popover{
+  position:absolute;
+  bottom:calc(100% + 10px);
+  left:50%;
+  transform:translateX(-50%);
+  width:280px;
+  background:rgba(8,13,26,0.98);
+  border:1px solid rgba(16,185,129,0.2);
+  border-radius:14px;
+  padding:14px 16px;
+  z-index:300;
+  backdrop-filter:blur(20px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(16,185,129,0.05);
+  pointer-events:auto;
+}
+.tooltip-popover::after{
+  content:'';
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:rgba(16,185,129,0.2);
+}
+@media(max-width:767px){
+  .tooltip-popover{display:none!important}
+  .tooltip-term svg{display:none}
+}
 
 /* Section accent borders for visual rhythm */
 .section-accent{border-top:1px solid rgba(16,185,129,0.08)}
@@ -330,9 +358,9 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 
       <!-- Developer view copy -->
       <p x-show="audience==='dev'" class="text-slate-300 text-lg leading-relaxed mb-8 max-w-xl">
-        TaxBridge is Nigeria's certified <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('APP','Official government licence that lets TaxBridge connect your software to the NRS tax system on your behalf.','Access Point Provider — holds NRS OAuth2 credentials, proxies all MBS endpoints, manages token rotation.')">
+        TaxBridge is Nigeria's certified <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('APP','Official government licence that lets TaxBridge connect your software to the NRS tax system on your behalf.','Access Point Provider — holds NRS OAuth2 credentials, proxies all MBS endpoints, manages token rotation.')">
           <span class="tooltip-term text-emerald-400">APP middleware<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
-          <div x-show="open" x-cloak x-cloak
+          <div x-show="open" x-cloak
                class="tooltip-popover"
                role="tooltip"
                x-transition:enter="transition ease-out duration-150"
@@ -433,69 +461,95 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
      COMPLIANCE TIMELINE
 ═══════════════════════════════════════════════ -->
 <section class="py-20 relative section-accent" id="timeline" aria-labelledby="timeline-heading">
-  <div class="max-w-6xl mx-auto px-4">
-    <div class="text-center mb-12">
-      <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border text-amber-400" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2)">⏱ Government Rollout Plan</div>
-      <h2 id="timeline-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">When Does This Affect Your Business?</h2>
-      <p class="text-slate-400 mt-3 max-w-xl mx-auto">The Nigeria Revenue Service is rolling out its new electronic invoicing system in stages. Here is exactly where your business stands right now.</p>
+  <div class="max-w-3xl mx-auto px-4">
+
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1.5 rounded-full mb-4 border text-amber-400" style="background:rgba(251,191,36,0.08);border-color:rgba(251,191,36,0.2)">🗓 The Government Deadline</div>
+      <h2 id="timeline-heading" class="font-display font-bold text-3xl sm:text-4xl text-white">Is Your Business Affected?</h2>
+      <p class="text-slate-400 mt-3 max-w-lg mx-auto">The Nigerian government is rolling out a new rule: all qualifying businesses must stamp every invoice with an official government code. Here is what you need to know.</p>
     </div>
 
-    <div class="grid md:grid-cols-4 gap-0 relative">
-      <!-- Desktop connector line -->
-      <div class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5" style="background:linear-gradient(90deg,#10B981,#10B981,#FBBF24,#EF4444)" aria-hidden="true"></div>
+    <!-- Vertical timeline — works on all screen sizes -->
+    <div class="relative" role="list">
 
-      <!-- Phase 1 — Done -->
-      <div class="reveal flex flex-col items-center text-center px-4 pb-8">
-        <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center mb-3 relative z-10" aria-label="Completed">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      <!-- Vertical connector line -->
+      <div class="absolute left-5 top-5 bottom-5 w-0.5" style="background:linear-gradient(180deg,#10B981 0%,#FBBF24 55%,#EF4444 100%)" aria-hidden="true"></div>
+
+      <!-- Step 1: Already happened -->
+      <div class="relative flex gap-5 mb-8" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center relative z-10 shadow-lg" style="box-shadow:0 0 16px rgba(16,185,129,0.4)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="Done"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="text-xs text-emerald-400 font-mono font-bold mb-1">ALREADY LIVE</div>
-        <div class="font-display font-semibold text-white text-sm mb-2">January 2025</div>
-        <p class="text-xs text-slate-400">Large businesses (₦5 billion+ turnover) are already connected and compliant</p>
+        <div class="glass rounded-2xl p-4 flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold font-display text-emerald-400 uppercase tracking-wide">Already Done</span>
+            <span class="text-xs text-slate-600">Jan 2025</span>
+          </div>
+          <div class="font-display font-semibold text-white mb-1">The Biggest Companies Went First</div>
+          <p class="text-sm text-slate-400">Nigeria's largest corporations are already using the new system. The government is now rolling it out to more businesses.</p>
+        </div>
       </div>
 
-      <!-- Phase 2 — Coming -->
-      <div class="reveal flex flex-col items-center text-center px-4 pb-8" style="animation-delay:.1s">
-        <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center mb-3 relative z-10 deadline-ring" aria-label="Upcoming deadline">
-          <span class="text-white text-xs font-bold" aria-hidden="true">!</span>
+      <!-- Step 2: Your deadline — highlighted -->
+      <div class="relative flex gap-5 mb-8" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-amber-500 flex items-center justify-center relative z-10 deadline-ring flex-shrink-0">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-label="Your deadline"><path d="M8 4v5l3 2" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="8" cy="8" r="6.5" stroke="white" stroke-width="1.5"/></svg>
         </div>
-        <div class="text-xs text-amber-400 font-mono font-bold mb-1">YOUR DEADLINE</div>
-        <div class="font-display font-semibold text-white text-sm mb-2">July 1, 2026</div>
-        <p class="text-xs text-slate-400">Medium-sized businesses (₦1 billion–₦5 billion turnover) must comply</p>
+        <div class="flex-1 rounded-2xl p-4 border" style="background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.25)">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold font-display text-amber-400 uppercase tracking-wide">👉 Your Deadline</span>
+            <span class="text-xs text-slate-500">July 1, 2026</span>
+          </div>
+          <div class="font-display font-semibold text-white mb-1">Medium-Sized Businesses Must Comply</div>
+          <p class="text-sm text-slate-400 mb-3">If your business earns between ₦1 billion and ₦5 billion a year, <strong class="text-white">you must be ready by July 1, 2026.</strong> Every invoice you raise must have a government-issued reference number.</p>
+          <div class="flex items-center gap-2 text-xs text-amber-400 font-display font-semibold">
+            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse-slow"></span>
+            <span x-text="daysLeft + ' days left to get ready'"></span>
+          </div>
+        </div>
       </div>
 
-      <!-- Phase 3 — Upcoming -->
-      <div class="reveal flex flex-col items-center text-center px-4 pb-8" style="animation-delay:.2s">
-        <div class="w-8 h-8 rounded-full border-2 border-slate-600 flex items-center justify-center mb-3 relative z-10">
-          <span class="text-slate-500 text-xs font-bold" aria-hidden="true">3</span>
+      <!-- Step 3: Smaller businesses coming -->
+      <div class="relative flex gap-5 mb-8" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full border-2 border-slate-600 flex items-center justify-center relative z-10 bg-slate-900">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-label="Future phase"><circle cx="7" cy="7" r="5.5" stroke="#64748B" stroke-width="1.2"/><path d="M7 4v3l2 1.5" stroke="#64748B" stroke-width="1.2" stroke-linecap="round"/></svg>
         </div>
-        <div class="text-xs text-slate-500 font-mono font-bold mb-1">NEXT PHASE</div>
-        <div class="font-display font-semibold text-white text-sm mb-2">January 2027</div>
-        <p class="text-xs text-slate-400">Smaller businesses (under ₦1 billion annual turnover) will be included</p>
+        <div class="glass rounded-2xl p-4 flex-1">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold font-display text-slate-400 uppercase tracking-wide">Coming Next</span>
+            <span class="text-xs text-slate-600">Jan 2027</span>
+          </div>
+          <div class="font-display font-semibold text-white mb-1">Smaller Businesses Will Follow</div>
+          <p class="text-sm text-slate-400">Businesses earning under ₦1 billion will need to comply from January 2027. <strong class="text-slate-300">Starting early means no last-minute rush.</strong></p>
+        </div>
       </div>
 
-      <!-- Phase 4 — Penalty -->
-      <div class="reveal flex flex-col items-center text-center px-4 pb-8" style="animation-delay:.3s">
-        <div class="w-8 h-8 rounded-full border-2 border-red-800 flex items-center justify-center mb-3 relative z-10" aria-label="Penalty zone">
-          <span class="text-red-500 text-xs font-bold" aria-hidden="true">!</span>
+      <!-- Step 4: Miss it -->
+      <div class="relative flex gap-5" role="listitem">
+        <div class="flex-shrink-0 w-10 h-10 rounded-full border-2 border-red-700 flex items-center justify-center relative z-10 bg-slate-900">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-label="Penalty risk"><path d="M7 3v5M7 10.5v.5" stroke="#EF4444" stroke-width="2" stroke-linecap="round"/><circle cx="7" cy="7" r="5.5" stroke="#EF4444" stroke-width="1.2"/></svg>
         </div>
-        <div class="text-xs text-red-400 font-mono font-bold mb-1">PENALTY RISK</div>
-        <div class="font-display font-semibold text-white text-sm mb-2">Miss the Date</div>
-        <p class="text-xs text-slate-400">Non-compliant invoices are invalid. Fines start at ₦2 million per offence</p>
+        <div class="flex-1 rounded-2xl p-4 border" style="background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.2)">
+          <div class="text-xs font-bold font-display text-red-400 uppercase tracking-wide mb-1">⚠ If You Miss the Deadline</div>
+          <div class="font-display font-semibold text-white mb-1">Your Invoices Could Be Rejected</div>
+          <p class="text-sm text-slate-400">Invoices without the government code will not be accepted by your customers for tax purposes. Missing the deadline may also result in government penalties.</p>
+        </div>
       </div>
-    </div>
 
-    <!-- Urgency strip -->
-    <div class="mt-10 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border" style="background:rgba(251,191,36,0.05);border-color:rgba(251,191,36,0.2)" role="alert">
+    </div><!-- /timeline -->
+
+    <!-- CTA strip -->
+    <div class="mt-10 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border" style="background:rgba(16,185,129,0.05);border-color:rgba(16,185,129,0.15)" role="complementary">
       <div>
-        <div class="font-display font-bold text-amber-400 text-xl"><span x-text="daysLeft"></span> days remaining</div>
-        <div class="text-slate-400 text-sm mt-0.5">Getting your system ready typically takes 1–4 weeks. Don't leave it until the last month.</div>
+        <div class="font-display font-bold text-white text-lg">Don't wait until it's urgent.</div>
+        <div class="text-slate-400 text-sm mt-0.5">Setup typically takes 1–5 working days. Start free today and test with no risk.</div>
       </div>
-      <a href="#demo" class="btn-primary px-6 py-3 rounded-xl text-sm flex-shrink-0 flex items-center gap-2">
-        <span>Get Compliant Now</span>
+      <a href="#demo" class="btn-primary px-6 py-3 rounded-xl text-sm flex-shrink-0 flex items-center gap-2 whitespace-nowrap">
+        <span>Get Started Free</span>
         <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
     </div>
+
   </div>
 </section>
 
@@ -516,9 +570,9 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
         <h3 class="font-display font-bold text-white text-lg mb-2">Government-Certified. No Extra Licence Needed.</h3>
         <p class="text-slate-400 text-sm leading-relaxed">
           TaxBridge is officially licensed by NRS as an
-          <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('Access Point Provider','A company that has been approved by the government to connect other businesses to the official tax system — so you don\'t have to apply for your own licence.','Access Point Provider (APP). TaxBridge holds NRS-issued APP credentials, handles OAuth2 token rotation, and proxies all MBS endpoints on your behalf.')">
+          <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('Access Point Provider','A company that has been approved by the government to connect other businesses to the official tax system — so you don\'t have to apply for your own licence.','Access Point Provider (APP). TaxBridge holds NRS-issued APP credentials, handles OAuth2 token rotation, and proxies all MBS endpoints on your behalf.')">
             <span class="tooltip-term text-emerald-400">Access Point Provider<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
-          <div x-show="open" x-cloak x-cloak
+          <div x-show="open" x-cloak
                class="tooltip-popover"
                role="tooltip"
                x-transition:enter="transition ease-out duration-150"
@@ -546,9 +600,9 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
         <h3 class="font-display font-bold text-white text-lg mb-2">All the Compliance Work Happens Automatically</h3>
         <p class="text-slate-400 text-sm leading-relaxed">
           TaxBridge automatically checks your
-          <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('Tax ID (TIN)','Your business registration number issued by the government. TaxBridge checks that it is valid before sending your invoice.','Tax Identification Number (TIN) — validated via NRS TIMS API. Returns: valid | invalid | suspended.')">
+          <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('Tax ID (TIN)','Your business registration number issued by the government. TaxBridge checks that it is valid before sending your invoice.','Tax Identification Number (TIN) — validated via NRS TIMS API. Returns: valid | invalid | suspended.')">
             <span class="tooltip-term text-emerald-400">Tax ID<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
-          <div x-show="open" x-cloak x-cloak
+          <div x-show="open" x-cloak
                class="tooltip-popover"
                role="tooltip"
                x-transition:enter="transition ease-out duration-150"
@@ -562,9 +616,9 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
             <p class="text-slate-300 text-xs leading-relaxed" x-text="tab==='dev' ? dev : biz"></p>
           </div>
           </span>, calculates
-          <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('VAT (7.5%)','A tax the government requires you to add to most invoices. TaxBridge calculates and applies the correct amount for you.','Nigeria VAT at 7.5% per Finance Act 2023. TaxBridge auto-calculates, applies exemptions, and passes to MBS.')">
+          <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('VAT (7.5%)','A tax the government requires you to add to most invoices. TaxBridge calculates and applies the correct amount for you.','Nigeria VAT at 7.5% per Finance Act 2023. TaxBridge auto-calculates, applies exemptions, and passes to MBS.')">
             <span class="tooltip-term text-emerald-400">VAT at 7.5%<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
-          <div x-show="open" x-cloak x-cloak
+          <div x-show="open" x-cloak
                class="tooltip-popover"
                role="tooltip"
                x-transition:enter="transition ease-out duration-150"
@@ -788,9 +842,9 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
         <div class="flex-1">
           <h3 class="font-display font-bold text-white text-lg mb-1">Every Invoice Gets an Official Government Reference</h3>
           <p class="text-slate-400 text-sm">Each time you raise an invoice, TaxBridge submits it to NRS and returns an official
-            <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('Invoice Reference Number (IRN)','A unique government-issued number stamped on each invoice, proving it has been officially registered — like a government receipt for your invoice.','Invoice Reference Number (IRN) — returned by NRS MBS. Format: TB-{epoch}-{hash}. Required on all printed and digital invoices.')">
+            <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('Invoice Reference Number (IRN)','A unique government-issued number stamped on each invoice, proving it has been officially registered — like a government receipt for your invoice.','Invoice Reference Number (IRN) — returned by NRS MBS. Format: TB-{epoch}-{hash}. Required on all printed and digital invoices.')">
               <span class="tooltip-term text-emerald-400">Invoice Reference Number<svg class="inline w-3 h-3 ml-0.5 text-emerald-500" fill="none" viewBox="0 0 12 12" aria-hidden="true"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg></span>
-          <div x-show="open" x-cloak x-cloak
+          <div x-show="open" x-cloak
                class="tooltip-popover"
                role="tooltip"
                x-transition:enter="transition ease-out duration-150"
@@ -875,7 +929,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
             <div>
               <label for="demo-seller-tin" class="block text-xs text-slate-400 mb-1.5 font-medium">
                 Your Tax ID
-                <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('Tax ID (TIN)','Your 14-digit business tax number issued by the government. Find it on your CAC certificate or FIRS letter.','Tax Identification Number (TIN). Format: XXXXXXXXXX-XXXX. Validated against NRS TIMS registry.')">
+                <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('Tax ID (TIN)','Your 14-digit business tax number issued by the government. Find it on your CAC certificate or FIRS letter.','Tax Identification Number (TIN). Format: XXXXXXXXXX-XXXX. Validated against NRS TIMS registry.')">
                   <svg class="inline w-3 h-3 ml-0.5 text-emerald-500 cursor-help" fill="none" viewBox="0 0 12 12" aria-label="What is this?"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg>
                 </span>
               </label>
@@ -894,7 +948,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
             <div>
               <label class="block text-xs text-slate-400 mb-1.5 font-medium">
                 VAT Added
-                <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @keydown.escape.window="open=false" @touchstart.prevent.stop="toggle()" x-data="tooltip('VAT (7.5%)','This is the government tax your business must add to most invoices. TaxBridge calculates the exact amount automatically — you don\'t need to work it out yourself.','Value Added Tax at 7.5% per Finance Act 2023. TaxBridge auto-calculates, applies exemptions, and submits to MBS.')">
+                <span @mouseenter="show()" @mouseleave="hide()" @click.prevent.stop="toggle()" @click.outside="open=false" @keydown.escape.window="open=false" x-data="tooltip('VAT (7.5%)','This is the government tax your business must add to most invoices. TaxBridge calculates the exact amount automatically — you don\'t need to work it out yourself.','Value Added Tax at 7.5% per Finance Act 2023. TaxBridge auto-calculates, applies exemptions, and submits to MBS.')">
                   <svg class="inline w-3 h-3 ml-0.5 text-emerald-500 cursor-help" fill="none" viewBox="0 0 12 12" aria-label="What is this?"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.2"/><text x="5" y="9" fill="currentColor" font-size="7" font-family="serif" text-anchor="middle">i</text></svg>
                 </span>
               </label>
@@ -2041,6 +2095,7 @@ Content-Type: application/json
           qr:        this.generateQR(),
           total:     this.totalAmount(),
           latency:   Math.floor(Math.random() * 120) + 80,
+          ti
           ti
           timestamp: new Date().toLocaleString('en-NG', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' })
         };
