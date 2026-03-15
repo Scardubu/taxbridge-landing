@@ -57,7 +57,8 @@ tailwind.config = {
 <style>
 *,::before,::after{box-sizing:border-box}
 [x-cloak]{display:none!important}
-body{background:#080D1A;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+html{scroll-padding-top:80px}
+body{background:#080D1A;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-x:hidden;overflow-y:scroll}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:#080D1A}
 ::-webkit-scrollbar-thumb{background:#10B981;border-radius:2px}
@@ -71,12 +72,12 @@ body{background:#080D1A;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-
 
 .grad-text{background:linear-gradient(135deg,#34D399 0%,#10B981 40%,#6EE7B7 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 
-.btn-primary{background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-family:'Syne',sans-serif;font-weight:700;transition:all .2s;position:relative;overflow:hidden}
+.btn-primary{background:linear-gradient(135deg,#10B981,#059669);color:#fff;font-family:'Syne',sans-serif;font-weight:700;transition:all .2s;position:relative;overflow:hidden;will-change:transform}
 .btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 32px rgba(16,185,129,0.4)}
 .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#34D399,#10B981);opacity:0;transition:opacity .2s}
 .btn-primary:hover::before{opacity:1}
 .btn-primary span{position:relative;z-index:1}
-.btn-secondary{background:transparent;border:1px solid rgba(16,185,129,0.4);color:#34D399;font-family:'Syne',sans-serif;font-weight:600;transition:all .2s}
+.btn-secondary{background:transparent;border:1px solid rgba(16,185,129,0.4);color:#34D399;font-family:'Syne',sans-serif;font-weight:600;transition:all .2s;will-change:transform}
 .btn-secondary:hover{border-color:#10B981;background:rgba(16,185,129,0.08);transform:translateY(-1px)}
 
 .code-block{background:#060C18;border:1px solid #1E2D47;font-family:'DM Mono',monospace;font-size:0.75rem;line-height:1.7;overflow-x:auto}
@@ -101,8 +102,8 @@ body{background:#080D1A;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-
 .glossary-panel{position:fixed;right:0;top:0;height:100vh;width:340px;z-index:999;transform:translateX(100%);transition:transform .3s cubic-bezier(0.4,0,0.2,1)}
 .glossary-panel.open{transform:translateX(0)}
 
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transition:opacity .55s ease}
+.reveal.visible{opacity:1}
 
 .shimmer-line{background:linear-gradient(90deg,#1E2D47 25%,#2D3F5E 50%,#1E2D47 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;height:12px}
 
@@ -115,8 +116,8 @@ body{background:#080D1A;color:#E2E8F0;font-family:'DM Sans',sans-serif;overflow-
 .logo-pill{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:12px 20px;display:flex;align-items:center;gap:8px;font-weight:700;font-family:'Syne',sans-serif;color:#94A3B8;font-size:0.85rem;transition:all .3s}
 .logo-pill:hover{border-color:rgba(16,185,129,0.3);color:#E2E8F0}
 
-@keyframes ring-pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,191,36,0.4)}50%{box-shadow:0 0 0 12px rgba(251,191,36,0)}}
-.deadline-ring{animation:ring-pulse 2s ease-in-out infinite}
+@keyframes ring-pulse{0%,100%{opacity:1}50%{opacity:0.65}}
+.deadline-ring{animation:ring-pulse 2.5s ease-in-out infinite}
 
 @media(max-width:768px){
   .tooltip-popover{width:240px;left:50%!important;transform:translateX(-50%)!important;right:auto!important}
@@ -157,7 +158,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
   99%   {transform:translateY(0)}
   100%  {transform:translateY(0)}
 }
-.phone-slides{animation:phoneSlide 13s ease-in-out infinite;will-change:transform;display:flex;flex-direction:column;height:calc(3 * 396px)}
+.phone-slides{animation:phoneSlide 13s ease-in-out infinite;will-change:transform;display:flex;flex-direction:column;height:calc(3 * 396px);backface-visibility:hidden;contain:layout style}
 .phone-slide{height:396px;flex-shrink:0;display:flex;flex-direction:column;gap:8px;padding-top:8px}
 
 /* Dashboard preview */
@@ -188,7 +189,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 <!-- ═══════════════════════════════════════════════
      STICKY NAV
 ═══════════════════════════════════════════════ -->
-<nav x-ref="nav" class="fixed top-0 left-0 right-0 z-50 glass-strong transition-all duration-300" :class="scrolled ? 'py-2 shadow-lg shadow-black/40' : 'py-3'" role="banner">
+<nav x-ref="nav" class="fixed top-0 left-0 right-0 z-50 glass-strong py-3 transition-shadow duration-300" :class="scrolled ? 'shadow-lg shadow-black/40' : ''" role="banner">
   <div class="max-w-7xl mx-auto px-4 flex items-center justify-between gap-4">
 
     <!-- Logo -->
@@ -252,7 +253,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 
 <!-- Mobile audience toggle — shown below nav on scroll -->
 <div x-show="showToggle"
-     class="fixed top-16 left-0 right-0 z-40 flex justify-center py-2 md:hidden"
+     class="fixed left-0 right-0 z-40 flex justify-center py-2 md:hidden" style="top:56px"
      x-transition:enter="transition ease-out duration-200"
      x-transition:enter-start="opacity-0"
      x-transition:enter-end="opacity-100"
@@ -265,7 +266,7 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
 
 
 <!-- Beta notice — fixed ribbon below nav, non-intrusive -->
-<div class="fixed top-0 left-0 right-0 z-[45] pointer-events-none" style="margin-top:52px">
+<div class="fixed left-0 right-0 z-[45] pointer-events-none" style="top:56px">
   <div class="flex justify-center">
     <div class="pointer-events-auto flex items-center gap-2 px-4 py-1 text-xs font-semibold rounded-b-xl"
          style="background:rgba(8,13,26,0.92);border:1px solid rgba(16,185,129,0.18);border-top:none;color:#6EE7B7;font-family:'Syne',sans-serif;letter-spacing:0.04em;backdrop-filter:blur(12px)">
@@ -1749,24 +1750,25 @@ details[open] summary .acc-icon{transform:rotate(45deg)}
         class="fixed bottom-6 left-6 z-50 btn-secondary px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg"
         style="background:rgba(13,20,37,0.95)">
   <svg width="14" height="14" fill="none" viewBox="0 0 14 14" aria-hidden="true"><rect x="2" y="2" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5h4M5 7h4M5 9h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
-  Plain English Glossary
+  Tax Terms Guide
 </button>
 
 <!-- Glossary slide-in panel -->
 <div id="glossary-panel"
      role="dialog"
-     aria-label="Plain English Glossary"
+     aria-label="Tax Terms Guide"
      aria-modal="true"
      class="glossary-panel glass-strong"
      :class="glossaryOpen ? 'open' : ''">
   <div class="p-5 h-full flex flex-col">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="font-display font-bold text-white">Plain English Glossary</h3>
+      <h3 class="font-display font-bold text-white">Tax Terms Guide</h3>
+      <p class="text-xs text-slate-500 mt-0.5 mb-0">Plain English &amp; Technical</p>
       <button @click="glossaryOpen=false" class="text-slate-400 hover:text-white transition-colors" aria-label="Close glossary">
         <svg width="18" height="18" fill="none" viewBox="0 0 18 18"><path d="M4 4l10 10M14 4L4 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </button>
     </div>
-    <p class="text-xs text-slate-500 mb-3">Tap any term to see what it means in plain English and for technical teams.</p>
+    <p class="text-xs text-slate-500 mb-3">Search any term — tap to see a plain English or technical explanation.</p>
     <input x-model="glossarySearch"
            type="search"
            placeholder="Search terms…"
@@ -1920,10 +1922,17 @@ document.addEventListener('alpine:init', () => {
       const now = new Date();
       this.daysLeft = Math.max(0, Math.ceil((deadline - now) / 86400000));
 
-      /* Scroll behaviours */
+      /* Scroll behaviours — rAF-debounced to one update per frame */
+      let _raf = false;
       window.addEventListener('scroll', () => {
-        this.scrolled    = window.scrollY > 20;
-        this.showToggle  = window.scrollY > 320;
+        if (!_raf) {
+          requestAnimationFrame(() => {
+            this.scrolled   = window.scrollY > 20;
+            this.showToggle = window.scrollY > 320;
+            _raf = false;
+          });
+          _raf = true;
+        }
       }, { passive: true });
 
       /* Scroll-reveal observer */
